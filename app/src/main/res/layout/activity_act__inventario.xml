@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="br.com.marcosmilitao.idativosandroid.Act_Inventario">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:id="@+id/content_act__inventario"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="16dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="br.com.marcosmilitao.idativosandroid.Act_Inventario"
+        tools:showIn="@layout/activity_act__inventario"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="@string/txtProcesso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sp_inventario_processo" />
+
+        <TextView
+            android:text="@string/txtPosicao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView4" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sp_inventario_posicao" />
+
+        <TextView
+            android:text="Almoxarifado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView11" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/sp_inventario_almoxarifado" />
+
+            <Button
+                android:text="OK"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_inventarioPlan_add"
+                android:layout_weight="0"
+                android:width="25dp" />
+        </LinearLayout>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:text="@string/rd_inventario_material"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rd_inventario_material"
+                android:layout_weight="1"
+                tools:text="@string/rd_inventario_material"
+
+                android:checked="true" />
+
+            <RadioButton
+                android:text="@string/rb_inventario_equipamento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rd_inventario_equipamento"
+
+                android:layout_weight="1" />
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/tv_inventario_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_inventario_count"
+                android:layout_weight="0.10" />
+
+            <TextView
+                android:text="@string/tv_inventario_qtd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_inventario_qtd"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:id="@+id/lv_Inventario"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/ic_rfid2"
+        app:elevation="8dp"
+        app:backgroundTint="@color/circular_button_normal"
+        tools:ignore="VectorDrawableCompat" />
+
+</android.support.design.widget.CoordinatorLayout>

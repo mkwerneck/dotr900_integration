@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:App="http://schemas.android.com/apk/res-auto"
+    tools:context="br.com.marcosmilitao.idativosandroid.Act_Cadastro_dados">
+
+    <item
+        android:id="@+id/action_sync_ci"
+        android:icon="@drawable/baseline_loop_white_24dp"
+        android:title="SINCRONIZAR"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_cadastro_dados_cadastrar"
+        android:orderInCategory="100"
+        android:title="@string/inventarioAtualizarTracking"
+        tools:ignore="HardcodedText"/>
+    <item
+        android:id="@+id/action_cadastro_dados_reconectar"
+        android:orderInCategory="100"
+        android:title="RECONECTAR"
+        tools:ignore="HardcodedText"/>
+
+</menu>

@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="br.com.marcosmilitao.idativosandroid.Processos.NovoProcessoActivity"
+    android:scrollbarAlwaysDrawVerticalTrack="?attr/isLightTheme"
+    android:scrollbarStyle="insideOverlay"
+    android:scrollbarThumbVertical="?android:attr/scrollbarThumbVertical"
+    android:scrollbars="vertical"
+    android:isScrollContainer="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    app:layout_scrollFlags="scroll|enterAlways"
+    android:verticalScrollbarPosition="defaultPosition"
+    >
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/ic_rfid2"
+        app:elevation="8dp"
+        app:backgroundTint="@color/circular_button_normal"
+        tools:ignore="VectorDrawableCompat"
+        android:id="@+id/fab_lertag_novoprocesso"
+        android:theme="@style/new_spinner"/>
+
+    <include layout="@layout/content_processos_os"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TabHost
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Tab_Novo_Processo"
+        android:verticalScrollbarPosition="right"
+        android:visibility="visible"
+        android:layout_gravity="top"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="top"
+            >
+
+            <android.support.design.widget.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                android:layout_gravity="top"
+                >
+
+                <TextView
+                    android:text="TAREFA"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:id="@+id/lbl_Nome_Tarefa"
+                    tools:textSize="24sp"
+                    tools:textStyle="normal|bold"
+                    android:textAlignment="center"
+                    android:textStyle="normal|bold"
+                    android:visibility="invisible" />
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/colorPrimary"
+                    app:popupTheme="@style/AppTheme.PopupOverlay"
+                    android:layout_gravity="top" />
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:textSize="18sp"
+                    android:id="@+id/tv_novo_processo_titulo"
+                    android:editable="true"
+                    android:textSize="20sp"
+                    android:layout_weight="1" />
+
+                <TabWidget
+
+                    android:id="@android:id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textDirection="inherit"
+                    android:visibility="visible"
+                    android:textAlignment="center"
+                    android:orientation="horizontal"
+
+                    android:divider="?android:attr/dividerVertical"
+                    android:dividerPadding="@dimen/cast_libraries_material_featurehighlight_text_vertical_space"
+
+                    android:scrollbarSize="15dp"
+                   >
+
+                </TabWidget>
+
+            </android.support.design.widget.AppBarLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sv_serviço">
+
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/tab_Materiais"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:scrollbarAlwaysDrawVerticalTrack="false">
+
+                        <ScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical" >
+
+                                <TextView
+                                    android:text="LISTA DE MATERIAIS"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/lbl_Lista_Materiais"
+
+                                    android:textSize="18sp"
+                                    tools:textStyle="bold"
+
+                                    android:textAlignment="textStart"
+                                    android:gravity="start"
+                                    android:layout_marginLeft="@dimen/cardview_compat_inset_shadow"
+                                    android:background="@drawable/card_background" />
+
+                                <ScrollView
+                                    android:layout_width="match_parent"
+                                    android:id="@+id/scroll_Lista_Materiais"
+                                    android:layout_height="match_parent"
+                                    android:minHeight="118dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="118dp"
+                                        android:orientation="vertical"
+                                        android:minHeight="118dp">
+
+                                        <ListView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="250dp"
+                                            tools:textSize="24dp"
+                                            android:id="@+id/list_Lista_Materiais"
+                                            android:minHeight="250dp"
+                                            android:scrollbarAlwaysDrawVerticalTrack="false" />
+                                    </LinearLayout>
+                                </ScrollView>
+
+                                <TextView
+                                    android:text="MATERIAIS ENCONTRADOS: 0"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/lbl_Materiais_Encontrados"
+
+                                    android:textSize="18sp"
+                                    tools:textStyle="bold"
+                                    android:textAlignment="textStart"
+                                    android:gravity="start"
+                                    android:layout_marginLeft="@dimen/cardview_compat_inset_shadow"
+                                    android:background="@drawable/card_background" />
+
+                                <ScrollView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:minHeight="118dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="118dp"
+                                        android:orientation="vertical"
+                                        android:minHeight="118dp">
+
+                                        <ListView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="250dp"
+                                            android:id="@+id/lv_material_encontrado"
+                                            android:scrollbarAlwaysDrawVerticalTrack="false"
+                                            android:minHeight="250dp" />
+                                    </LinearLayout>
+                                </ScrollView>
+
+                            </LinearLayout>
+                        </ScrollView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/tab_Serviços"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:scrollbarAlwaysDrawVerticalTrack="true"
+
+                        android:elevation="1dp">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            >
+                        </LinearLayout>
+
+                        <ListView
+                            android:layout_width="match_parent"
+                            android:layout_height="350dp"
+                            android:id="@+id/list_Lista_Servicos"
+                            android:minHeight="180dp"
+                            android:scrollbarAlwaysDrawVerticalTrack="true"
+                            android:scrollbars="none" />
+
+                        <TextView
+                            android:text="USUÁRIO IDENTIFICADO:"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:textSize="18sp"
+                            tools:textStyle="bold"
+                            android:id="@+id/tv_usuario"
+                            android:layout_weight="1" />
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <EditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="textPersonName"
+                                    android:text=""
+                                    android:hint="Entre com o Resultado"
+                                    android:ems="10"
+                                    android:id="@+id/edt_resultado"
+                                    android:layout_weight="1" />
+
+                                <ListView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="64dp"
+                                    android:id="@+id/lv_novo_processo_tagiduser"
+                                    android:layout_weight="1"
+                                    android:layout_marginTop="@dimen/card_content_padding_rect_top" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:weightSum="1">
+
+                                <Button
+                                    android:text="OK"
+                                    android:layout_width="118dp"
+                                    android:layout_height="66dp"
+                                    android:id="@+id/btn_resultado" />
+
+                                <Button
+                                    android:text="VOLTAR"
+                                    android:layout_width="118dp"
+                                    android:layout_height="66dp"
+                                    android:id="@+id/btn_Voltar" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </FrameLayout>
+            </ScrollView>
+
+        </LinearLayout>
+
+    </TabHost>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="br.com.marcosmilitao.idativosandroid.Act_Cadastro_dados">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_lertag_cadastro_dados"
+        android:layout_width="62dp"
+        android:layout_height="62dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:visibility="visible"
+        app:backgroundTint="@color/circular_button_normal"
+        app:elevation="8dp"
+        app:srcCompat="@drawable/ic_rfid2"
+        tools:ignore="VectorDrawableCompat" />
+
+    <LinearLayout
+        android:id="@+id/content_act__cadastro_dados"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="br.com.marcosmilitao.idativosandroid.Act_Cadastro_dados"
+        tools:showIn="@layout/activity_act__cadastro_dados"
+        android:orientation="vertical">
+
+         <ListView
+            android:id="@+id/lv_cadastro_dados"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_gravity="fill_vertical"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:scrollbarSize="200dp"
+            android:visibility="visible" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="UselessParent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Tagid"
+                    android:textColor="@color/green"
+                    tools:ignore="HardcodedText"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/lbl_posicao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="16sp"
+                    android:text="Posição Original:"
+                    tools:text="@string/txtPosicao_Original" />
+
+                <Spinner
+                    android:id="@+id/sp_cadastro_posicao_original"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:text="Proprietário:"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="16sp"
+                    android:id="@+id/textView5"/>
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sp_cadastro_proprietario" />
+
+                <TextView
+                    android:text="Modelo Material:"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="16sp"
+                    android:id="@+id/textView6"/>
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sp_cadastro_Material_Type" />
+
+                <TextView
+                    android:text="Condição:"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="16sp"
+                    android:id="@+id/textView7"/>
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:id="@+id/sp_cadastro_condition" />
+
+                <EditText
+                    android:id="@+id/novo_tagid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Novo TAGID"
+                    android:inputType="textPersonName"
+                    android:text=""
+                    android:visibility="visible"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/tv_numserie"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="16sp"
+                    android:text="Nº Série:" />
+
+                <EditText
+                    android:id="@+id/PK_Serie"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Digite o Nº Série"
+                    android:inputType="textPersonName"
+                    android:paddingLeft="0dp"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/tv_patrimonio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="16sp"
+                    android:text="Patrimônio:" />
+
+                <EditText
+                    android:id="@+id/PK_Lote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Digite o Nº Patrimônio"
+                    android:inputType="textPersonName"
+                    android:text=""
+                    android:paddingLeft="0dp"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/tv_dadostecnicos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="16sp"
+                    android:text="Dados Técnicos:" />
+
+                <EditText
+                    android:id="@+id/Dados_Tecnicos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Digite o Dados Técnicos"
+                    android:inputType="textPersonName"
+                    android:text=""
+                    android:paddingLeft="0dp"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/tv_valor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="16sp"
+                    android:text="Valor Unitário:" />
+
+                <com.blackcat.currencyedittext.CurrencyEditText
+                    android:id="@+id/et_valor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="0dp"
+                    android:ems="10"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/tv_nf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="16sp"
+                    android:text="Nota Fiscal:" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName|number"
+                    android:text=""
+                    android:ems="10"
+                    android:id="@+id/num_NF"
+                    android:hint="Digite o Número da Nota Fiscal"
+                    android:paddingLeft="0dp"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/tv_datanf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="16sp"
+                    android:text="Data Entrada Nota Fiscal:" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvsp_data_nf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AAAA-MM-DD"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="8dp"
+                        android:textSize="18sp"
+                        style="@android:style/Widget.DeviceDefault.Light.Spinner"/>
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginLeft="7dp"
+                        android:layout_gravity="bottom"
+                        android:src="@mipmap/ic_date_range_black_24dp"
+                        android:contentDescription="Image Logo" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_dtvalidade"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="16sp"
+                    android:text="Data Validade:" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvsp_dtvalidade"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AAAA-MM-DD"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="8dp"
+                        android:textSize="18sp"
+                        style="@android:style/Widget.DeviceDefault.Light.Spinner"/>
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginLeft="7dp"
+                        android:layout_gravity="bottom"
+                        android:src="@mipmap/ic_date_range_black_24dp"
+                        android:contentDescription="Image Logo" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView100"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Imagem Material:"
+                    android:layout_marginTop="18dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="16sp"/>
+
+                <ImageView
+                    android:id="@+id/imagemModelo2"
+                    android:layout_width="match_parent"
+                    android:layout_height="192dp"
+                    app:srcCompat="@android:drawable/ic_menu_camera"
+                    tools:ignore="ContentDescription" />
+                <!--
+                <DatePicker
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dp_validade"
+                    android:calendarViewShown="false"
+                    android:datePickerMode="spinner" />-->
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:title="Cadastros">
+            <menu>
+                <item
+                    android:id="@+id/nav_menu_cf"
+                    android:icon="@drawable/baseline_build_black_18dp"
+                    android:title="Cadastrar Ferramentas" />
+                <item
+                    android:id="@+id/nav_menu_cu"
+                    android:icon="@drawable/baseline_assignment_ind_black_24dp"
+                    android:title="Cadastrar Usuários" />
+                <!--<item
+                    android:id="@+id/nav_menu_cp"
+                    android:icon="@drawable/baseline_navigation_black_24dp"
+                    android:title="Cadastrar Posições" />-->
+            </menu>
+        </item>
+        <item
+            android:title="Processos">
+            <item
+                android:id="@+id/nav_inventario"
+                android:icon="@drawable/ic_menu_inventario2"
+                android:title="Inventário" />
+            <item
+                android:id="@+id/nav_processos"
+                android:icon="@drawable/ic_menu_processo"
+                android:title="Processos OS" />
+            <item
+                android:id="@+id/nav_tracking"
+                android:icon="@drawable/ic_menu_tracking"
+                android:title="Tracking" />
+            <item
+                android:id="@+id/nav_tagid_nao_cadastrado"
+                android:icon="@drawable/ic_menu_tagid_nao_cadastrado"
+                android:title="TAG ID Não Cadastrado" />
+            <item
+                android:id="@+id/nav_descarte"
+                android:icon="@drawable/baseline_delete_forever_black_24dp"
+                android:title="Descarte de TAGID" />
+        </item>
+    </group>
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_sync"
+                android:icon="@drawable/ic_menu_sync"
+                android:title="Sincronizar" />
+            <item
+                android:id="@+id/nav_config"
+                android:icon="@drawable/ic_settings_black_24dp"
+                android:title="Configurações" />
+            <item
+                android:id="@+id/nav_sair"
+                android:icon="@drawable/ic_menu_sair"
+                android:title="Sair" />
+        </menu>
+    </item>
+
+</menu>

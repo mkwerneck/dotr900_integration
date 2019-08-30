@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="br.com.marcosmilitao.idativosandroid.Processos.ProcessosAtivosActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarProcessAtivos"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_Adicionar_ativos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:visibility="invisible" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1">
+
+        <TextView
+            android:text=""
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:id="@+id/textView15ativo" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text=""
+                android:hint="Pesquisar Ativo"
+                android:ems="10"
+                android:id="@+id/edt_p_ativo_pesquisar"
+                android:layout_weight="1" />
+
+            <Button
+                android:text=""
+                android:drawableEnd="@drawable/places_ic_search"
+                android:layout_width="@dimen/cast_expanded_controller_control_toolbar_min_height"
+                android:layout_height="@dimen/cast_expanded_controller_control_toolbar_min_height"
+                android:id="@+id/btn_p_ativo_pesquisar"
+                android:drawableRight="@drawable/places_ic_search" />
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="45dp"
+            android:id="@+id/list_Processos_ativo" />
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

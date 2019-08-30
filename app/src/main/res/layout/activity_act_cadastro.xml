@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="br.com.marcosmilitao.idativosandroid.Act_Cadastro">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_lertag_cadastro"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/ic_rfid2"
+        app:elevation="8dp"
+        app:backgroundTint="@color/circular_button_normal"
+        tools:ignore="VectorDrawableCompat" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/ic_rfid2"
+        app:elevation="8dp"
+        app:backgroundTint="@color/circular_button_normal"
+        tools:ignore="VectorDrawableCompat"
+        android:id="@+id/floatingActionButton2" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/ic_rfid2"
+        app:elevation="8dp"
+        app:backgroundTint="@color/circular_button_normal"
+        tools:ignore="VectorDrawableCompat"
+        android:id="@+id/floatingActionButton" />
+
+    <LinearLayout
+        android:id="@+id/content_act__cadastro"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="br.com.marcosmilitao.idativosandroid.Act_Cadastro"
+        tools:showIn="@layout/activity_act_cadastro"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tv_cadastro_posicao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Posição Original" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <Spinner
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sp_cadastro_posicao"
+                android:contentDescription="@string/tv_cadastro_posicao"
+                android:layout_weight="12"/>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="88">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <CheckBox
+                    android:id="@+id/cb_cadastro_posicao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:text="@string/tv_cadastro_categoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_cadastro_categoria" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sp_cadastro_categoria"
+            />
+
+        <TextView
+            android:text="Quantidade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView9" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/etv_cadastro_quantidade"
+            android:hint="Entre com a Quantidade"
+            android:text="@string/tv_cadsatro_quantidade"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:text="Número Produto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView10" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/tv_cadastro_part_number"
+            android:hint="Entre com o Número do Produto"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:text="Nº Lote/Trace Number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView8" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text=""
+            android:hint="Entre com o Nº Lote/Trace Number"
+            android:ems="10"
+            android:id="@+id/tv_cadastro_nlote_tracen" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:id="@+id/lv_cadastro" />
+
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

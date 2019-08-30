@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:text="Digite o motivo da solicitação:"
+            android:id="@+id/title_comments_ad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:textColor="@android:color/black"/>
+
+        <EditText
+            android:id="@+id/et_comment_comments_ad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Máximo de 500 caracteres"
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxLength="500"
+            android:maxLines="4" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_cancelar_comments_ad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:textColor="@color/green"
+                android:text="CANCELAR"
+                android:minWidth="0dp"/>
+
+            <Button
+                android:id="@+id/btn_OK_comments_ad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:text="OK"
+                android:textColor="@color/green"
+                android:minWidth="0dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+</LinearLayout>

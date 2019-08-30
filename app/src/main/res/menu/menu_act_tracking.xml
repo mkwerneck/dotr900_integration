@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="br.com.marcosmilitao.idativosandroid.Act_Tracking">
+
+    <item
+        android:id="@+id/tracking_sync"
+        android:icon="@drawable/baseline_loop_white_24dp"
+        android:title="SINCRONIZAR"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/inventarioAtualizarTracking"
+        android:orderInCategory="100"
+        android:title="@string/inventarioAtualizarTracking"
+        android:visible="false"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/limparTracking"
+        android:orderInCategory="100"
+        android:title="LIMPAR"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/reconectarTracking"
+        android:orderInCategory="100"
+        android:title="RECONECTAR"
+        app:showAsAction="never" />
+</menu>

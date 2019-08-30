@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="SAIR" type="id">action_main_sair</item>
+</resources>

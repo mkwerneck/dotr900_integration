@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/et_et_ad_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:inputType="number"
+        android:digits="0123456789."
+        android:hint="Ex.: 192.168.0.100"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="horizontal"
+        android:gravity="right">
+
+        <Button
+            android:id="@+id/btn_salvar_et_ad_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SALVAR"/>
+
+        <Button
+            android:id="@+id/btn_conectar_et_ad_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="CONECTAR"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

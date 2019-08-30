@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="br.com.marcosmilitao.idativosandroid.Act_Inventario_Planejado">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/content_act__inventario__planejado" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_lertag_inventario_planejado"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/ic_rfid2"
+        app:elevation="8dp"
+
+        app:backgroundTint="@color/circular_button_normal"
+        tools:ignore="VectorDrawableCompat"/>
+
+    <LinearLayout
+        android:id="@+id/content_act__inventario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="br.com.marcosmilitao.idativosandroid.Act_Inventario"
+        tools:showIn="@layout/activity_act__inventario">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="left">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Processo:" />
+
+                <Spinner
+                    android:id="@+id/sp_inventario_processo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/ll_almpos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="60dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/lb_inventario_almoxarifado"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Almoxarifado:"/>
+
+                        <Spinner
+                            android:id="@+id/sp_inventario_almoxarifado"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:paddingLeft="60dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            >
+
+                            <TextView
+                                android:id="@+id/lb_inventario_posicao"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Posição:"/>
+
+                            <Spinner
+                                android:id="@+id/sp_inventario_posicao"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_gravity="bottom"
+                            android:layout_marginLeft="15dp">
+
+                            <CheckBox
+                                android:id="@+id/ckb_tagid_pos"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.07"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_invplan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="60dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/lb_inventario_planejado"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Inventario Planejado:"/>
+
+                    <Spinner
+                        android:id="@+id/sp_inventario_planejado"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_material"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="@string/rd_inventario_material"
+
+                tools:text="@string/rd_inventario_material" />
+
+            <RadioButton
+                android:id="@+id/rb_posicoes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:visibility="invisible"
+                tools:text="POSIÇÃO" />
+
+            <RadioButton
+                android:id="@+id/rb_equipmento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:text="@string/rb_inventario_equipamento" />
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/tv_inventario_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_inventario__planejado_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.10"
+                android:text="@string/tv_inventario_count" />
+
+            <TextView
+                android:id="@+id/tv_inventario__planejado_qtd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/tv_inventario_qtd" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/lv_Inventario_planejado"
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent"
+            android:isScrollContainer="false" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <GridView
+                    android:id="@+id/gdv_Inventario_planejado"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

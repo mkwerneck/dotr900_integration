@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_act__cadastro_dados"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="1dp"
+    android:paddingLeft="1dp"
+    android:paddingRight="1dp"
+    android:paddingTop="1dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="br.com.marcosmilitao.idativosandroid.Act_Cadastro_dados"
+
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/Tagid"
+                tools:ignore="HardcodedText"
+                android:textSize="18sp" />
+
+            <TextView
+                android:text="Proprietário"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView5"
+                tools:ignore="HardcodedText" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sp_cadastro_proprietario" />
+
+            <TextView
+                android:text="Modelo Material"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView6"
+                tools:ignore="HardcodedText" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sp_cadastro_Material_Type" />
+
+            <TextView
+                android:text="Condição"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView7"
+                tools:ignore="HardcodedText" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sp_cadastro_condition" />
+            <TextView
+                android:text="Posiçao Original"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView71"
+                tools:ignore="HardcodedText" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sp_cadastro_posicao_original" />
+
+            <EditText
+                android:id="@+id/Trace_Number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/digite_o_trace_number"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="TextFields" />
+
+            <EditText
+                android:id="@+id/lote_material"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite o Número do Lote"
+                android:inputType="textPersonName"
+                android:text=""
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/Part_Number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite o Part Number"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText,TextFields" />
+
+            <EditText
+                android:id="@+id/Quantidade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite a Quantidade"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/Categoria_Equipamento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite a Categoria"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/Modalidade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite a Modalidade"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:text=""
+                android:ems="10"
+                android:id="@+id/Data_Validade"
+                android:hint="Digite a Data Validade"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/Volume"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/digite_o_volume"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/Unidade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite a Unidade"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/Placa_Veiculo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite a Placa do Veículo"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/proprietario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="proprietario"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/Certificadora_Classificadora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite o Certificadora Classificadora"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/Num_Contrato"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite o Número do Contrato"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/Nome_Fantasia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite o Nome Fantasia"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/Composicao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite a Composiçao"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/PurchaseOrder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite PurchaseOrder"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/Requisicao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite o Requisição"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text=""
+                android:ems="10"
+                android:id="@+id/Dados_Tecnicos"
+                android:hint="Digite o Dados Técnicos"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/DataHoraLocalizacao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite o Data Hora Localização"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/Cod_Posicao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite o Código da Posição"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/Qtde_Manillhas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite a Quantidade de Manilhas"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text=""
+                android:ems="10"
+                android:id="@+id/Condition"
+                android:hint="Digite a Condição"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/Diam_Manilha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite o Diâmetro da Manilha"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/Comprimento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite o Comprimento"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/Largura_Original"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite o Largura Original"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/Altura_Original"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite a Altura Original"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/Diametro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite o Diâmetro"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/Peso_Original"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite o Peso Original"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/Comprimento_Original"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite o Comprimento Original"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/FlagAtualizar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/flagatualizar"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/Modelo_Certificado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite o Modelo do Certificado"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/num_NF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite o Número da Nota Fiscal"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/Carga_Trabalho_Manilha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite a Carga Trabalho Manilha"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/ID_Manilha_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite o ID da Manilha 1"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/ID_Manilha_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite o ID da Manilha 2"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/ID_Manilha_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite o ID da Manilha 3"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/ID_Manilha_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Digite o ID da Manilha 4"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/Angulo_Manilha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/digite_o_ngulo_da_manilha"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/Auto_Carregar_Lote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Auto_Carregar_Lote"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/A_S"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="A.S."
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/Tarefa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Tarefa"
+                android:inputType="textPersonName"
+                android:text=""
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,69 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:20:1-50:12
+INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:20:1-50:12
+INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:20:1-50:12
+INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:20:1-50:12
+INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:20:1-50:12
+INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:20:1-50:12
+INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:20:1-50:12
+	package
+		ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:21:5-50
+		INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml
+		INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml
+	android:versionName
+		ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:23:5-30
+		INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml
+		INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:20:11-69
+	android:versionCode
+		ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:22:5-28
+		INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml
+		INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml
+uses-feature#android.hardware.bluetooth_le
+ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:31:5-89
+	android:required
+		ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:31:64-87
+	android:name
+		ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:31:19-63
+uses-permission#android.permission.BLUETOOTH
+ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:33:5-67
+	android:name
+		ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:33:22-65
+uses-permission#android.permission.BLUETOOTH_ADMIN
+ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:34:5-73
+	android:name
+		ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:34:22-71
+application
+ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:36:5-48:19
+	android:label
+		ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:36:18-50
+	android:icon
+		ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:37:9-45
+	android:theme
+		ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:38:9-56
+activity#com.example.android.bluetoothlegatt.DeviceControlActivity
+ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:46:9-58
+	android:name
+		ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:46:19-56
+service#com.example.android.bluetoothlegatt.BluetoothLeService
+ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:47:9-77
+	android:enabled
+		ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:47:53-75
+	android:name
+		ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml:47:18-52
+uses-sdk
+INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml
+INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml
+INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml
+INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml
+		ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml
+		INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml
+		ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml
+		INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/src/main/AndroidManifest.xml

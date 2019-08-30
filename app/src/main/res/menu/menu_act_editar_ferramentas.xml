@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="br.com.marcosmilitao.idativosandroid.EditarFerramentasActivity">
+
+    <item
+        android:id="@+id/action_sync_ef"
+        android:icon="@drawable/baseline_loop_white_24dp"
+        android:title="SINCRONIZAR"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_itens_ef"
+        android:orderInCategory="100"
+        android:title="Itens do Contentor"/>
+
+    <item
+        android:id="@+id/action_salvar_ef"
+        android:orderInCategory="100"
+        android:title="Salvar"/>
+
+</menu>

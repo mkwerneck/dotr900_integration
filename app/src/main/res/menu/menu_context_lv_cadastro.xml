@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/opt_cadastrar_ferramenta"
+        android:title="Cadastrar Ferramenta"/>
+    <item android:id="@+id/opt_cadastrar_usuario"
+        android:title="Cadastrar Usuário"/>
+    <item android:id="@+id/opt_editar_ferramenta"
+        android:title="Editar Ferramenta"/>
+    <item android:id="@+id/opt_itens_contentor"
+        android:title="Itens de Contentor"/>
+</menu>

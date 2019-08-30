@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="br.com.marcosmilitao.idativosandroid.Processos.ProcessosOSActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <fragment
+        android:id="@+id/fragment"
+        android:name="br.com.marcosmilitao.idativosandroid.Processos.ProcessosOSActivityFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:layout="@layout/fragment_processos_os" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_Adicionar"
+        android:layout_width="79dp"
+        android:layout_height="74dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:visibility="visible" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1"
+        android:layout_marginTop="@dimen/cast_mini_controller_icon_height">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+
+            <EditText
+                android:id="@+id/edt_p_os_pesquisar"
+                android:layout_width="wrap_content"
+                android:layout_height="57dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Pesquisar Ativo | Código Processo"
+                android:inputType="textPersonName"
+                android:text="" />
+
+            <Button
+                android:text=""
+                android:drawableEnd="@drawable/places_ic_search"
+                android:layout_width="45dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_p_os_pesquisar"
+                android:drawableRight="@drawable/places_ic_search" />
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="45dp"
+            android:id="@+id/list_Processos" />
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

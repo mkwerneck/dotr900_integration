@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_act__tracking"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="br.com.marcosmilitao.idativosandroid.Act_Tracking"
+    tools:showIn="@layout/activity_act__tracking"
+    android:orientation="vertical">
+
+    <TextView
+        android:text="@string/txtProcesso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sp_tracking_processo"/>
+
+    <TextView
+        android:text="@string/txtPosicao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sp_tracking_posicao"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/edt_nLoteTracking"
+            android:layout_weight="1"
+            tools:ignore="HardcodedText,ObsoleteLayoutParam" />
+
+        <Button
+            android:text="@string/btn_tracking_addItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/edt_nLoteTracking"
+            android:layout_toEndOf="@+id/edt_nLoteTracking"
+            android:layout_marginLeft="19dp"
+            android:layout_marginStart="19dp"
+            android:id="@+id/btn_tracking_addItem"
+            android:layout_weight="1"
+            tools:ignore="ObsoleteLayoutParam"
+            android:onClick="AddItem"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lv_tracking_inv"
+        android:layout_weight="1"
+        tools:ignore="InefficientWeight" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="191dp"
+        android:id="@+id/lv_tracking"/>
+
+</LinearLayout>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="br.com.marcosmilitao.idativosandroid.Act_Cadastro_ItensKit">>
+
+
+    <item
+        android:id="@+id/action_sync_ci"
+        android:icon="@drawable/baseline_loop_white_24dp"
+        android:title="SINCRONIZAR"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_atualizar_ci"
+        android:orderInCategory="100"
+        android:title="@string/inventarioAtualizarTracking"/>
+
+</menu>

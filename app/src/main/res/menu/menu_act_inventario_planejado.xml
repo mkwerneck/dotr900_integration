@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/inventario_planejado_sync"
+        android:icon="@drawable/baseline_loop_white_24dp"
+        android:title="SINCRONIZAR"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/inventario_palanejado_Atualizar"
+        android:orderInCategory="100"
+        android:title="@string/inventarioAtualizar"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/inventario_planejado_limpar"
+        android:orderInCategory="100"
+        android:title="@string/inventario_limpar"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/inventario_planejado_conexao"
+        android:orderInCategory="100"
+        android:title="RECONECTAR"
+        app:showAsAction="never"
+        tools:ignore="HardcodedText" />
+
+</menu>

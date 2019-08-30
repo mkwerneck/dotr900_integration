@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:App="http://schemas.android.com/apk/res-auto"
+    tools:context="br.com.marcosmilitao.idativosandroid.Act_Cadastro">
+
+    <item
+        android:id="@+id/action_consultar_materiais"
+        android:orderInCategory="100"
+        android:title="CONSULTAR MATERIAIS"
+        tools:ignore="HardcodedText" />
+    <item
+        android:id="@+id/action_cadastro_reconectar"
+        android:orderInCategory="100"
+        android:title="RECONECTAR"
+        tools:ignore="HardcodedText" />
+
+    <item
+        android:id="@+id/action_cadastrar_ferramenta"
+        android:orderInCategory="100"
+        android:title="Cadastrar Ferramenta"
+        tools:ignore="HardcodedText" />
+</menu>

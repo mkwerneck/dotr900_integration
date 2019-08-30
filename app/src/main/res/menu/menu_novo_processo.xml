@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="br.com.marcosmilitao.idativosandroid.Processos.NovoProcessoActivity">
+
+    <item
+        android:id="@+id/action_novo_processo_sync"
+        android:icon="@drawable/baseline_loop_white_24dp"
+        android:title="SINCRONIZAR"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_novo_processo_novo"
+        android:orderInCategory="100"
+        android:title="NOVO" />
+
+    <item
+        android:id="@+id/action_limpar_lista_materiais_encontrados"
+        android:orderInCategory="100"
+        android:title="LIMPAR"/>
+
+    <item
+        android:id="@+id/action_novo_processo_reconectar"
+        android:orderInCategory="100"
+        android:title="RECONECTAR"/>
+
+    <item
+        android:id="@+id/action_novo_processo_atualizar"
+        android:orderInCategory="100"
+        android:title="@string/inventarioAtualizarTracking"/>
+</menu>

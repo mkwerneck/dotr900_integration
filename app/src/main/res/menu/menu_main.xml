@@ -1,0 +1,41 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="br.com.marcosmilitao.idativosandroid.MainActivity">
+    <item
+        android:id="@+id/action_cadastro"
+        android:orderInCategory="100"
+        android:title="@string/action_cadastro"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_inventario"
+        android:orderInCategory="100"
+        android:title="@string/invent_rio"
+        app:showAsAction="never" />
+    <item android:title="@string/tracking"
+        android:id="@+id/action_tracking"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_tagid_nao_cadastrado"
+        android:orderInCategory="100"
+        android:title="TAGID NÃO CADASTRADO"
+        app:showAsAction="never"
+        tools:ignore="HardcodedText" />
+    <item
+        android:id="@+id/action_processo_os"
+        android:orderInCategory="100"
+        android:title="PROCESSOS O.S."
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_sync"
+        android:orderInCategory="100"
+        android:title="@string/sync"
+        app:showAsAction="never" />
+    <item android:title="SAIR"
+        android:orderInCategory="100"
+        android:id="@+id/action_mail_sair"
+        app:showAsAction="never"
+        tools:ignore="HardcodedText" />
+</menu>

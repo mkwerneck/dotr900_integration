@@ -1,0 +1,74 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-sw600dp-v13/values-sw600dp-v13.xml",
+            "map": [
+                {
+                    "source": "/Users/marcoswerneck/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-27.0.2.aar/40e7e36ebc8b4de2acd255c0a0dc68a9/res/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,124",
+                        "endColumns": "68,68",
+                        "endOffsets": "119,188"
+                    },
+                    "to": {
+                        "startLines": "19,20",
+                        "startColumns": "4,4",
+                        "startOffsets": "1238,1307",
+                        "endColumns": "68,68",
+                        "endOffsets": "1302,1371"
+                    }
+                },
+                {
+                    "source": "/Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/build/intermediates/packaged_res/debug/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "from": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,123,191",
+                        "endLines": "2,3,8",
+                        "endColumns": "67,67,12",
+                        "endOffsets": "118,186,431"
+                    },
+                    "to": {
+                        "startLines": "18,21,27",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "1170,1376,1689",
+                        "endLines": "18,21,31",
+                        "endColumns": "67,67,12",
+                        "endOffsets": "1233,1439,1929"
+                    }
+                },
+                {
+                    "source": "/Users/marcoswerneck/.gradle/caches/transforms-1/files-1.1/design-27.0.2.aar/c61c4cb479f478244a4f64e5b537ade5/res/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,115,185,256,328,386,444,550,614,677",
+                        "endLines": "2,3,4,5,6,7,8,9,10,14",
+                        "endColumns": "59,69,70,71,57,57,105,63,62,12",
+                        "endOffsets": "110,180,251,323,381,439,545,609,672,854"
+                    },
+                    "to": {
+                        "startLines": "10,11,12,13,14,15,16,17,22,23",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "611,671,741,812,884,942,1000,1106,1444,1507",
+                        "endLines": "10,11,12,13,14,15,16,17,22,26",
+                        "endColumns": "59,69,70,71,57,57,105,63,62,12",
+                        "endOffsets": "666,736,807,879,937,995,1101,1165,1502,1684"
+                    }
+                },
+                {
+                    "source": "/Users/marcoswerneck/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.0.2.aar/5f003bedcc7a444e0f2479c52f7906d5/res/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,124,193,263,337,413,472,543",
+                        "endColumns": "68,68,69,73,75,58,70,67",
+                        "endOffsets": "119,188,258,332,408,467,538,606"
+                    }
+                }
+            ]
+        }
+    ]
+}

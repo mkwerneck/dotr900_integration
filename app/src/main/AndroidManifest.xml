@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="br.com.marcosmilitao.idativosandroid">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:name=".RoomImplementation"
+        android:allowBackup="true"
+        android:icon="@drawable/logoidutto"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon,android:theme">
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation"
+            android:label="title_activity_main2"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:uiOptions="splitActionBarWhenNarrow">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".Act_Cadastro_dados"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:label="@string/title_activity_act__cadastro_dados"
+            android:parentActivityName=".Act_Cadastro"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.marcosmilitao.idativosandroid.Act_Cadastro" />
+        </activity>
+        <activity
+            android:name=".Act_Inventario"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:label="@string/title_activity_act__inventario"
+            android:parentActivityName=".Main2Activity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.marcosmilitao.idativosandroid.Main2Activity" />
+        </activity>
+        <activity
+            android:name=".Processos.ProcessosOSActivity"
+            android:label="@string/title_activity_processos_os"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".Processos.ProcessosAtivosActivity"
+            android:label="@string/title_activity_processos_ativos"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Processos.NovoProcessoActivity"
+            android:label="@string/title_activity_novo_processo"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Act_Cadastro"
+            android:label="@string/title_activity_act__cadastro"
+            android:parentActivityName=".Main2Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.marcosmilitao.idativosandroid.Main2Activity" />
+        </activity>
+        <activity
+            android:name=".Act_Tracking"
+            android:label="TRACKING"
+            android:parentActivityName=".Main2Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.marcosmilitao.idativosandroid.Main2Activity" />
+        </activity>
+        <activity
+            android:name=".Act_TagID_Nao_Cadastrado"
+            android:label="TAGID NÃO CADASTRADO"
+            android:parentActivityName=".Main2Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.marcosmilitao.idativosandroid.Main2Activity" />
+        </activity>
+        <activity
+            android:name=".Act_Consulta_ItensKit"
+            android:label="ITENS DO CONTENTOR"
+            android:parentActivityName=".Act_Cadastro"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.marcosmilitao.idativosandroid.Act_Cadastro" />
+        </activity>
+        <activity
+            android:name=".Main2Activity"
+            android:label="ID ATIVOS"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".act_consulta_material"
+            android:label="CONSULTA MATERIAL"
+            android:parentActivityName=".Act_Cadastro"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.marcosmilitao.idativosandroid.Act_Cadastro" />
+        </activity>
+        <activity
+            android:name=".Act_Imagem"
+            android:label="@string/title_activity_act__imagem"
+            android:parentActivityName=".Act_Cadastro"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.marcosmilitao.idativosandroid.Act_Cadastro" />
+        </activity>
+        <activity
+            android:name=".Act_Inventario_Planejado"
+            android:label="@string/title_activity_act__inventario__planejado"
+            android:parentActivityName=".Act_Inventario"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.marcosmilitao.idativosandroid.Act_Inventario" />
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".Main2Activity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.marcosmilitao.idativosandroid.Main2Activity" />
+        </activity>
+        <activity
+            android:name=".DescarteActivity"
+            android:label="DESCARTAR TAGID"
+            android:parentActivityName=".Main2Activity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.marcosmilitao.idativosandroid.Main2Activity" />
+        </activity>
+        <activity
+            android:name=".Act_Gravar_Tag"
+            android:label="GRAVAR TAGID"
+            android:parentActivityName=".Act_Cadastro"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.marcosmilitao.idativosandroid.Act_Cadastro" />
+        </activity>
+        <activity
+            android:name=".Act_Cadastro_ItensKit"
+            android:label="CADASTRAR ITEM DO CONTENTOR"
+            android:parentActivityName=".Act_Cadastro"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".Act_Cadastro_Usuarios"
+            android:label="CADASTRAR USUÁRIO"
+            android:parentActivityName=".Act_Cadastro_Usuarios"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".CadastrarFerramentasActivity"
+            android:label="CADASTRAR FERRAMENTAS"
+            android:parentActivityName=".Main2Activity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.marcosmilitao.idativosandroid.Main2Activity" />
+        </activity>
+        <activity
+            android:name=".EditarFerramentasActivity"
+            android:label="EDITAR FERRAMENTAS"
+            android:parentActivityName=".CadastrarFerramentasActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+        <activity
+            android:name=".CadastrarUsuariosActivity"
+            android:label="CADASTRAR USUÁRIOS"
+            android:parentActivityName=".Main2Activity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+        <activity
+            android:name=".EditarUsuariosActivity"
+            android:label="EDITAR USUÁRIOS"
+            android:parentActivityName=".CadastrarUsuariosActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+        <activity android:name=".CadastrarPosicoesActivity"
+            android:label="CADASTRAR POSIÇÕES"
+            android:parentActivityName=".Main2Activity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden">
+
+        </activity>
+    </application>
+
+</manifest>

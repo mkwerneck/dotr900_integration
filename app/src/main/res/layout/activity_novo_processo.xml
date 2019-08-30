@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="br.com.marcosmilitao.idativosandroid.Processos.ProcessosOSActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/content_processos_os" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/ic_rfid2"
+        app:elevation="8dp"
+        app:backgroundTint="@color/circular_button_normal"
+        tools:ignore="VectorDrawableCompat"
+        android:id="@+id/fab_lertag_novoprocesso" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:text="TAREFA"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:id="@+id/lbl_Nome_Tarefa"
+            tools:textSize="30sp"
+            tools:textStyle="bold"
+            android:textAlignment="center" />
+
+        <TextView
+            android:text="Lista de Serviços"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lbl_Lista_Servicos"
+            tools:textSize="36dp"
+            tools:textStyle="bold"
+            android:textAlignment="textStart"
+            android:gravity="start" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="121dp"
+            android:id="@+id/list_Lista_Servicos" />
+
+        <EditText
+            android:layout_width="342dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text=""
+            android:ems="10"
+            android:id="@+id/edt_resultado" />
+
+        <TextView
+            android:text="Lista de Materiais"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lbl_Lista_Materiais"
+            tools:textSize="36dp"
+            tools:textStyle="bold"
+            android:textAlignment="textStart"
+            android:gravity="start" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="106dp"
+            tools:textSize="36dp"
+            android:id="@+id/list_Lista_Materiais"
+            tools:ignore="SpUsage" />
+
+        <TextView
+            android:text="MATERIAIS ENCONTRADOS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:textSize="24dp"
+            tools:textStyle="bold"
+            android:gravity="start"
+            android:id="@+id/lbl_material_encontrado_novo_processo" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lv_material_encontrado" />
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

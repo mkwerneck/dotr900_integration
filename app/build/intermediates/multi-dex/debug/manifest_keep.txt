@@ -1,0 +1,3 @@
+# Referenced at /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/app/build/intermediates/manifests/full/debug/AndroidManifest.xml:40
+-keep class br.com.marcosmilitao.idativosandroid.RoomImplementation { <init>(...); }
+

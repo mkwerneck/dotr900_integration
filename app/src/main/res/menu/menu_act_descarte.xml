@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="br.com.marcosmilitao.idativosandroid.DescarteActivity">
+
+    <item
+        android:id="@+id/action_sincronizar_descarte"
+        android:icon="@drawable/baseline_loop_white_24dp"
+        android:title="SINCRONIZAR"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_limpar_descarte"
+        android:orderInCategory="100"
+        android:title="LIMPAR"/>
+
+    <item
+        android:id="@+id/action_reconectar_descarte"
+        android:orderInCategory="100"
+        android:title="RECONECTAR"/>
+
+    <item
+        android:id="@+id/action_atualizar_descarte"
+        android:orderInCategory="100"
+        android:title="@string/inventarioAtualizarTracking"/>
+
+</menu>
