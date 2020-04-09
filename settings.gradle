@@ -1,2 +1,2 @@
-include ':app', ':EventBus', ':BluetoothLeGatt'
+include ':app', ':EventBus', ':BluetoothLeGatt', ':Dotr900'
 include ':app', ':slideDateTimePicker'

@@ -24,6 +24,10 @@ public class Settings {
             new Settings("IP do XR400", "", false, false, true)
     };
 
+    public static final Settings[] maisSettings = {
+            new Settings ("Limpar dados armazenados", null, false, false, true)
+    };
+
     public Settings(String title, String subtitle, boolean hasCheckbox, boolean isChecked, boolean isClickable){
         this.title = title;
         this.subtitle = subtitle;

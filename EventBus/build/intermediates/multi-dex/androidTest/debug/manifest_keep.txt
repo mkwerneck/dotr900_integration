@@ -1,0 +1,3 @@
+# Referenced at /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/build/intermediates/manifest/androidTest/debug/AndroidManifest.xml:9
+-keep class android.support.test.runner.AndroidJUnitRunner { <init>(...); }
+

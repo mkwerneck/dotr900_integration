@@ -1,8 +1,8 @@
 package br.com.marcosmilitao.idativosandroid.DBUtils.Models;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-import android.arch.persistence.room.TypeConverters;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import java.util.Date;
 
@@ -17,8 +17,6 @@ public class ListaMateriaisListaTarefas {
 
     private String RowVersion;
 
-    private String Status;
-
     @TypeConverters({TimeStampConverter.class})
     private Date DataInicio;
 
@@ -27,9 +25,9 @@ public class ListaMateriaisListaTarefas {
 
     private String Observacao;
 
-    private int ListaTarefasItemIdOriginal;
+    private int ProcessoIdOriginal;
 
-    private int CadastroMateriaisItemIdOriginal;
+    private int CadastroMateriaisIdOriginal;
 
     public int getId() {
         return Id;
@@ -47,12 +45,12 @@ public class ListaMateriaisListaTarefas {
         IdOriginal = idOriginal;
     }
 
-    public String getStatus() {
-        return Status;
+    public String getRowVersion() {
+        return RowVersion;
     }
 
-    public void setStatus(String status) {
-        Status = status;
+    public void setRowVersion(String rowVersion) {
+        RowVersion = rowVersion;
     }
 
     public Date getDataInicio() {
@@ -79,27 +77,20 @@ public class ListaMateriaisListaTarefas {
         Observacao = observacao;
     }
 
-    public int getListaTarefasItemIdOriginal() {
-        return ListaTarefasItemIdOriginal;
+    public int getProcessoIdOriginal() {
+        return ProcessoIdOriginal;
     }
 
-    public void setListaTarefasItemIdOriginal(int listaTarefasItemIdOriginal) {
-        ListaTarefasItemIdOriginal = listaTarefasItemIdOriginal;
+    public void setProcessoIdOriginal(int processoIdOriginal) {
+        ProcessoIdOriginal = processoIdOriginal;
     }
 
-    public int getCadastroMateriaisItemIdOriginal() {
-        return CadastroMateriaisItemIdOriginal;
+    public int getCadastroMateriaisIdOriginal() {
+        return CadastroMateriaisIdOriginal;
     }
 
-    public void setCadastroMateriaisItemIdOriginal(int cadastroMateriaisItemIdOriginal) {
-        CadastroMateriaisItemIdOriginal = cadastroMateriaisItemIdOriginal;
+    public void setCadastroMateriaisIdOriginal(int cadastroMateriaisIdOriginal) {
+        CadastroMateriaisIdOriginal = cadastroMateriaisIdOriginal;
     }
 
-    public String getRowVersion() {
-        return RowVersion;
-    }
-
-    public void setRowVersion(String rowVersion) {
-        RowVersion = rowVersion;
-    }
 }

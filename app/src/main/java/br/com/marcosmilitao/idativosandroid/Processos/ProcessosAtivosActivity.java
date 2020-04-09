@@ -35,6 +35,7 @@ import java.util.List;
 import br.com.marcosmilitao.idativosandroid.DBUtils.ApplicationDB;
 import br.com.marcosmilitao.idativosandroid.DBUtils.Models.CadastroEquipamentos;
 import br.com.marcosmilitao.idativosandroid.DBUtils.Models.ModeloEquipamentos;
+import br.com.marcosmilitao.idativosandroid.DBUtils.Models.Proprietarios;
 import br.com.marcosmilitao.idativosandroid.DBUtils.Models.Tarefas;
 import br.com.marcosmilitao.idativosandroid.Idativos02Data.Idativos02Data;
 import br.com.marcosmilitao.idativosandroid.Idativos02Data.Query.Query_InventarioEquipamento;
@@ -206,7 +207,9 @@ public class ProcessosAtivosActivity extends AppCompatActivity  implements Adapt
                 }
                 else
                 {
-                    cadastroEquipamentosList = dbInstance.cadastroEquipamentosDAO().GetCadastroEquipamentos();
+                    Proprietarios proprietario = dbInstance.proprietariosDAO().GetByIdOriginal(dbInstance.parametrosPadraoDAO().GetBaseId());
+
+                    cadastroEquipamentosList = dbInstance.cadastroEquipamentosDAO().GetCadastroEquipamentos(proprietario.getDescricao());
                 }
 
                 for (CadastroEquipamentos cadastroEquipamento : cadastroEquipamentosList)

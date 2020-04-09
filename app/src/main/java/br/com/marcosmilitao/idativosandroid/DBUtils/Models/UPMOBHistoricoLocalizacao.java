@@ -1,8 +1,8 @@
 package br.com.marcosmilitao.idativosandroid.DBUtils.Models;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-import android.arch.persistence.room.TypeConverters;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import java.util.Date;
 
@@ -13,20 +13,14 @@ public class UPMOBHistoricoLocalizacao {
     @PrimaryKey(autoGenerate = true)
     private int Id;
 
-    private String TAGID;
+    private int CadastroMateriaisId;
 
-    private String TAGIDPosicao;
+    private int PosicaoId;
 
     @TypeConverters({TimeStampConverter.class})
     private Date DataHoraEvento;
 
     private String Processo;
-
-    private String Dominio;
-
-    private int Quantidade;
-
-    private String Modalidade;
 
     private String CodColetor;
 
@@ -34,9 +28,23 @@ public class UPMOBHistoricoLocalizacao {
 
     private Boolean FlagErro;
 
-    private Boolean FlagAtualizar;
-
     private Boolean FlagProcess;
+
+    public int getCadastroMateriaisId() {
+        return CadastroMateriaisId;
+    }
+
+    public void setCadastroMateriaisId(int cadastroMateriaisId) {
+        CadastroMateriaisId = cadastroMateriaisId;
+    }
+
+    public int getPosicaoId() {
+        return PosicaoId;
+    }
+
+    public void setPosicaoId(int posicaoId) {
+        PosicaoId = posicaoId;
+    }
 
     public int getId() {
         return Id;
@@ -44,22 +52,6 @@ public class UPMOBHistoricoLocalizacao {
 
     public void setId(int id) {
         Id = id;
-    }
-
-    public String getTAGID() {
-        return TAGID;
-    }
-
-    public void setTAGID(String TAGID) {
-        this.TAGID = TAGID;
-    }
-
-    public String getTAGIDPosicao() {
-        return TAGIDPosicao;
-    }
-
-    public void setTAGIDPosicao(String TAGIDPosicao) {
-        this.TAGIDPosicao = TAGIDPosicao;
     }
 
     public Date getDataHoraEvento() {
@@ -76,30 +68,6 @@ public class UPMOBHistoricoLocalizacao {
 
     public void setProcesso(String processo) {
         Processo = processo;
-    }
-
-    public String getDominio() {
-        return Dominio;
-    }
-
-    public void setDominio(String dominio) {
-        Dominio = dominio;
-    }
-
-    public int getQuantidade() {
-        return Quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        Quantidade = quantidade;
-    }
-
-    public String getModalidade() {
-        return Modalidade;
-    }
-
-    public void setModalidade(String modalidade) {
-        Modalidade = modalidade;
     }
 
     public String getCodColetor() {
@@ -124,14 +92,6 @@ public class UPMOBHistoricoLocalizacao {
 
     public void setFlagErro(Boolean flagErro) {
         FlagErro = flagErro;
-    }
-
-    public Boolean getFlagAtualizar() {
-        return FlagAtualizar;
-    }
-
-    public void setFlagAtualizar(Boolean flagAtualizar) {
-        FlagAtualizar = flagAtualizar;
     }
 
     public Boolean getFlagProcess() {

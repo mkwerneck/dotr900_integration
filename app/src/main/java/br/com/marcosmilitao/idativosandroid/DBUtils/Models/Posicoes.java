@@ -1,7 +1,10 @@
 package br.com.marcosmilitao.idativosandroid.DBUtils.Models;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import br.com.marcosmilitao.idativosandroid.POJO.AlmoxarifadosCP;
 
 @Entity
 public class Posicoes {
@@ -16,7 +19,7 @@ public class Posicoes {
 
     private String Descricao;
 
-    private String Almoxarifado;
+    private int AlmoxarifadoId;
 
     private String TAGID;
 
@@ -52,12 +55,12 @@ public class Posicoes {
         Descricao = descricao;
     }
 
-    public String getAlmoxarifado() {
-        return Almoxarifado;
+    public int getAlmoxarifadoId() {
+        return AlmoxarifadoId;
     }
 
-    public void setAlmoxarifado(String almoxarifado) {
-        Almoxarifado = almoxarifado;
+    public void setAlmoxarifadoId(int almoxarifado) {
+        AlmoxarifadoId = almoxarifado;
     }
 
     public String getTAGID() {

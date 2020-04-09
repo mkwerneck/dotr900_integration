@@ -7,4 +7,10 @@
         android:id="@+id/action_tagid_nao_cadastrado_reconectar"
         android:orderInCategory="100"
         android:title="RECONECTAR"/>
+
+    <item
+        android:id="@+id/action_tagid_nao_cadastrado_limpar"
+        android:orderInCategory="100"
+        android:title="LIMPAR"/>
+
 </menu>

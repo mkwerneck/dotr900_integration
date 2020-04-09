@@ -207,7 +207,7 @@ public class Main2Activity extends AppCompatActivity  implements NavigationView.
         btn_inventario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Main2Activity.this, Act_Inventario.class);
+                Intent intent = new Intent(Main2Activity.this, InventarioPosicaoActivity.class);
                 intent.putExtra("main",Main2Activity.class);
                 startActivity(intent);
 
@@ -216,7 +216,7 @@ public class Main2Activity extends AppCompatActivity  implements NavigationView.
         btn_processos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Intent intent = new Intent(Main2Activity.this, ProcessosOSActivity.class);
+               Intent intent = new Intent(Main2Activity.this, ProcessosActivity.class);
                 startActivity(intent);
             }
         });
@@ -230,7 +230,7 @@ public class Main2Activity extends AppCompatActivity  implements NavigationView.
         btn_tag_nao_cadsatrado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Intent intent = new Intent(Main2Activity.this, Act_TagID_Nao_Cadastrado.class);
+               Intent intent = new Intent(Main2Activity.this, TagidsNaoCadastradosActivity.class);
                 startActivity(intent);
             }
         });
@@ -319,9 +319,18 @@ public class Main2Activity extends AppCompatActivity  implements NavigationView.
 
         Intent intent;
         switch (id) {
-            case R.id.nav_inventario:
-                intent = new Intent(this, Act_Inventario.class);
-                intent.putExtra("main",Main2Activity.class);
+            case R.id.nav_inv_plan:
+                intent = new Intent(this, InventarioPlanejadoActivity.class);
+                startActivity(intent);
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
+            case R.id.nav_inv:
+                intent = new Intent(this, InventarioActivity.class);
+                startActivity(intent);
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
+            case R.id.nav_inv_pos:
+                intent = new Intent(this, InventarioPosicaoActivity.class);
                 startActivity(intent);
                 drawer.closeDrawer(GravityCompat.START);
                 return true;
@@ -376,7 +385,7 @@ public class Main2Activity extends AppCompatActivity  implements NavigationView.
                         .setNegativeButton("Não", dialogClickListener).show();
                 return true;
             case R.id.nav_processos:
-                intent = new Intent(this, ProcessosOSActivity.class);
+                intent = new Intent(this, ProcessosActivity.class);
                 startActivity(intent);
                 drawer.closeDrawer(GravityCompat.START);
                 return true;

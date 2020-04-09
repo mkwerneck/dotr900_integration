@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v21/values-v21.xml",
+            "outputFile": "/Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v21/values-v21.xml",
             "map": [
                 {
                     "source": "/Users/marcoswerneck/.gradle/caches/transforms-1/files-1.1/play-services-appinvite-11.8.0.aar/0cf81741647bf142cc929370660f5a9f/res/values-v21/values.xml",
@@ -20,25 +20,6 @@
                         "endLines": "306",
                         "endColumns": "8",
                         "endOffsets": "21855"
-                    }
-                },
-                {
-                    "source": "/Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/build/intermediates/packaged_res/debug/values-v21/values-v21.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endLines": "3",
-                        "endColumns": "12",
-                        "endOffsets": "131"
-                    },
-                    "to": {
-                        "startLines": "307",
-                        "startColumns": "4",
-                        "startOffsets": "21860",
-                        "endLines": "308",
-                        "endColumns": "12",
-                        "endOffsets": "21936"
                     }
                 },
                 {
@@ -80,25 +61,6 @@
                     }
                 },
                 {
-                    "source": "/Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/app/src/main/res/values-v21/styles.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "17",
-                        "endLines": "8",
-                        "endColumns": "12",
-                        "endOffsets": "396"
-                    },
-                    "to": {
-                        "startLines": "6",
-                        "startColumns": "4",
-                        "startOffsets": "354",
-                        "endLines": "12",
-                        "endColumns": "12",
-                        "endOffsets": "733"
-                    }
-                },
-                {
                     "source": "/Users/marcoswerneck/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.0.2.aar/5f003bedcc7a444e0f2479c52f7906d5/res/values-v21/values-v21.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,17,19,20,21,22,24,26,27,28,29,30,32,34,36,38,40,42,43,48,50,52,53,54,56,58,59,60,61,62,63,107,110,154,157,160,162,164,166,169,171,174,175,176,179,180,181,182,183,184,187,188,190,192,194,196,200,202,203,204,205,207,211,213,215,216,217,218,219,221,222,223,233,234,235,247",
@@ -118,6 +80,25 @@
                     }
                 },
                 {
+                    "source": "/Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/build/intermediates/packaged_res/debug/values-v21/values-v21.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "3",
+                        "endColumns": "12",
+                        "endOffsets": "131"
+                    },
+                    "to": {
+                        "startLines": "307",
+                        "startColumns": "4",
+                        "startOffsets": "21860",
+                        "endLines": "308",
+                        "endColumns": "12",
+                        "endOffsets": "21936"
+                    }
+                },
+                {
                     "source": "/Users/marcoswerneck/.gradle/caches/transforms-1/files-1.1/wearable-2.1.0.aar/0b436fe006f270b67c0d261eaa647829/res/values-v21/values.xml",
                     "from": {
                         "startLines": "4,8,11,15,21,30,42,54,57,61",
@@ -134,6 +115,25 @@
                         "endLines": "293,296,300,304,315,327,347,350,354,358",
                         "endColumns": "8,8,8,8,8,8,8,8,8,8",
                         "endOffsets": "21310,21411,21567,21725,22396,23044,24201,24374,24558,24740"
+                    }
+                },
+                {
+                    "source": "/Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/app/src/main/res/values-v21/styles.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "17",
+                        "endLines": "8",
+                        "endColumns": "12",
+                        "endOffsets": "396"
+                    },
+                    "to": {
+                        "startLines": "6",
+                        "startColumns": "4",
+                        "startOffsets": "354",
+                        "endLines": "12",
+                        "endColumns": "12",
+                        "endOffsets": "733"
                     }
                 },
                 {

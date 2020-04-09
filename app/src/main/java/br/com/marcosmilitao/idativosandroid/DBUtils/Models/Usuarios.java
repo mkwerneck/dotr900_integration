@@ -1,7 +1,8 @@
 package br.com.marcosmilitao.idativosandroid.DBUtils.Models;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 @Entity
 public class Usuarios {
@@ -21,6 +22,8 @@ public class Usuarios {
     private String Permissao;
 
     private String TAGID;
+
+    private String Matricula;
 
     public int getId() {
         return Id;
@@ -84,5 +87,13 @@ public class Usuarios {
 
     public void setRowVersion(String rowVersion) {
         RowVersion = rowVersion;
+    }
+
+    public String getMatricula() {
+        return Matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        Matricula = matricula;
     }
 }

@@ -1107,7 +1107,7 @@ public class Act_Cadastro_dados extends AppCompatActivity  implements AdapterVie
             public void run() {
                 ApplicationDB dbInstance = RoomImplementation.getmInstance().getDbInstance();
 
-                String proprietarioPadrao = dbInstance.parametrosPadraoDAO().GetProprietarioPadrao();
+                String proprietarioPadrao = "Teste";
                 List<String> proprietariosList = dbInstance.proprietariosDAO().GetAllDescricao();
 
                 runOnUiThread(new Runnable() {
@@ -1154,9 +1154,9 @@ public class Act_Cadastro_dados extends AppCompatActivity  implements AdapterVie
             public void run() {
                 ApplicationDB dbInstance = RoomImplementation.getmInstance().getDbInstance();
 
-                String almoxarifadoPadrao = dbInstance.parametrosPadraoDAO().GetCodigoAlmoxarifado();
+                String almoxarifadoPadrao = "Teste";
                 Posicoes posicao = intentPosicaoOriginal != null ? dbInstance.posicoesDAO().GetByCodPosicao(intentPosicaoOriginal) : null;
-                List<String> posicaoList = dbInstance.posicoesDAO().GetPosicoesByAlmoxarifado(almoxarifadoPadrao);
+                List<String> posicaoList = dbInstance.posicoesDAO().GetPosicoesByAlmoxarifado(1);
 
                 runOnUiThread(new Runnable() {
                     @Override

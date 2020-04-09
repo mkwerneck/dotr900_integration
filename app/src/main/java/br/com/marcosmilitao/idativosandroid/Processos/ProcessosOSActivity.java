@@ -302,13 +302,13 @@ public class ProcessosOSActivity extends AppCompatActivity implements AdapterVie
 
                 if (listaTarefas != null)
                 {
-                    CadastroEquipamentos cadastroEquipamentos = dbInstance.cadastroEquipamentosDAO().GetByIdOriginal(listaTarefas.getCadsatroEquipamentosItemIdOriginal());
-                    Tarefas tarefas = dbInstance.tarefasDAO().GetByIdOriginal(listaTarefas.getTarefaItemIdOriginal());
+                    CadastroEquipamentos cadastroEquipamentos = dbInstance.cadastroEquipamentosDAO().GetByIdOriginal(listaTarefas.getProcessoIdOriginal());
+                    Tarefas tarefas = dbInstance.tarefasDAO().GetByIdOriginal(listaTarefas.getTarefaIdOriginal());
                     ModeloEquipamentos modeloEquipamentos = dbInstance.modeloEquipamentosDAO().GetByIdOriginal(cadastroEquipamentos.getModeloEquipamentoItemIdOriginal());
 
                     intent.putExtra(NovoProcessoActivity.EXTRA_TRACENUMBER, cadastroEquipamentos.getTraceNumber());
                     intent.putExtra(NovoProcessoActivity.EXTRA_IDORIGINAL, idOriginal);
-                    intent.putExtra(NovoProcessoActivity.EXTRA_CODPROCESSO, listaTarefas.getProcesso());
+                    intent.putExtra(NovoProcessoActivity.EXTRA_CODPROCESSO, listaTarefas.getIdOriginal());
                     intent.putExtra(NovoProcessoActivity.EXTRA_CODTAREFA, tarefas.getCodigo());
                     //intent.putExtra(NovoProcessoActivity.EXTRA_TIPOTAREFA, tarefas.getTipo());
                     intent.putExtra(NovoProcessoActivity.EXTRA_TITULOTAREFA, tarefas.getTitulo());
@@ -386,19 +386,19 @@ public class ProcessosOSActivity extends AppCompatActivity implements AdapterVie
 
                 if (!filtro.matches(""))
                 {
-                    listaTarefasList = dbInstance.listaTarefasDAO().GetListaTarefasFilter(filtro);
+                    listaTarefasList = dbInstance.listaTarefasDAO().GetAll();
                 }
                 else
                 {
-                    listaTarefasList = dbInstance.listaTarefasDAO().GetListaTarefas();
+                    listaTarefasList = dbInstance.listaTarefasDAO().GetAll();
                 }
 
                 for (ListaTarefas listaTarefas : listaTarefasList)
                 {
-                    CadastroEquipamentos cadastroEquipamentos = dbInstance.cadastroEquipamentosDAO().GetByIdOriginal(listaTarefas.getCadsatroEquipamentosItemIdOriginal());
-                    Tarefas tarefa = dbInstance.tarefasDAO().GetByIdOriginal(listaTarefas.getTarefaItemIdOriginal());
+                    CadastroEquipamentos cadastroEquipamentos = dbInstance.cadastroEquipamentosDAO().GetByIdOriginal(listaTarefas.getTarefaIdOriginal());
+                    Tarefas tarefa = dbInstance.tarefasDAO().GetByIdOriginal(listaTarefas.getTarefaIdOriginal());
 
-                    String item = "Processo: " + listaTarefas.getProcesso() + " | " + cadastroEquipamentos.getTraceNumber() + " | " + tarefa.getTitulo() + " | " + listaTarefas.getStatus() + " | " + sdformat.format(listaTarefas.getDataInicio());
+                    String item = "Processo: " + listaTarefas.getIdOriginal() + " | " + cadastroEquipamentos.getTraceNumber() + " | " + tarefa.getTitulo() + " | " + listaTarefas.getStatus() + " | " + sdformat.format(listaTarefas.getDataInicio());
                     array_Lista_Tarefas.add(item);
                     lista_Tarefa_Id_Original.add(listaTarefas.getIdOriginal());
 

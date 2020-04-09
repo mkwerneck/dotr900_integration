@@ -457,15 +457,9 @@ public class Act_Inventario extends AppCompatActivity {
                                     upmobHistoricoLocalizacao.setCodColetor(Build.SERIAL);
                                     upmobHistoricoLocalizacao.setDataHoraEvento(Calendar.getInstance().getTime());
                                     upmobHistoricoLocalizacao.setDescricaoErro("");
-                                    upmobHistoricoLocalizacao.setDominio("MOBILE");
-                                    upmobHistoricoLocalizacao.setFlagAtualizar(false);
                                     upmobHistoricoLocalizacao.setFlagErro(false);
                                     upmobHistoricoLocalizacao.setFlagProcess(false);
-                                    upmobHistoricoLocalizacao.setModalidade("Equipamento");
-                                    upmobHistoricoLocalizacao.setQuantidade(1);
                                     upmobHistoricoLocalizacao.setProcesso(sp_inventario_processo.getSelectedItem().toString());
-                                    upmobHistoricoLocalizacao.setTAGID(cadastroEquipamentos.getTAGID());
-                                    upmobHistoricoLocalizacao.setTAGIDPosicao(posicao.getTAGID());
 
                                     dbInstance.upmobHistoricoLocalizacaoDAO().Create(upmobHistoricoLocalizacao);
                                 }
@@ -488,15 +482,9 @@ public class Act_Inventario extends AppCompatActivity {
                                     upmobHistoricoLocalizacao.setCodColetor(Build.SERIAL);
                                     upmobHistoricoLocalizacao.setDataHoraEvento(Calendar.getInstance().getTime());
                                     upmobHistoricoLocalizacao.setDescricaoErro("");
-                                    upmobHistoricoLocalizacao.setDominio("MOBILE");
-                                    upmobHistoricoLocalizacao.setFlagAtualizar(false);
                                     upmobHistoricoLocalizacao.setFlagErro(false);
                                     upmobHistoricoLocalizacao.setFlagProcess(false);
-                                    upmobHistoricoLocalizacao.setModalidade("Material");
-                                    upmobHistoricoLocalizacao.setQuantidade(cadastroMateriais.getQuantidade());
                                     upmobHistoricoLocalizacao.setProcesso(sp_inventario_processo.getSelectedItem().toString());
-                                    upmobHistoricoLocalizacao.setTAGID(cadastroMateriais.getTAGID());
-                                    upmobHistoricoLocalizacao.setTAGIDPosicao(posicao.getTAGID());
 
                                     dbInstance.upmobHistoricoLocalizacaoDAO().Create(upmobHistoricoLocalizacao);
                                 }
@@ -682,14 +670,7 @@ public class Act_Inventario extends AppCompatActivity {
             case R.id.inventario_conexao:
                 list();
                 return true;
-            case R.id.inventarioPlan:
-                //showMessage("Aviso!","Esta funcionalidade não está disponível nesta Versão.");
-                BA.disable();
-                BA.enable();
-                Intent intent = new Intent(this,Act_Inventario_Planejado.class);
-                startActivity(intent);
 
-                return true;
             case R.id.inventario_sync:
                 //Nova Chamada para Sincronismo
                 ESync.GetSyncInstance().SyncDatabase(Act_Inventario.this);
@@ -1413,7 +1394,6 @@ public class Act_Inventario extends AppCompatActivity {
         View edittextLayout = inflaterEt.inflate(R.layout.tagiddetails_alertdialog_layout, null);
         adbuilder.setView(edittextLayout);
 
-        et_proprietario_in = (TextView) edittextLayout.findViewById(R.id.et_proprietario_in);
         et_tagid_in = (TextView) edittextLayout.findViewById(R.id.et_tagid_in);
         et_datavalidade_in = (TextView) edittextLayout.findViewById(R.id.et_datavalidade_in);
         et_posicao_in = (TextView) edittextLayout.findViewById(R.id.et_posicao_in);
@@ -1453,10 +1433,10 @@ public class Act_Inventario extends AppCompatActivity {
             public void run() {
                 ApplicationDB dbInstance = RoomImplementation.getmInstance().getDbInstance();
 
-                String codigoAlmoxarifado = dbInstance.parametrosPadraoDAO().GetCodigoAlmoxarifado();
+                String codigoAlmoxarifado = "Teste";
 
                 _arrayPosicaoSpiner = new ArrayList<String>();
-                _arrayPosicaoSpiner.addAll(dbInstance.posicoesDAO().GetPosicoesByAlmoxarifado(codigoAlmoxarifado));
+                _arrayPosicaoSpiner.addAll(dbInstance.posicoesDAO().GetPosicoesByAlmoxarifado(1));
 
                 _adapterPosicaoSpiner = new ArrayAdapter<String>(Act_Inventario.this, R.layout.spinner_item, _arrayPosicaoSpiner);
 

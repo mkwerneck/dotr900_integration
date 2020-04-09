@@ -1,8 +1,9 @@
 package br.com.marcosmilitao.idativosandroid.DBUtils.Models;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-import android.arch.persistence.room.TypeConverters;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
 import java.util.Date;
 import br.com.marcosmilitao.idativosandroid.helper.TimeStampConverter;
 
@@ -13,40 +14,19 @@ public class UPMOBListaServicosListaTarefas {
 
     private int IdOriginal;
 
-    private String CodTarefa;
-
-    private String Servico;
-
-    private String Resultado;
-
-    private String Status;
-
     @TypeConverters({TimeStampConverter.class})
     private Date DataHoraEvento;
 
-    @TypeConverters({TimeStampConverter.class})
-    private Date DataInicio;
+   private String Resultado;
 
     @TypeConverters({TimeStampConverter.class})
-    private Date DataConclusao;
+    private Date UltimaAtualizacao;
 
-    @TypeConverters({TimeStampConverter.class})
-    private Date DataCancelamento;
+    private int ListaTarefaId;
+
+    private int ServicoId;
 
     private String CodColetor;
-
-    private String DescricaoErro;
-
-    private Boolean FlagErro;
-
-    private Boolean FlagAtualizar;
-
-    private Boolean FlagProcess;
-
-
-
-
-
 
     public int getId() {
         return Id;
@@ -64,20 +44,12 @@ public class UPMOBListaServicosListaTarefas {
         IdOriginal = idOriginal;
     }
 
-    public String getCodTarefa() {
-        return CodTarefa;
+    public Date getDataHoraEvento() {
+        return DataHoraEvento;
     }
 
-    public void setCodTarefa(String codTarefa) {
-        CodTarefa = codTarefa;
-    }
-
-    public String getServico() {
-        return Servico;
-    }
-
-    public void setServico(String servico) {
-        Servico = servico;
+    public void setDataHoraEvento(Date dataHoraEvento) {
+        DataHoraEvento = dataHoraEvento;
     }
 
     public String getResultado() {
@@ -88,44 +60,28 @@ public class UPMOBListaServicosListaTarefas {
         Resultado = resultado;
     }
 
-    public String getStatus() {
-        return Status;
+    public Date getUltimaAtualizacao() {
+        return UltimaAtualizacao;
     }
 
-    public void setStatus(String status) {
-        Status = status;
+    public void setUltimaAtualizacao(Date ultimaAtualizacao) {
+        UltimaAtualizacao = ultimaAtualizacao;
     }
 
-    public Date getDataHoraEvento() {
-        return DataHoraEvento;
+    public int getListaTarefaId() {
+        return ListaTarefaId;
     }
 
-    public void setDataHoraEvento(Date dataHoraEvento) {
-        DataHoraEvento = dataHoraEvento;
+    public void setListaTarefaId(int listaTarefaId) {
+        ListaTarefaId = listaTarefaId;
     }
 
-    public Date getDataInicio() {
-        return DataInicio;
+    public int getServicoId() {
+        return ServicoId;
     }
 
-    public void setDataInicio(Date dataInicio) {
-        DataInicio = dataInicio;
-    }
-
-    public Date getDataConclusao() {
-        return DataConclusao;
-    }
-
-    public void setDataConclusao(Date dataConclusao) {
-        DataConclusao = dataConclusao;
-    }
-
-    public Date getDataCancelamento() {
-        return DataCancelamento;
-    }
-
-    public void setDataCancelamento(Date dataCancelamento) {
-        DataCancelamento = dataCancelamento;
+    public void setServicoId(int servicoId) {
+        ServicoId = servicoId;
     }
 
     public String getCodColetor() {
@@ -134,37 +90,5 @@ public class UPMOBListaServicosListaTarefas {
 
     public void setCodColetor(String codColetor) {
         CodColetor = codColetor;
-    }
-
-    public String getDescricaoErro() {
-        return DescricaoErro;
-    }
-
-    public void setDescricaoErro(String descricaoErro) {
-        DescricaoErro = descricaoErro;
-    }
-
-    public Boolean getFlagErro() {
-        return FlagErro;
-    }
-
-    public void setFlagErro(Boolean flagErro) {
-        FlagErro = flagErro;
-    }
-
-    public Boolean getFlagAtualizar() {
-        return FlagAtualizar;
-    }
-
-    public void setFlagAtualizar(Boolean flagAtualizar) {
-        FlagAtualizar = flagAtualizar;
-    }
-
-    public Boolean getFlagProcess() {
-        return FlagProcess;
-    }
-
-    public void setFlagProcess(Boolean flagProcess) {
-        FlagProcess = flagProcess;
     }
 }

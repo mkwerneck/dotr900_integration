@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-w240dp-v13/values-w240dp-v13.xml",
+            "outputFile": "/Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-w240dp-v13/values-w240dp-v13.xml",
             "map": [
                 {
                     "source": "/Users/marcoswerneck/.gradle/caches/transforms-1/files-1.1/wearable-2.1.0.aar/0b436fe006f270b67c0d261eaa647829/res/values-w240dp-v13/values.xml",

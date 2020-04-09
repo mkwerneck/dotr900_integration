@@ -1,7 +1,8 @@
 package br.com.marcosmilitao.idativosandroid.DBUtils.Models;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 @Entity
 public class Tarefas {
@@ -21,6 +22,10 @@ public class Tarefas {
     private Boolean FlagDependenciaServico;
 
     private Boolean FlagDependenciaMaterial;
+
+    private Boolean FlagEntradaAlmoxarifado;
+
+    private Boolean FlagSaidaAlmoxarifado;
 
     private String CategoriaEquipamentos;
 
@@ -94,5 +99,21 @@ public class Tarefas {
 
     public void setRowVersion(String rowVersion) {
         RowVersion = rowVersion;
+    }
+
+    public Boolean getFlagEntradaAlmoxarifado() {
+        return FlagEntradaAlmoxarifado;
+    }
+
+    public void setFlagEntradaAlmoxarifado(Boolean flagEntradaAlmoxarifado) {
+        FlagEntradaAlmoxarifado = flagEntradaAlmoxarifado;
+    }
+
+    public Boolean getFlagSaidaAlmoxarifado() {
+        return FlagSaidaAlmoxarifado;
+    }
+
+    public void setFlagSaidaAlmoxarifado(Boolean flagSaidaAlmoxarifado) {
+        FlagSaidaAlmoxarifado = flagSaidaAlmoxarifado;
     }
 }

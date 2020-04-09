@@ -393,7 +393,7 @@ public class Act_Cadastro_ItensKit extends AppCompatActivity {
                     @Override
                     public void run() {
                         modeloMateriaisArrayList = new ArrayList<ModeloMateriaisCF>(modeloMateriaisList);
-                        modeloMateriaisAdapter = new CustomAdapterModeloMateriais(Act_Cadastro_ItensKit.this, modeloMateriaisArrayList);
+                        modeloMateriaisAdapter = new CustomAdapterModeloMateriais(Act_Cadastro_ItensKit.this, modeloMateriaisArrayList, dbInstance);
 
                         et_modelo_ci = (AppCompatAutoCompleteTextView) findViewById(R.id.et_modelo_ci);
                         et_modelo_ci.setAdapter(modeloMateriaisAdapter);

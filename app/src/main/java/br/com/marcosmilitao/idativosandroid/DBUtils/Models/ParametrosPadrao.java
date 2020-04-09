@@ -1,7 +1,8 @@
 package br.com.marcosmilitao.idativosandroid.DBUtils.Models;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 @Entity
 public class ParametrosPadrao {
@@ -12,9 +13,7 @@ public class ParametrosPadrao {
 
     private String RowVersion;
 
-    private String CodAlmoxarifado;
-
-    private String SetorProprietario;
+    private int SetorProprietarioId;
 
     public int getId() {
         return Id;
@@ -32,20 +31,12 @@ public class ParametrosPadrao {
         IdOriginal = idOriginal;
     }
 
-    public String getCodAlmoxarifado() {
-        return CodAlmoxarifado;
+    public int getSetorProprietarioId() {
+        return SetorProprietarioId;
     }
 
-    public void setCodAlmoxarifado(String codAlmoxarifado) {
-        CodAlmoxarifado = codAlmoxarifado;
-    }
-
-    public String getSetorProprietario() {
-        return SetorProprietario;
-    }
-
-    public void setSetorProprietario(String setorProprietario) {
-        SetorProprietario = setorProprietario;
+    public void setSetorProprietarioId(int setorProprietario) {
+        SetorProprietarioId = setorProprietario;
     }
 
     public String getRowVersion() {

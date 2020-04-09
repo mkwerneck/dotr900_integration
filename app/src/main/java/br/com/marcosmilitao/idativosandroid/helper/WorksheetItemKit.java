@@ -1,7 +1,5 @@
 package br.com.marcosmilitao.idativosandroid.helper;
 
-import android.arch.persistence.room.Relation;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

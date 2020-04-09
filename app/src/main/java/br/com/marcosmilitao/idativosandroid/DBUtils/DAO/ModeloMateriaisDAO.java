@@ -1,10 +1,10 @@
 package br.com.marcosmilitao.idativosandroid.DBUtils.DAO;
 
-import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Delete;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.Query;
-import android.arch.persistence.room.Update;
+import androidx.room.Dao;
+import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -38,6 +38,9 @@ public interface ModeloMateriaisDAO {
 
     @Query("SELECT IdOriginal as idOriginal, Modelo as modelo, IDOmni as numProduto FROM ModeloMateriais")
     List<ModeloMateriaisCF> GetAllModelosCustomAdapter();
+
+    @Query("SELECT IdOriginal as idOriginal, Modelo as modelo, IDOmni as numProduto FROM ModeloMateriais WHERE Modelo like :charSequence COLLATE NOCASE OR IDOmni like :charSequence LIMIT 10")
+    List<ModeloMateriaisCF> GetFilterModelosCustomAdapter(String charSequence);
 
     @Query("SELECT IDOmni FROM ModeloMateriais WHERE Modelo like :qryModelo")
     String GetNumProdutoByModelo(String qryModelo);

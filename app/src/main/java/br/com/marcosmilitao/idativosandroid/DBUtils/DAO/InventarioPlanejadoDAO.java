@@ -1,16 +1,16 @@
 package br.com.marcosmilitao.idativosandroid.DBUtils.DAO;
 
-
-import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Delete;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.Query;
-import android.arch.persistence.room.Update;
+import androidx.room.Dao;
+import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
 import br.com.marcosmilitao.idativosandroid.DBUtils.Models.InventarioPlanejado;
 import br.com.marcosmilitao.idativosandroid.DBUtils.Models.Proprietarios;
+import br.com.marcosmilitao.idativosandroid.POJO.InvPlanejado;
 
 @Dao
 public interface InventarioPlanejadoDAO {
@@ -34,4 +34,7 @@ public interface InventarioPlanejadoDAO {
 
     @Query("SELECT IdOriginal FROM InventarioPlanejado WHERE Descricao like :qryDescricao")
     Integer GetIdOriginalByDescricao(String qryDescricao);
+
+    @Query("SELECT IdOriginal, Descricao FROM InventarioPlanejado")
+    List<InvPlanejado> GetSpinnerItens();
 }

@@ -1,10 +1,10 @@
 package br.com.marcosmilitao.idativosandroid.DBUtils.DAO;
 
-import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Delete;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.Query;
-import android.arch.persistence.room.Update;
+import androidx.room.Dao;
+import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -28,6 +28,6 @@ public interface ServicosAdicionaisDAO {
     @Query("SELECT * FROM ServicosAdicionais WHERE IdOriginal = :qryIdOriginal ")
     ServicosAdicionais GetByIdOriginal(int qryIdOriginal);
 
-    @Query("SELECT * FROM ServicosAdicionais WHERE TarefaItemIdOriginal like :qryIdOriginalTarefa")
+    @Query("SELECT * FROM ServicosAdicionais WHERE TarefaItemIdOriginal like :qryIdOriginalTarefa AND FlagAtivo = 1")
     List<ServicosAdicionais> GetByIdOriginalTarefa(int qryIdOriginalTarefa);
 }

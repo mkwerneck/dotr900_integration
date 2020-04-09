@@ -1,43 +1,43 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:1:1-14:12
-INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:1:1-14:12
-INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:1:1-14:12
-INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:1:1-14:12
-INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:1:1-14:12
-INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:1:1-14:12
-INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:1:1-14:12
+ADDED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:1:1-14:12
+INJECTED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:1:1-14:12
+INJECTED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:1:1-14:12
+INJECTED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:1:1-14:12
+INJECTED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:1:1-14:12
+INJECTED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:1:1-14:12
+INJECTED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:1:1-14:12
 	package
-		ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:2:5-34
-		INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml
-		INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml
+		ADDED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:2:5-34
+		INJECTED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml
+		INJECTED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml
 	android:versionName
-		INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml
-		ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:5:5-30
-		INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml
+		INJECTED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml
+		ADDED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:5:5-30
+		INJECTED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml
 	xmlns:tools
-		ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:3:5-51
+		ADDED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:3:5-51
 	android:versionCode
-		INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml
-		ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:4:5-28
-		INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml
+		INJECTED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml
+		ADDED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:4:5-28
+		INJECTED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml
 	xmlns:android
-		ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:1:11-69
+		ADDED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:1:11-69
 uses-sdk
-ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:8:5-73
-INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:8:5-73
-INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:8:5-73
-INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:8:5-73
-INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:8:5-73
+ADDED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:8:5-73
+INJECTED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:8:5-73
+INJECTED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:8:5-73
+INJECTED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:8:5-73
+INJECTED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:8:5-73
 	android:targetSdkVersion
-		ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:8:41-70
-		INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml
-		INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml
+		ADDED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:8:41-70
+		INJECTED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml
+		INJECTED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml
 	android:minSdkVersion
-		ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:8:15-40
-		INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml
-		INJECTED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml
+		ADDED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:8:15-40
+		INJECTED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml
+		INJECTED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml
 application
-ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:10:5-12:19
+ADDED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:10:5-12:19
 	android:label
-		ADDED from /Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:10:18-50
+		ADDED from /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/AndroidManifest.xml:10:18-50

@@ -1200,9 +1200,9 @@ public class Act_Cadastro extends AppCompatActivity {
                 ApplicationDB dbInstance = RoomImplementation.getmInstance().getDbInstance();
 
                 ArrayAdapter<String> posicaoAdapter = new ArrayAdapter<String>(Act_Cadastro.this, R.layout.spinner_item);
-                String codigoAlmoxarifado = dbInstance.parametrosPadraoDAO().GetCodigoAlmoxarifado();
+                String codigoAlmoxarifado = "Testef";
 
-                for (String posicao : dbInstance.posicoesDAO().GetPosicoesByAlmoxarifado(codigoAlmoxarifado))
+                for (String posicao : dbInstance.posicoesDAO().GetPosicoesByAlmoxarifado(1))
                 {
                     posicaoAdapter.add(posicao);
                 }

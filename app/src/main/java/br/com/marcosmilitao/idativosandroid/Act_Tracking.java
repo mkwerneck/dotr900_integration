@@ -1056,9 +1056,9 @@ public class Act_Tracking extends AppCompatActivity {
                 ApplicationDB dbInstance = RoomImplementation.getmInstance().getDbInstance();
 
                 ArrayAdapter<String> posicaoAdapter = new ArrayAdapter<String>(Act_Tracking.this, R.layout.spinner_item);
-                String codigoAlmoxarifado = dbInstance.parametrosPadraoDAO().GetCodigoAlmoxarifado();
+                String codigoAlmoxarifado = "Teste";
 
-                for (String posicao : dbInstance.posicoesDAO().GetPosicoesByAlmoxarifado(codigoAlmoxarifado))
+                for (String posicao : dbInstance.posicoesDAO().GetPosicoesByAlmoxarifado(1))
                 {
                     posicaoAdapter.add(posicao);
                 }

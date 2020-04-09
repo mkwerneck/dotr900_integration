@@ -3,8 +3,7 @@
 
     <group android:checkableBehavior="single">
 
-        <item
-            android:title="Cadastros">
+        <item android:title="Cadastros">
             <menu>
                 <item
                     android:id="@+id/nav_menu_cf"
@@ -20,28 +19,41 @@
                     android:title="Cadastrar Posições" />-->
             </menu>
         </item>
-        <item
-            android:title="Processos">
-            <item
-                android:id="@+id/nav_inventario"
-                android:icon="@drawable/ic_menu_inventario2"
-                android:title="Inventário" />
-            <item
-                android:id="@+id/nav_processos"
-                android:icon="@drawable/ic_menu_processo"
-                android:title="Processos OS" />
-            <item
-                android:id="@+id/nav_tracking"
-                android:icon="@drawable/ic_menu_tracking"
-                android:title="Tracking" />
-            <item
-                android:id="@+id/nav_tagid_nao_cadastrado"
-                android:icon="@drawable/ic_menu_tagid_nao_cadastrado"
-                android:title="TAG ID Não Cadastrado" />
-            <item
-                android:id="@+id/nav_descarte"
-                android:icon="@drawable/baseline_delete_forever_black_24dp"
-                android:title="Descarte de TAGID" />
+        <item android:title="Inventários">
+            <menu>
+                <item
+                    android:id="@+id/nav_inv"
+                    android:icon="@drawable/ic_menu_inventario2"
+                    android:title="Inventário" />
+                <item
+                    android:id="@+id/nav_inv_pos"
+                    android:icon="@drawable/baseline_near_me_black_18dp"
+                    android:title="Inventário Posição" />
+                <item
+                    android:id="@+id/nav_inv_plan"
+                    android:icon="@drawable/baseline_today_black_18dp"
+                    android:title="Inventário Planejado" />
+            </menu>
+        </item>
+        <item android:title="Processos">
+            <menu>
+                <item
+                    android:id="@+id/nav_processos"
+                    android:icon="@drawable/ic_menu_processo"
+                    android:title="Processos OS" />
+                <item
+                    android:id="@+id/nav_tracking"
+                    android:icon="@drawable/ic_menu_tracking"
+                    android:title="Tracking" />
+                <item
+                    android:id="@+id/nav_tagid_nao_cadastrado"
+                    android:icon="@drawable/ic_menu_tagid_nao_cadastrado"
+                    android:title="TAG ID Não Cadastrado" />
+                <item
+                    android:id="@+id/nav_descarte"
+                    android:icon="@drawable/baseline_delete_forever_black_24dp"
+                    android:title="Descarte de TAGID" />
+            </menu>
         </item>
     </group>
 

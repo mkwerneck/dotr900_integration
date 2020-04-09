@@ -439,6 +439,7 @@ public class NovoProcessoActivity  extends AppCompatActivity implements View.OnC
         });
 
         flagDo = true;
+
         list_Lista_Servicos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -861,14 +862,8 @@ public class NovoProcessoActivity  extends AppCompatActivity implements View.OnC
                 //Atualizando ListaTarefa
                 UPMOBListaTarefas upmobListaTarefas = new UPMOBListaTarefas();
                 upmobListaTarefas.setIdOriginal(intentIdOriginal);
-                upmobListaTarefas.setCodTarefa(intentCodTarefa);
-                upmobListaTarefas.setTraceNumber(intentTraceNumber);
-                upmobListaTarefas.setDataInicio(Calendar.getInstance().getTime());
                 upmobListaTarefas.setDataHoraEvento(dataHoraEvento);
                 upmobListaTarefas.setCodColetor(Build.SERIAL);
-                upmobListaTarefas.setFlagErro(false);
-                upmobListaTarefas.setFlagAtualizar(intentTagEditar);
-                upmobListaTarefas.setFlagProcess(false);
 
                 dbInstance.upmobListaTarefasDAO().Create(upmobListaTarefas);
 
@@ -899,16 +894,9 @@ public class NovoProcessoActivity  extends AppCompatActivity implements View.OnC
 
                     UPMOBListaServicosListaTarefas upmobListaServicosListaTarefas = new UPMOBListaServicosListaTarefas();
                     upmobListaServicosListaTarefas.setIdOriginal(servico.getIdOriginal());
-                    upmobListaServicosListaTarefas.setCodTarefa(intentCodTarefa);
-                    upmobListaServicosListaTarefas.setServico(servicoAdicional.getServico());
                     upmobListaServicosListaTarefas.setResultado(servico.getResultado());
-                    upmobListaServicosListaTarefas.setStatus(servico.getResultado() == null ? "Pendente" : "Concluido");
                     upmobListaServicosListaTarefas.setDataHoraEvento(dataHoraEvento);
-                    upmobListaServicosListaTarefas.setDataInicio(Calendar.getInstance().getTime());
                     upmobListaServicosListaTarefas.setCodColetor(Build.SERIAL);
-                    upmobListaServicosListaTarefas.setFlagErro(false);
-                    upmobListaServicosListaTarefas.setFlagAtualizar(intentTagEditar);
-                    upmobListaServicosListaTarefas.setFlagProcess(false);
 
                     dbInstance.upmobListaServicosListaTarefasDAO().Create(upmobListaServicosListaTarefas);
                 }
@@ -1509,7 +1497,7 @@ public class NovoProcessoActivity  extends AppCompatActivity implements View.OnC
 
                 for (ListaServicosListaTarefas listaServico : listaServicosListaTarefasList)
                 {
-                    ServicosAdicionais servicoAdicional = dbInstance.servicosAdicionaisDAO().GetByIdOriginal(listaServico.getServicoAdicinalItemIdOriginal());
+                    ServicosAdicionais servicoAdicional = dbInstance.servicosAdicionaisDAO().GetByIdOriginal(listaServico.getServicoAdicionalIdOriginal());
 
                     NovoProcesso_Servicos newServico = new NovoProcesso_Servicos();
                     newServico.setServicosAdicional(servicoAdicional);
@@ -1536,11 +1524,11 @@ public class NovoProcessoActivity  extends AppCompatActivity implements View.OnC
             @Override
             public void run() {
                 ApplicationDB dbInstance = RoomImplementation.getmInstance().getDbInstance();
-                List<ListaMateriaisListaTarefas> listaMateriaisList = dbInstance.listaMateriaisListaTarefasDAO().GetByIdOriginalListaTarefa(intentIdOriginal);
+                List<ListaMateriaisListaTarefas> listaMateriaisList = dbInstance.listaMateriaisListaTarefasDAO().GetAll();
 
                 for (ListaMateriaisListaTarefas listaMaterial : listaMateriaisList)
                 {
-                    CadastroMateriais cadastroMateriais = dbInstance.cadastroMateriaisDAO().GetByIdOriginal(listaMaterial.getCadastroMateriaisItemIdOriginal());
+                    CadastroMateriais cadastroMateriais = dbInstance.cadastroMateriaisDAO().GetByIdOriginal(listaMaterial.getCadastroMateriaisIdOriginal());
                     ModeloMateriais modeloMateriais = dbInstance.modeloMateriaisDAO().GetByIdOriginal(cadastroMateriais.getModeloMateriaisItemIdOriginal());
                     String tagid = cadastroMateriais.getTAGID();
 
@@ -1825,7 +1813,6 @@ public class NovoProcessoActivity  extends AppCompatActivity implements View.OnC
         View edittextLayout = inflaterEt.inflate(R.layout.tagiddetails_alertdialog_layout, null);
         adbuilder.setView(edittextLayout);
 
-        et_proprietario_in = (TextView) edittextLayout.findViewById(R.id.et_proprietario_in);
         et_tagid_in = (TextView) edittextLayout.findViewById(R.id.et_tagid_in);
         et_datavalidade_in = (TextView) edittextLayout.findViewById(R.id.et_datavalidade_in);
         et_posicao_in = (TextView) edittextLayout.findViewById(R.id.et_posicao_in);

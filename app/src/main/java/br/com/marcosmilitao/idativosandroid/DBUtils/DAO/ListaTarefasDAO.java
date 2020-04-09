@@ -1,10 +1,10 @@
 package br.com.marcosmilitao.idativosandroid.DBUtils.DAO;
 
-import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Delete;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.Query;
-import android.arch.persistence.room.Update;
+import androidx.room.Dao;
+import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -28,9 +28,12 @@ public interface ListaTarefasDAO {
     @Query("SELECT * FROM ListaTarefas WHERE IdOriginal = :qryIdOriginal ")
     ListaTarefas GetByIdOriginal(int qryIdOriginal);
 
-    @Query("SELECT * FROM ListaTarefas as lt INNER JOIN CadastroEquipamentos as ce ON lt.CadsatroEquipamentosItemIdOriginal = ce.IdOriginal WHERE (lt.Status <> 'Concluido' AND lt.Status <> 'Cancelado') AND (lt.Processo like :qryFilter || ce.TraceNumber like :qryFilter)")
-    List<ListaTarefas> GetListaTarefasFilter(String qryFilter);
+    @Query("SELECT * FROM ListaTarefas")
+    List<ListaTarefas> GetAll();
 
-    @Query("SELECT * FROM ListaTarefas WHERE (Status != 'Concluido' AND Status != 'Cancelado')")
-    List<ListaTarefas> GetListaTarefas();
+    @Query("SELECT TarefaIdOriginal FROM ListaTarefas WHERE ProcessoIdOriginal = :codProcesso AND Status = 'Em Andamento' ORDER BY IdOriginal DESC LIMIT 1")
+    int GetUltimaTarefaByCodProcesso(int codProcesso);
+
+    @Query("SELECT * FROM ListaTarefas WHERE ProcessoIdOriginal = :codProcesso AND Status = 'Em Andamento' ORDER BY IdOriginal DESC LIMIT 1")
+    ListaTarefas GetUltimaListaTarefaByCodProcesso(int codProcesso);
 }

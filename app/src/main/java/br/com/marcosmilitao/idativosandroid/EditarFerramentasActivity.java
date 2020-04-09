@@ -258,7 +258,7 @@ public class EditarFerramentasActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         modeloMateriaisArrayList = new ArrayList<ModeloMateriaisCF>(modeloMateriaisList);
-                        modeloMateriaisAdapter = new CustomAdapterModeloMateriais(EditarFerramentasActivity.this, modeloMateriaisArrayList);
+                        modeloMateriaisAdapter = new CustomAdapterModeloMateriais(EditarFerramentasActivity.this, modeloMateriaisArrayList, dbInstance);
 
                         et_edfer_modelo.setAdapter(modeloMateriaisAdapter);
                         et_edfer_modelo.setThreshold(1);
@@ -286,7 +286,7 @@ public class EditarFerramentasActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         posicoesArrayList = new ArrayList<PosicaoCF>(posicoesList);
-                        posicoesAdapter = new CustomAdapterPosicoes(EditarFerramentasActivity.this, posicoesArrayList);
+                        posicoesAdapter = new CustomAdapterPosicoes(EditarFerramentasActivity.this, posicoesArrayList, dbInstance);
 
                         et_edfer_posicao.setAdapter(posicoesAdapter);
                         et_edfer_posicao.setThreshold(1);
@@ -309,33 +309,37 @@ public class EditarFerramentasActivity extends AppCompatActivity {
             @Override
             public void run() {
                 CadastroMateriais cadastroMateriais = dbInstance.cadastroMateriaisDAO().GetByTAGID(tagid, true);
-                ModeloMateriais modeloMateriais = dbInstance.modeloMateriaisDAO().GetByIdOriginal(cadastroMateriais.getModeloMateriaisItemIdOriginal());
-                Posicoes posicao = dbInstance.posicoesDAO().GetByIdOriginal(cadastroMateriais.getPosicaoOriginalItemIdoriginal());
 
                 if (cadastroMateriais != null)
                 {
-                    idOriginal = cadastroMateriais.getIdOriginal();
-                    modeloSelected = modeloMateriais.getIdOriginal();
-                    posicaoSelected = posicao.getIdOriginal();
+                    ModeloMateriais modeloMateriais = dbInstance.modeloMateriaisDAO().GetByIdOriginal(cadastroMateriais.getModeloMateriaisItemIdOriginal());
+                    Posicoes posicao = dbInstance.posicoesDAO().GetByIdOriginal(cadastroMateriais.getPosicaoOriginalItemIdoriginal());
 
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            et_edfer_numserie.setText(cadastroMateriais.getNumSerie());
-                            et_edfer_patrimonio.setText(cadastroMateriais.getPatrimonio());
-                            et_edfer_quantidade.setText(String.valueOf(cadastroMateriais.getQuantidade()));
-                            et_edfer_valorunitario.setText(String.valueOf(cadastroMateriais.getValorUnitario()));
-                            et_edfer_notafiscal.setText(cadastroMateriais.getNotaFiscal());
+                    if (modeloMateriais != null && posicao != null)
+                    {
+                        idOriginal = cadastroMateriais.getIdOriginal();
+                        modeloSelected = modeloMateriais.getIdOriginal();
+                        posicaoSelected = posicao.getIdOriginal();
 
-                            if (cadastroMateriais.getDataValidade() != null) tvsp_edfer_dtvalidade.setText(formato.format(cadastroMateriais.getDataValidade()));
-                            if (cadastroMateriais.getDataEntradaNotaFiscal() != null) tvsp_edfer_dtnotafiscal.setText(formato.format(cadastroMateriais.getDataEntradaNotaFiscal()));
-                            if (cadastroMateriais.getDataFabricacao() != null) tvsp_edfer_dtfabricacao.setText(formato.format(cadastroMateriais.getDataFabricacao()));
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                et_edfer_numserie.setText(cadastroMateriais.getNumSerie());
+                                et_edfer_patrimonio.setText(cadastroMateriais.getPatrimonio());
+                                et_edfer_quantidade.setText(String.valueOf(cadastroMateriais.getQuantidade()));
+                                et_edfer_valorunitario.setText(String.valueOf(cadastroMateriais.getValorUnitario()));
+                                et_edfer_notafiscal.setText(cadastroMateriais.getNotaFiscal());
 
-                            et_edfer_modelo.setText(modeloMateriais.getModelo());
+                                if (cadastroMateriais.getDataValidade() != null) tvsp_edfer_dtvalidade.setText(formato.format(cadastroMateriais.getDataValidade()));
+                                if (cadastroMateriais.getDataEntradaNotaFiscal() != null) tvsp_edfer_dtnotafiscal.setText(formato.format(cadastroMateriais.getDataEntradaNotaFiscal()));
+                                if (cadastroMateriais.getDataFabricacao() != null) tvsp_edfer_dtfabricacao.setText(formato.format(cadastroMateriais.getDataFabricacao()));
 
-                            et_edfer_posicao.setText(posicao.getCodigo());
-                        }
-                    });
+                                et_edfer_modelo.setText(modeloMateriais.getModelo());
+
+                                et_edfer_posicao.setText(posicao.getCodigo());
+                            }
+                        });
+                    }
                 }
             }
         }).start();

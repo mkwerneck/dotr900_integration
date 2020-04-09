@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BluetoothLeGatt/BluetoothLeGatt.iml" filepath="$PROJECT_DIR$/BluetoothLeGatt/BluetoothLeGatt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Dotr900/Dotr900.iml" filepath="$PROJECT_DIR$/Dotr900/Dotr900.iml" />
       <module fileurl="file://$PROJECT_DIR$/EventBus/EventBus.iml" filepath="$PROJECT_DIR$/EventBus/EventBus.iml" />
       <module fileurl="file://$PROJECT_DIR$/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO.iml" filepath="$PROJECT_DIR$/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />

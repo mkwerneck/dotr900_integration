@@ -11,19 +11,22 @@ import android.widget.Filter;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.marcosmilitao.idativosandroid.DBUtils.ApplicationDB;
 import br.com.marcosmilitao.idativosandroid.DBUtils.Models.ModeloMateriais;
 import br.com.marcosmilitao.idativosandroid.POJO.ModeloMateriaisCF;
 import br.com.marcosmilitao.idativosandroid.R;
 
 public class CustomAdapterModeloMateriais extends ArrayAdapter<ModeloMateriaisCF> {
     private List<ModeloMateriaisCF> _modelos, _tempItens, _suggestions;
+    private ApplicationDB _dbInstance;
     private Context _context;
 
-    public CustomAdapterModeloMateriais(Context context, ArrayList<ModeloMateriaisCF> modelos)
+    public CustomAdapterModeloMateriais(Context context, ArrayList<ModeloMateriaisCF> modelos, ApplicationDB dbInstance)
     {
         super(context, 0, modelos);
         _modelos = modelos;
         _context = context;
+        _dbInstance = dbInstance;
 
         _tempItens = new ArrayList<ModeloMateriaisCF>(_modelos);
         _suggestions = new ArrayList<>();
@@ -97,17 +100,9 @@ public class CustomAdapterModeloMateriais extends ArrayAdapter<ModeloMateriaisCF
             if (charSequence != null) {
                 _suggestions.clear();
 
-                for (ModeloMateriaisCF modeloMateriaisCF : _tempItens) {
-                    if (_suggestions.size() < 15)
-                    {
-                        if (modeloMateriaisCF.getModelo().toLowerCase().startsWith(charSequence.toString().toLowerCase()) ||
-                                modeloMateriaisCF.getNumProduto().toLowerCase().startsWith(charSequence.toString().toLowerCase())) {
-                            _suggestions.add(modeloMateriaisCF);
-                        }
-                    } else {
-                        break;
-                    }
-                }
+                String filter = charSequence.toString().toLowerCase() + "%";
+
+                _suggestions = _dbInstance.modeloMateriaisDAO().GetFilterModelosCustomAdapter(filter);
 
                 FilterResults filterResults = new FilterResults();
                 filterResults.values = _suggestions;

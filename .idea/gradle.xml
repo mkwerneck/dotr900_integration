@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/BluetoothLeGatt" />
+            <option value="$PROJECT_DIR$/Dotr900" />
             <option value="$PROJECT_DIR$/EventBus" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/slideDateTimePicker" />

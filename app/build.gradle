@@ -12,49 +12,24 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    //1
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-}
-
-allprojects {
-    repositories {
-        maven { url "https://jitpack.io" }
-        maven { url "https://maven.google.com" }
-        maven { url "https://maven.google.com" }
-        jcenter()
-        google()
-    }
 }
 
 dependencies {
-    /*subprojects {
-            project.configurations.all {
-                resolutionStrategy.eachDependency { details ->
-                    if (details.requested.group == 'com.android.support'
-                            && !details.requested.name.contains('multidex')) {
-                        details.useVersion "27.0.2"
-                    }
-                }
-            }
-        }*/
-
-    implementation "com.android.support:support-core-utils:27.0.2"
-
+    implementation 'com.android.support:support-core-utils:27.0.2'
     implementation fileTree(include: ['*.jar'], exclude: 'android-support-v4.jar', dir: 'libs')
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
-    implementation project(path: ':EventBus')
-    implementation project(path: ':slideDateTimePicker')
-    //implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.facebook.stetho:stetho:1.3.1'
     testImplementation 'junit:junit:4.12'
     implementation 'com.android.support:appcompat-v7:27.0.2'
@@ -62,14 +37,11 @@ dependencies {
     implementation 'com.android.support:mediarouter-v7:27.0.2'
     implementation 'com.android.support:cardview-v7:27.0.2'
     implementation 'com.android.support:design:27.0.2'
-    //implementation 'com.google.android.gms:play-services-appindexing:11.8.0'
     implementation 'com.android.support:multidex:1.0.2'
     implementation 'com.google.android.gms:play-services-maps:11.8.0'
     implementation 'com.google.android.gms:play-services-plus:11.8.0'
-    //implementation 'com.android.support:support-v4:27.0.2'
     implementation 'com.android.support:support-v13:27.0.2'
     implementation 'com.android.support:support-annotations:27.0.2'
-    //implementation 'com.android.support:support-annotations:27.1.0'
     implementation 'com.android.support:support-vector-drawable:27.0.2'
     implementation 'com.google.android.gms:play-services:11.8.0'
     implementation 'com.google.android.gms:play-services-ads:11.8.0'
@@ -80,14 +52,23 @@ dependencies {
     implementation 'com.google.android.support:wearable:2.1.0'
     compileOnly 'com.google.android.wearable:wearable:2.1.0'
     implementation 'net.sourceforge.jtds:jtds:1.3.1'
-    //implementation 'com.android.support:wear:27.0.2'
     testImplementation 'junit:junit:4.12'
-    implementation project(':BluetoothLeGatt')
-    implementation 'android.arch.persistence.room:runtime:1.0.0'
-    annotationProcessor 'android.arch.persistence.room:compiler:1.0.0'
-    compile 'com.facebook.network.connectionclass:connectionclass:1.0.1'
-    compile 'com.squareup.okhttp3:okhttp:3.3.0'
+    implementation 'androidx.room:room-runtime:2.2.0-beta01'
+    annotationProcessor "androidx.room:room-compiler:2.2.0-beta01"
+    implementation 'com.facebook.network.connectionclass:connectionclass:1.0.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.3.0'
+    implementation project(path: ':EventBus')
+    implementation project(path: ':slideDateTimePicker')
+    implementation project(path: ':BluetoothLeGatt')
+    implementation project(path: ':Dotr900')
 }
+
+
+
+
+
+
+
 
 
 

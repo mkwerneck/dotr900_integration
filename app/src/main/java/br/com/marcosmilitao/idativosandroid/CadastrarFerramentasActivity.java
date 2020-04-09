@@ -37,6 +37,7 @@ import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -108,6 +109,8 @@ public class CadastrarFerramentasActivity extends AppCompatActivity {
     private Integer modeloSelected = null;
 
     public static final String TAG = "inventory";
+    public static final String EXTRA_TAGID = "tagid";
+    private String extra_tagid = null;
 
     public static class InventoryEvent {
     }
@@ -116,6 +119,8 @@ public class CadastrarFerramentasActivity extends AppCompatActivity {
     }
 
     private Handler mHandler;
+
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -292,6 +297,12 @@ public class CadastrarFerramentasActivity extends AppCompatActivity {
         BA = BluetoothAdapter.getDefaultAdapter();
         BA.enable();
         mHandler = new Handler();
+
+        intent = getIntent();
+        extra_tagid = intent.getStringExtra(EXTRA_TAGID);
+
+        //Se activity vier como intent de outra activity, usa-se o tagid para já incluir na lista e seleciona-lo
+        PreencherListaTAGID(extra_tagid);
     }
 
     @Override
@@ -342,6 +353,9 @@ public class CadastrarFerramentasActivity extends AppCompatActivity {
             case R.id.action_salvar_cf:
                 Salvar();
                 return true;
+            case R.id.action_sync_cf:
+                ESync.GetSyncInstance().SyncDatabase(CadastrarFerramentasActivity.this);
+                return true;
             default:
 
                 return false;
@@ -373,7 +387,7 @@ public class CadastrarFerramentasActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         modeloMateriaisArrayList = new ArrayList<ModeloMateriaisCF>(modeloMateriaisList);
-                        modeloMateriaisAdapter = new CustomAdapterModeloMateriais(CadastrarFerramentasActivity.this, modeloMateriaisArrayList);
+                        modeloMateriaisAdapter = new CustomAdapterModeloMateriais(CadastrarFerramentasActivity.this, modeloMateriaisArrayList, dbInstance);
 
                         et_cadfer_modelo = (AppCompatAutoCompleteTextView) findViewById(R.id.et_cadfer_modelo);
                         et_cadfer_modelo.setAdapter(modeloMateriaisAdapter);
@@ -402,7 +416,7 @@ public class CadastrarFerramentasActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         posicoesArrayList = new ArrayList<PosicaoCF>(posicoesList);
-                        posicoesAdapter = new CustomAdapterPosicoes(CadastrarFerramentasActivity.this, posicoesArrayList);
+                        posicoesAdapter = new CustomAdapterPosicoes(CadastrarFerramentasActivity.this, posicoesArrayList, dbInstance);
 
                         et_cadfer_posicao = (AppCompatAutoCompleteTextView) findViewById(R.id.et_cadfer_posicao);
                         et_cadfer_posicao.setAdapter(posicoesAdapter);
@@ -623,7 +637,7 @@ public class CadastrarFerramentasActivity extends AppCompatActivity {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        AtualizarListView(tagid);
+                        AtualizarListView(tagid.trim(), false);
                     }
                 });
             } catch (Exception e) {
@@ -654,7 +668,7 @@ public class CadastrarFerramentasActivity extends AppCompatActivity {
         builder.create().show();
     }
 
-    public void AtualizarListView(String tagid)
+    public void AtualizarListView(String tagid, boolean isSelected)
     {
         new Thread(new Runnable() {
             @Override
@@ -666,7 +680,7 @@ public class CadastrarFerramentasActivity extends AppCompatActivity {
 
                 CadastrarTagid cadastrarTagid = new CadastrarTagid();
                 cadastrarTagid.setTagid(tagid);
-                cadastrarTagid.setIsSelected(false);
+                cadastrarTagid.setIsSelected(isSelected);
 
                 if (!tagsLidosArrayList.contains(tagid))
                 {
@@ -771,7 +785,11 @@ public class CadastrarFerramentasActivity extends AppCompatActivity {
                     if (ValidarData(tvsp_cadfer_dtnotafiscal.getText().toString()) != null){
                         dataEntradaNF = ValidarData(tvsp_cadfer_dtnotafiscal.getText().toString());
                     } else {
-                        dataEntradaNF = null;
+
+                        //Se a data de entrada da nota fiscal não for valida, saímos da função
+                        showMessage("AVISO", "Data de Entrada da Nota Fiscal inválida", 3);
+
+                        return;
                     }
 
                     if (ValidarData(tvsp_cadfer_dtfabricacao.getText().toString()) != null){
@@ -821,6 +839,24 @@ public class CadastrarFerramentasActivity extends AppCompatActivity {
     public Date ValidarData(String data_validar)
     {
         Date date = null;
+        Date dataMinimo = null;
+        Date dataMaximo = null;
+
+        //tentando fazer o parse da data minima e maxima do SQL Server
+        try {
+            dataMinimo = formato.parse("01/01/1753");
+        } catch(ParseException e)
+        {
+            dataMinimo = null;
+        }
+
+        try {
+            dataMaximo = formato.parse("31/12/9999");
+        } catch(ParseException e)
+        {
+            dataMaximo = null;
+        }
+
 
         if (data_validar == null){
             return date;
@@ -830,6 +866,12 @@ public class CadastrarFerramentasActivity extends AppCompatActivity {
             date = formato.parse(data_validar);
         } catch (Exception e){
             return date;
+        }
+
+        //Verificando se a data não é inválida
+        if (date.before(dataMinimo) || date.after(dataMaximo))
+        {
+            date = null;
         }
 
         return date;
@@ -863,5 +905,15 @@ public class CadastrarFerramentasActivity extends AppCompatActivity {
                 LimparDados();
             }
         }, 1500);
+    }
+
+    private void PreencherListaTAGID(String tagid)
+    {
+        if (tagid != null)
+        {
+            AtualizarListView(tagid, true);
+
+            listViewSelected = 0;
+        }
     }
 }

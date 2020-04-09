@@ -1,9 +1,10 @@
 package br.com.marcosmilitao.idativosandroid.DBUtils.DAO;
 
-import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.Query;
-import android.arch.persistence.room.Update;
+import androidx.room.Dao;
+import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.Query;
+import androidx.room.Update;
 
 import br.com.marcosmilitao.idativosandroid.DBUtils.Models.ListaServicosListaTarefas;
 import br.com.marcosmilitao.idativosandroid.DBUtils.Models.ParametrosPadrao;
@@ -22,9 +23,12 @@ public interface ParametrosPadraoDAO {
     @Query("SELECT * FROM ParametrosPadrao WHERE IdOriginal = :qryIdOriginal ")
     ParametrosPadrao GetByIdOriginal(int qryIdOriginal);
 
-    @Query("SELECT CodAlmoxarifado FROM ParametrosPadrao LIMIT 1")
-    String GetCodigoAlmoxarifado();
+    @Query("SELECT SetorProprietarioId FROM ParametrosPadrao LIMIT 1")
+    int GetBaseId();
 
-    @Query("SELECT SetorProprietario FROM PARAMETROSPADRAO LIMIT 1")
-    String GetProprietarioPadrao();
+    /*@Query("SELECT CodAlmoxarifado FROM ParametrosPadrao LIMIT 1")
+    String GetCodigoAlmoxarifado();*/
+
+    /*@Query("SELECT SetorProprietario FROM PARAMETROSPADRAO LIMIT 1")
+    String GetProprietarioPadrao();*/
 }

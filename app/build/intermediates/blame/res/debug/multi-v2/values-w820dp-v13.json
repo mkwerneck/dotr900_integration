@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-w820dp-v13/values-w820dp-v13.xml",
+            "outputFile": "/Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-w820dp-v13/values-w820dp-v13.xml",
             "map": [
                 {
-                    "source": "/Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/app/src/main/res/values-w820dp/dimens.xml",
+                    "source": "/Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/app/src/main/res/values-w820dp/dimens.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "4",

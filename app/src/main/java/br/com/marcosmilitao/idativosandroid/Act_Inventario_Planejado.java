@@ -662,15 +662,9 @@ public class Act_Inventario_Planejado extends AppCompatActivity {
                             upmobHistoricoLocalizacao.setCodColetor(Build.SERIAL);
                             upmobHistoricoLocalizacao.setDataHoraEvento(Calendar.getInstance().getTime());
                             upmobHistoricoLocalizacao.setDescricaoErro("");
-                            upmobHistoricoLocalizacao.setDominio("MOBILE");
-                            upmobHistoricoLocalizacao.setFlagAtualizar(false);
                             upmobHistoricoLocalizacao.setFlagErro(false);
                             upmobHistoricoLocalizacao.setFlagProcess(false);
-                            upmobHistoricoLocalizacao.setModalidade("Material");
-                            upmobHistoricoLocalizacao.setQuantidade(cadastroMateriais.getQuantidade());
                             upmobHistoricoLocalizacao.setProcesso(sp_inventario_processo.getSelectedItem().toString());
-                            upmobHistoricoLocalizacao.setTAGID(cadastroMateriais.getTAGID());
-                            upmobHistoricoLocalizacao.setTAGIDPosicao(posicao.getTAGID());
 
                             dbInstance.upmobHistoricoLocalizacaoDAO().Create(upmobHistoricoLocalizacao);
                         }
@@ -1679,7 +1673,7 @@ public class Act_Inventario_Planejado extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                sp_inventario_almoxarifado.setSelection(adapterAlmoxarifados.getPosition(posicao.getAlmoxarifado()), false);
+                                sp_inventario_almoxarifado.setSelection(2, false);
                                 FillPosicaoSpinner();
 
                                 sp_inventario_posicao.setSelection(adapterPosicoes.getPosition(posicao.getCodigo()), false);
@@ -1847,7 +1841,6 @@ public class Act_Inventario_Planejado extends AppCompatActivity {
         View edittextLayout = inflaterEt.inflate(R.layout.tagiddetails_alertdialog_layout, null);
         adbuilder.setView(edittextLayout);
 
-        et_proprietario_in = (TextView) edittextLayout.findViewById(R.id.et_proprietario_in);
         et_tagid_in = (TextView) edittextLayout.findViewById(R.id.et_tagid_in);
         et_datavalidade_in = (TextView) edittextLayout.findViewById(R.id.et_datavalidade_in);
         et_posicao_in = (TextView) edittextLayout.findViewById(R.id.et_posicao_in);
@@ -1899,10 +1892,9 @@ public class Act_Inventario_Planejado extends AppCompatActivity {
             @Override
             public void run() {
                 ApplicationDB dbInstance = RoomImplementation.getmInstance().getDbInstance();
-                String almoxarifadoPadrao = dbInstance.parametrosPadraoDAO().GetCodigoAlmoxarifado();
+                String almoxarifadoPadrao = "Teste";
 
                 alistAlmoxarifados = new ArrayList<String>();
-                alistAlmoxarifados.addAll(dbInstance.posicoesDAO().GetAlmoxarifados());
 
                 adapterAlmoxarifados = new ArrayAdapter<String>(Act_Inventario_Planejado.this, R.layout.spinner_item, alistAlmoxarifados);
 
@@ -1925,7 +1917,7 @@ public class Act_Inventario_Planejado extends AppCompatActivity {
                 String almoxarifado = sp_inventario_almoxarifado.getSelectedItem().toString();
 
                 alistPosicoes.clear();
-                alistPosicoes.addAll(dbInstance.posicoesDAO().GetPosicoesByAlmoxarifado(almoxarifado));
+                alistPosicoes.addAll(dbInstance.posicoesDAO().GetPosicoesByAlmoxarifado(2));
 
                 runOnUiThread(new Runnable() {
                     @Override

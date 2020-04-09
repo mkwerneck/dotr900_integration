@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ja/values-ja.xml",
+            "outputFile": "/Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ja/values-ja.xml",
             "map": [
                 {
                     "source": "/Users/marcoswerneck/.gradle/caches/transforms-1/files-1.1/firebase-messaging-11.8.0.aar/db147611d40d842eefa275c34c1687d5/res/values-ja/values.xml",

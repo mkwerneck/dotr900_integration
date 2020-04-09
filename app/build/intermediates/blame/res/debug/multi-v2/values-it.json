@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-it/values-it.xml",
+            "outputFile": "/Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-it/values-it.xml",
             "map": [
                 {
                     "source": "/Users/marcoswerneck/.gradle/caches/transforms-1/files-1.1/play-services-ads-11.8.0.aar/79659c9288fab444521b9c2b39da74e4/res/values-it/values.xml",

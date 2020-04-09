@@ -1,8 +1,19 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v14/values-v14.xml",
+            "outputFile": "/Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v14/values-v14.xml",
             "map": [
+                {
+                    "source": "/Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/slideDateTimePicker/build/intermediates/packaged_res/debug/values-v14/values-v14.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "4",
+                        "endColumns": "12",
+                        "endOffsets": "201"
+                    }
+                },
                 {
                     "source": "/Users/marcoswerneck/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.0.2.aar/5f003bedcc7a444e0f2479c52f7906d5/res/values-v14/values-v14.xml",
                     "from": {
@@ -20,17 +31,6 @@
                         "endLines": "9,10,11,17,23",
                         "endColumns": "12,70,82,12,12",
                         "endOffsets": "477,548,631,1041,1463"
-                    }
-                },
-                {
-                    "source": "/Users/marcoswerneck/AndroidStudio/Omn - 2019/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/slideDateTimePicker/build/intermediates/packaged_res/debug/values-v14/values-v14.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endLines": "4",
-                        "endColumns": "12",
-                        "endOffsets": "201"
                     }
                 }
             ]

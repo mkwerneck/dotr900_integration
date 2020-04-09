@@ -12,7 +12,7 @@ public final class R {
         public static final int decimal_digits = 0x7f0400c4;
     }
     public static final class string {
-        public static final int app_name = 0x7f110021;
+        public static final int app_name = 0x7f120021;
     }
     public static final class styleable {
         public static final int[] CurrencyEditText = { 0x7f04002c, 0x7f0400c4 };

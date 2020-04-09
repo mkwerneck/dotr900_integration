@@ -25,7 +25,7 @@
         app:elevation="8dp"
         app:backgroundTint="@color/circular_button_normal"
         tools:ignore="VectorDrawableCompat"
-        android:id="@+id/fab_lertag_novoprocesso"
+        android:id="@+id/fab_ler_materiais"
         android:theme="@style/new_spinner"/>
 
     <include layout="@layout/content_processos_os"
@@ -158,12 +158,12 @@
                                         android:minHeight="118dp">
 
                                         <ListView
+                                            android:id="@+id/list_Lista_Materiais"
                                             android:layout_width="match_parent"
                                             android:layout_height="250dp"
-                                            tools:textSize="24dp"
-                                            android:id="@+id/list_Lista_Materiais"
                                             android:minHeight="250dp"
-                                            android:scrollbarAlwaysDrawVerticalTrack="false" />
+                                            android:scrollbarAlwaysDrawVerticalTrack="false"
+                                            tools:textSize="24dp" />
                                     </LinearLayout>
                                 </ScrollView>
 

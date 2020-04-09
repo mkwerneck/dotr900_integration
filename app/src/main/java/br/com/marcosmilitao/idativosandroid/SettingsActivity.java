@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.RequiresApi;
@@ -33,10 +34,22 @@ import java.lang.reflect.Field;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
+import java.sql.PreparedStatement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import br.com.marcosmilitao.idativosandroid.DBUtils.ApplicationDB;
+import br.com.marcosmilitao.idativosandroid.DBUtils.Models.UPMOBCadastroMateriais;
+import br.com.marcosmilitao.idativosandroid.DBUtils.Models.UPMOBCadastroMateriaisItens;
+import br.com.marcosmilitao.idativosandroid.DBUtils.Models.UPMOBDescartes;
+import br.com.marcosmilitao.idativosandroid.DBUtils.Models.UPMOBHistoricoLocalizacao;
+import br.com.marcosmilitao.idativosandroid.DBUtils.Models.UPMOBListaMateriais;
+import br.com.marcosmilitao.idativosandroid.DBUtils.Models.UPMOBListaServicosListaTarefas;
+import br.com.marcosmilitao.idativosandroid.DBUtils.Models.UPMOBListaTarefas;
+import br.com.marcosmilitao.idativosandroid.DBUtils.Models.UPMOBProcesso;
+import br.com.marcosmilitao.idativosandroid.DBUtils.Models.UPMOBUsuarios;
 import br.com.marcosmilitao.idativosandroid.Idativos02Data.Idativos02Data;
 import br.com.marcosmilitao.idativosandroid.helper.ConfigUI;
 import br.com.marcosmilitao.idativosandroid.helper.CustomerAdapterSettings;
@@ -49,12 +62,12 @@ import de.greenrobot.event.EventBus;
 import static br.com.marcosmilitao.idativosandroid.MainActivity.getConfigLastConnected;
 
 public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
-    private ListView sobre_list_view, gerais_list_view;
+    private ListView sobre_list_view, gerais_list_view, mais_list_view;
     private SeekBar seek_bar_ad_layout;
     private EditText et_et_ad_layout;
     private Button btn_salvar_et_ad_layout, btn_conectar_et_ad_layout;
-    private CustomerAdapterSettings sobre_list_custom, gerais_list_custom;
-    private ArrayList<Settings> arrayListSobre, arrayListGerais;
+    private CustomerAdapterSettings sobre_list_custom, gerais_list_custom, mais_list_custom;
+    private ArrayList<Settings> arrayListSobre, arrayListGerais, arrayListMais;
     public SQLiteDatabase db;
     private Idativos02Data idativos02Data;
     private Settings settingsItem;
@@ -102,6 +115,11 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     private SharedPreferences.Editor editor;
     private AlertDialog.Builder etbuilder;
     private AlertDialog alert;
+
+    private ApplicationDB dbInstance;
+    private Handler limparDadosHandler;
+    private HandlerThread limparDadosThread;
+    private Handler mainHandler;
 
     public static class GetHandsetParam {
 
@@ -220,17 +238,31 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        //COMENTADO PARA TESTES
-        //idativos02Data = new Idativos02Data(this);
-        //db = idativos02Data.getReadableDatabase();
+        limparDadosThread = new HandlerThread("limparDadosThread");
+        limparDadosThread.start();
+        limparDadosHandler = new Handler(limparDadosThread.getLooper())
+        {
+            @Override
+            public void handleMessage(Message msg)
+            {
+                //Processar mensagens
+            }
+        };
+
+        mainHandler = new Handler();
 
         setupToolbar();
 
+        //instancia do banco de dados
+        dbInstance = RoomImplementation.getmInstance().getDbInstance();
+
         arrayListSobre = new ArrayList<Settings>();
         arrayListGerais = new ArrayList<Settings>();
+        arrayListMais = new ArrayList<Settings>();
 
         sobre_list_view = (ListView) findViewById(R.id.sobre_list_view);
         gerais_list_view = (ListView) findViewById(R.id.gerais_list_view);
+        mais_list_view = (ListView) findViewById(R.id.mais_list_view);
 
         pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         editor = pref.edit();
@@ -244,6 +276,10 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         gerais_list_custom = new CustomerAdapterSettings(this, arrayListGerais);
         gerais_list_view.setAdapter(gerais_list_custom);
         gerais_list_view.setOnItemClickListener(this);
+
+        mais_list_custom = new CustomerAdapterSettings(this, arrayListMais);
+        mais_list_view.setAdapter(mais_list_custom);
+        mais_list_view.setOnItemClickListener(this);
 
         BA = BluetoothAdapter.getDefaultAdapter();
         BA.enable();
@@ -312,6 +348,9 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
         if (title != null){
             switch (title){
+                case "Limpar dados armazenados":
+                    LimparDadosArmazenados();
+                    break;
                 case "FAQ":
                     Toast.makeText(getApplicationContext(), "Função ainda não habilitada", Toast.LENGTH_SHORT).show();
                     break;
@@ -456,6 +495,19 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     void PreencherSettings(){
         settingsItem = new Settings();
 
+        for (int k = 0; k < settingsItem.maisSettings.length; k++)
+        {
+            switch (settingsItem.maisSettings[k].getTitle())
+            {
+                case "Limpar dados armazenados":
+                    break;
+                default:
+                    break;
+            }
+
+            arrayListMais.add(settingsItem.maisSettings[k]);
+        }
+
         for (int i = 0; i < settingsItem.settings.length; i++){
             switch (settingsItem.settings[i].getTitle()){
                 case "Versão":
@@ -581,7 +633,8 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         arraySpinner = new String[] {
                 "Vanch_VH75",
                 "BluetoothLE",
-                "XR_400"
+                "XR_400",
+                "DOTR_900"
         };
 
         sp_dialog = (Spinner) editspLayout.findViewById(R.id.sp_dialog);
@@ -744,5 +797,84 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    private void LimparDadosArmazenados()
+    {
+        limparDadosHandler.post(new Runnable() {
+            @Override
+            public void run() {
+
+                //region UPMOBCADASTRO MATERIAIS
+                for (UPMOBCadastroMateriais upmobCadastroMateriais : dbInstance.upmobCadastroMateriaisDAO().GetAllRecords())
+                {
+                    dbInstance.upmobCadastroMateriaisDAO().Delete(upmobCadastroMateriais);
+                }
+                //endregion
+
+                //region UPMOBCADASTRO MATERIAIS ITENS
+                for (UPMOBCadastroMateriaisItens upmobCadastroMateriaisItens : dbInstance.upmobCadastroMateriaisItensDAO().GetAllRecords())
+                {
+                    dbInstance.upmobCadastroMateriaisItensDAO().Delete(upmobCadastroMateriaisItens);
+                }
+                //endregion
+
+                //region UPMOBHISTÓRICO LOCALIZAÇÃO
+                for (UPMOBHistoricoLocalizacao upmobHistoricoLocalizacao : dbInstance.upmobHistoricoLocalizacaoDAO().GetAllRecords())
+                {
+                    dbInstance.upmobHistoricoLocalizacaoDAO().Delete(upmobHistoricoLocalizacao);
+                }
+                //endregion
+
+                //region UPMOBUSUARIOS
+                for (UPMOBUsuarios upmobUsuarios : dbInstance.upmobUsuariosDAO().GetAllRecords())
+                {
+                    dbInstance.upmobUsuariosDAO().Delete(upmobUsuarios);
+                }
+                //endregion
+
+                //region UPMOBDESCARTES
+                for (UPMOBDescartes upmobDescartes : dbInstance.upmobDescartesDAO().GetAllRecords())
+                {
+                    dbInstance.upmobDescartesDAO().Delete(upmobDescartes);
+                }
+                //endregion
+
+                //region UPMOBPROCESSO
+                for (UPMOBProcesso upmobProcesso : dbInstance.upmobProcessoDAO().GetAllRecords())
+                {
+                    dbInstance.upmobProcessoDAO().Delete(upmobProcesso);
+                }
+                //endregion
+
+                //region UPMOBLISTATAREFAS
+                for (UPMOBListaTarefas upmobListaTarefas : dbInstance.upmobListaTarefasDAO().GetAllRecords())
+                {
+                    dbInstance.upmobListaTarefasDAO().Delete(upmobListaTarefas);
+                }
+                //endregion
+
+                //region UPMOBLISTASERVIÇOS
+                for (UPMOBListaServicosListaTarefas upmobListaServicosListaTarefas : dbInstance.upmobListaServicosListaTarefasDAO().GetAllRecords())
+                {
+                    dbInstance.upmobListaServicosListaTarefasDAO().Delete(upmobListaServicosListaTarefas);
+                }
+                //endregion
+
+                //region UPMOBLISTAMATERIAIS
+                for (UPMOBListaMateriais upmobListaMateriais : dbInstance.upmobListaMateriaisDAO().GetAllRecords())
+                {
+                    dbInstance.upmobListaMateriaisDAO().Delete(upmobListaMateriais);
+                }
+                //endregion
+
+                mainHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "Dados removidos com sucesso", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
     }
 }

@@ -1,7 +1,5 @@
 package br.com.marcosmilitao.idativosandroid.helper;
 
-import android.arch.persistence.room.TypeConverter;
-
 import net.sourceforge.jtds.jdbc.DateTime;
 
 import java.text.DateFormat;
@@ -9,6 +7,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
+
+import androidx.room.TypeConverter;
 
 public class TimeStampConverter {
     private static DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

@@ -1,9 +1,12 @@
 package br.com.marcosmilitao.idativosandroid;
 
 import android.app.Application;
-import android.arch.persistence.room.Room;
+
 import com.facebook.stetho.Stetho;
+
+import androidx.room.Room;
 import br.com.marcosmilitao.idativosandroid.DBUtils.ApplicationDB;
+import br.com.marcosmilitao.idativosandroid.DBUtils.Migrations;
 
 public class RoomImplementation extends Application {
 
@@ -22,6 +25,7 @@ public class RoomImplementation extends Application {
 
         mInstance = this;
         dbInstance = Room.databaseBuilder(getApplicationContext(), ApplicationDB.class, "ApplicationDB")
+                .addMigrations(Migrations.MIGRATION_1_2)
                 .build();
     }
 

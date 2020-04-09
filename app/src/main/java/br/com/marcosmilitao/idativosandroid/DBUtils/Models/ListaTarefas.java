@@ -1,8 +1,8 @@
 package br.com.marcosmilitao.idativosandroid.DBUtils.Models;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-import android.arch.persistence.room.TypeConverters;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import java.util.Date;
 
@@ -23,24 +23,14 @@ public class ListaTarefas {
     private Date DataInicio;
 
     @TypeConverters({TimeStampConverter.class})
-    private Date DataFimPrevisao;
-
-    @TypeConverters({TimeStampConverter.class})
-    private Date DataFimReal;
+    private Date DataConclusao;
 
     @TypeConverters({TimeStampConverter.class})
     private Date DataCancelamento;
 
-    private String Dominio;
+    private int ProcessoIdOriginal;
 
-    private int Processo;
-
-    private int TarefaItemIdOriginal;
-
-    private int CadsatroEquipamentosItemIdOriginal;
-
-
-
+    private int TarefaIdOriginal;
 
     public int getId() {
         return Id;
@@ -56,6 +46,14 @@ public class ListaTarefas {
 
     public void setIdOriginal(int idOriginal) {
         IdOriginal = idOriginal;
+    }
+
+    public String getRowVersion() {
+        return RowVersion;
+    }
+
+    public void setRowVersion(String rowVersion) {
+        RowVersion = rowVersion;
     }
 
     public String getStatus() {
@@ -74,20 +72,12 @@ public class ListaTarefas {
         DataInicio = dataInicio;
     }
 
-    public Date getDataFimPrevisao() {
-        return DataFimPrevisao;
+    public Date getDataConclusao() {
+        return DataConclusao;
     }
 
-    public void setDataFimPrevisao(Date dataFimPrevisao) {
-        DataFimPrevisao = dataFimPrevisao;
-    }
-
-    public Date getDataFimReal() {
-        return DataFimReal;
-    }
-
-    public void setDataFimReal(Date dataFimReal) {
-        DataFimReal = dataFimReal;
+    public void setDataConclusao(Date dataConclusao) {
+        DataConclusao = dataConclusao;
     }
 
     public Date getDataCancelamento() {
@@ -98,43 +88,20 @@ public class ListaTarefas {
         DataCancelamento = dataCancelamento;
     }
 
-    public String getDominio() {
-        return Dominio;
+    public int getProcessoIdOriginal() {
+        return ProcessoIdOriginal;
     }
 
-    public void setDominio(String dominio) {
-        Dominio = dominio;
+    public void setProcessoIdOriginal(int processoIdOriginal) {
+        ProcessoIdOriginal = processoIdOriginal;
     }
 
-    public int getProcesso() {
-        return Processo;
+    public int getTarefaIdOriginal() {
+        return TarefaIdOriginal;
     }
 
-    public void setProcesso(int processo) {
-        Processo = processo;
+    public void setTarefaIdOriginal(int tarefaIdOriginal) {
+        TarefaIdOriginal = tarefaIdOriginal;
     }
 
-    public int getTarefaItemIdOriginal() {
-        return TarefaItemIdOriginal;
-    }
-
-    public void setTarefaItemIdOriginal(int tarefaItemIdOriginal) {
-        TarefaItemIdOriginal = tarefaItemIdOriginal;
-    }
-
-    public String getRowVersion() {
-        return RowVersion;
-    }
-
-    public void setRowVersion(String rowVersion) {
-        RowVersion = rowVersion;
-    }
-
-    public int getCadsatroEquipamentosItemIdOriginal() {
-        return CadsatroEquipamentosItemIdOriginal;
-    }
-
-    public void setCadsatroEquipamentosItemIdOriginal(int cadsatroEquipamentosItemIdOriginal) {
-        CadsatroEquipamentosItemIdOriginal = cadsatroEquipamentosItemIdOriginal;
-    }
 }

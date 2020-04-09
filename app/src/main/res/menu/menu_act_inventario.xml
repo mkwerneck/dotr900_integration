@@ -10,22 +10,17 @@
     <item
         android:id="@+id/inventarioAtualizar"
         android:orderInCategory="100"
-        android:title="@string/inventarioAtualizar"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/inventarioPlan"
-        android:orderInCategory="100"
-        android:title="@string/inventarioPlan"
+        android:title="Salvar"
         app:showAsAction="never" />
     <item
         android:id="@+id/inventario_limpar"
         android:orderInCategory="100"
-        android:title="@string/inventario_limpar"
+        android:title="Limpar"
         app:showAsAction="never" />
     <item
         android:id="@+id/inventario_conexao"
         android:orderInCategory="100"
-        android:title="RECONECTAR"
+        android:title="Reconectar"
         app:showAsAction="never"
         tools:ignore="HardcodedText" />
 </menu>

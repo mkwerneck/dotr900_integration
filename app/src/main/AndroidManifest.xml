@@ -167,6 +167,7 @@
             android:name=".DescarteActivity"
             android:label="DESCARTAR TAGID"
             android:parentActivityName=".Main2Activity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -199,6 +200,7 @@
             android:name=".CadastrarFerramentasActivity"
             android:label="CADASTRAR FERRAMENTAS"
             android:parentActivityName=".Main2Activity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
@@ -211,25 +213,69 @@
             android:parentActivityName=".CadastrarFerramentasActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".CadastrarUsuariosActivity"
             android:label="CADASTRAR USUÁRIOS"
             android:parentActivityName=".Main2Activity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".EditarUsuariosActivity"
             android:label="EDITAR USUÁRIOS"
             android:parentActivityName=".CadastrarUsuariosActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
-        <activity android:name=".CadastrarPosicoesActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".CadastrarPosicoesActivity"
             android:label="CADASTRAR POSIÇÕES"
             android:parentActivityName=".Main2Activity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden">
-
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".InventarioActivity"
+            android:label="INVENTÁRIO"
+            android:parentActivityName=".Main2Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".InventarioPosicaoActivity"
+            android:label="INVENTÁRIO POSIÇÃO"
+            android:parentActivityName=".Main2Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".InventarioPlanejadoActivity"
+            android:label="INVENTÁRIO PLANEJADO"
+            android:parentActivityName=".Main2Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ProcessosActivity"
+            android:label="PROCESSOS"
+            android:parentActivityName=".Main2Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AtivosProcessoActivity"
+            android:label="ATIVOS"
+            android:parentActivityName=".Main2Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ExecutarProcessosActivity"
+            android:label="EXECUÇÃO DE TAREFA"
+            android:parentActivityName=".Main2Activity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TagidsNaoCadastradosActivity"
+            android:label="TAGIDS NÃO CADASTRADOS"
+            android:parentActivityName=".Main2Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

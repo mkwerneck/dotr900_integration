@@ -1,5 +1,7 @@
 package br.com.marcosmilitao.idativosandroid.POJO;
 
+import java.util.Iterator;
+
 /**
  * Created by marcoswerneck on 14/08/19.
  */
@@ -43,4 +45,5 @@ public class ModeloMateriaisCF {
     {
         return numProduto;
     }
+
 }

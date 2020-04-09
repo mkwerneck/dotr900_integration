@@ -3,14 +3,13 @@ package br.com.marcosmilitao.idativosandroid;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.os.Looper;
 import android.os.Message;
 import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
@@ -29,12 +28,10 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -49,16 +46,19 @@ import br.com.marcosmilitao.idativosandroid.DBUtils.Models.UPMOBUsuarios;
 import br.com.marcosmilitao.idativosandroid.DBUtils.Models.Usuarios;
 import br.com.marcosmilitao.idativosandroid.POJO.CadastrarTagid;
 import br.com.marcosmilitao.idativosandroid.POJO.FuncoesCU;
-import br.com.marcosmilitao.idativosandroid.ViewModel.UPMOBUsuario;
-import br.com.marcosmilitao.idativosandroid.helper.ConfigUI;
 import br.com.marcosmilitao.idativosandroid.helper.TimeoutException;
 import br.com.marcosmilitao.idativosandroid.helper.Utility;
 import br.com.marcosmilitao.idativosandroid.helper.VH73Device;
-import de.greenrobot.event.EventBus;
 
-import static br.com.marcosmilitao.idativosandroid.MainActivity.getConfigLastConnected;
+import com.dotel.libr900.BluetoothActivity;
+import com.dotel.libr900.OnBtEventListener;
+import com.dotel.libr900.R900Protocol;
+import com.dotel.libr900.R900RecvPacketParser;
+import com.dotel.libr900.R900Status;
+import com.dotel.rfid.LampView;
+import com.dotel.rfid.MaskActivity;
 
-public class CadastrarUsuariosActivity extends AppCompatActivity {
+public class CadastrarUsuariosActivity extends BluetoothActivity implements OnBtEventListener {
 
     private ApplicationDB dbInstance;
     private BluetoothAdapter BA;
@@ -81,6 +81,7 @@ public class CadastrarUsuariosActivity extends AppCompatActivity {
     private FloatingActionButton fab_cadusu;
 
     private static VH73Device currentDevice;
+    private BluetoothDevice mConnectedDevice;
     private List<BluetoothDevice> foundDevices;
     private Set<BluetoothDevice> pairedDevices;
 
@@ -102,8 +103,18 @@ public class CadastrarUsuariosActivity extends AppCompatActivity {
 
     public static final String TAG_READING = "reading";
 
+    public static final String EXTRA_TAGID = "tagid";
+    private String extra_tagid = null;
+    private Intent intent;
+
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
+    private String modeloLeitor;
+    public static final String key_modelo_leitor_rfid = "key_modelo_leitor_rfid";
+    private String modelo_leitor_rfid_Default = this.getResources().getString(R.string.modelo_leitor_default);
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar_usuarios);
 
@@ -178,7 +189,7 @@ public class CadastrarUsuariosActivity extends AppCompatActivity {
                         StopReading();
                     }
                 } else {
-                    ConectarDispositivoBT();
+                    ConectarDispositivoBT(modeloLeitor);
                 }
             }
         });
@@ -234,6 +245,14 @@ public class CadastrarUsuariosActivity extends AppCompatActivity {
 
         BA = BluetoothAdapter.getDefaultAdapter();
         BA.enable();
+
+        intent = getIntent();
+        extra_tagid = intent.getStringExtra(EXTRA_TAGID);
+
+        //Se activity vier como intent de outra activity, usa-se o tagid para já incluir na lista e seleciona-lo
+        PreencherListaTAGID(extra_tagid);
+
+        setOnBtEventListener(this);
     }
 
     @Override
@@ -246,14 +265,17 @@ public class CadastrarUsuariosActivity extends AppCompatActivity {
     protected void onResume()
     {
         super.onResume();
-        ConectarDispositivoBT();
+
+        //Obtendo o modelo preferencial
+        modeloLeitor = LeitorPreferencial();
+
+        ConectarDispositivoBT(modeloLeitor);
     }
 
     @Override
     protected void onStop()
     {
         super.onStop();
-        //EventBus.getDefault().unregister(this);
         CloseAct();
     }
 
@@ -279,7 +301,7 @@ public class CadastrarUsuariosActivity extends AppCompatActivity {
                 Salvar();
                 return true;
             case R.id.action_reconectar_ci:
-                ConectarDispositivoBT();
+                ConectarDispositivoBT(modeloLeitor);
                 return true;
             default:
 
@@ -344,7 +366,7 @@ public class CadastrarUsuariosActivity extends AppCompatActivity {
         }).start();
     }
 
-    private void ConectarDispositivoBT()
+    private void ConectarDispositivoBT(String modeloLeitor)
     {
         pairedDevices = BA.getBondedDevices();
         for (BluetoothDevice bluetoothDevice : pairedDevices)
@@ -352,25 +374,21 @@ public class CadastrarUsuariosActivity extends AppCompatActivity {
             connectionBTHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    VH73Device vh75Device = new VH73Device(CadastrarUsuariosActivity.this, bluetoothDevice);
 
-                    boolean succ = vh75Device.connect();
+                    switch (modeloLeitor)
+                    {
+                        case "Vanch_VH75":
 
-                    if (succ) {
-                        CadastrarUsuariosActivity.currentDevice = vh75Device;
-                        mainHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(CadastrarUsuariosActivity.this, "Conectado!", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    } else {
-                        mainHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(CadastrarUsuariosActivity.this, "Leitor não conectado. Tente novamente!", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                            ConectarVANCH75(bluetoothDevice);
+                            break;
+
+                        case "DOTR_900":
+
+                            ConectarDOTR900(bluetoothDevice);
+                            break;
+
+                        default:
+                            break;
                     }
                 }
             });
@@ -396,64 +414,22 @@ public class CadastrarUsuariosActivity extends AppCompatActivity {
         readTAGIDHandler.post(new Runnable() {
             @Override
             public void run() {
-                try{
-                    CadastrarUsuariosActivity.currentDevice.SetReaderMode((byte) 1);
-                    byte[] res = CadastrarUsuariosActivity.currentDevice.getCmdResultWithTimeout(3000);
-                    if (!VH73Device.checkSucc(res)) {
-                        StopReading();
-
-                        return;
-                    }
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
-                } catch (TimeoutException e1) { // timeout
-                    Log.i(TAG_READING, "Timeout!!@");
-                }
-
-                while (reading)
+                switch (modeloLeitor)
                 {
-                    long lnow = SystemClock.uptimeMillis();
+                    case "Vanch_VH75":
+                        StartReadingVANCH75();
 
-                    //TODO LEITURA
-                    try{
-                        CadastrarUsuariosActivity.currentDevice.listTagID(1, 0, 0);
-                        byte[] ret = CadastrarUsuariosActivity.currentDevice.getCmdResult();
-                        if (VH73Device.checkSucc(ret))
-                        {
-                            VH73Device.ListTagIDResult listTagIDResult = VH73Device.parseListTagIDResult(ret);
+                        break;
 
-                            //transformando cada tagid lido no padrao com sufixo "H" e atualizando a ListView
-                            for(byte[] bs : listTagIDResult.epcs)
-                            {
-                                final String tagid = "H" + Utility.bytes2HexString(bs);
-
-                                AtualizarListView(tagid);
-
-                            }
-                            Log.d("SUCCESS", ret.toString());
-                        } else {
-                            Log.d("ERRO", ret.toString());
-                        }
-                    } catch (IOException e){
-                        e.printStackTrace();
-                    }
-
-
-                    while(true)
-                    {
-                        long lnew = android.os.SystemClock.uptimeMillis();
-                        if (lnew - lnow > 50) {
-                            break;
-                        }
-                    }
+                    case "DOTR_900":
+                        StartReadingDOTR900();
+                        break;
                 }
             }
         });
     }
 
-    public void AtualizarListView(String tagid)
+    public void AtualizarListView(String tagid, boolean isSelected)
     {
         updateListViewHandler.post(new Runnable() {
             @Override
@@ -465,7 +441,7 @@ public class CadastrarUsuariosActivity extends AppCompatActivity {
 
                 CadastrarTagid cadastrarTagid = new CadastrarTagid();
                 cadastrarTagid.setTagid(tagid);
-                cadastrarTagid.setIsSelected(false);
+                cadastrarTagid.setIsSelected(isSelected);
 
                 if (!tagsLidosArrayList.contains(tagid))
                 {
@@ -514,7 +490,6 @@ public class CadastrarUsuariosActivity extends AppCompatActivity {
                     showMessage("AVISO", "Informe o Nome Completo do usuário", 3);
                     return;
                 }
-
 
                 String tagid = listViewAdapter.getItem(listViewSelected).getTagid();
 
@@ -608,4 +583,199 @@ public class CadastrarUsuariosActivity extends AppCompatActivity {
 
     }
 
+    private void PreencherListaTAGID(String tagid)
+    {
+        if (tagid != null)
+        {
+            AtualizarListView(tagid, true);
+
+            listViewSelected = 0;
+        }
+    }
+
+    private String LeitorPreferencial()
+    {
+        pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        editor = pref.edit();
+
+        if (!pref.contains(key_modelo_leitor_rfid)){
+            editor.putString(key_modelo_leitor_rfid, modelo_leitor_rfid_Default);
+            editor.commit();
+
+            return modelo_leitor_rfid_Default;
+        } else {
+            return pref.getString(key_modelo_leitor_rfid, modelo_leitor_rfid_Default);
+        }
+    }
+
+    private void StartReadingVANCH75()
+    {
+        try{
+            CadastrarUsuariosActivity.currentDevice.SetReaderMode((byte) 1);
+            byte[] res = CadastrarUsuariosActivity.currentDevice.getCmdResultWithTimeout(3000);
+            if (!VH73Device.checkSucc(res)) {
+                StopReading();
+
+                return;
+            }
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        } catch (InterruptedException e1) {
+            e1.printStackTrace();
+        } catch (TimeoutException e1) { // timeout
+            Log.i(TAG_READING, "Timeout!!@");
+        }
+
+        while (reading)
+        {
+            long lnow = SystemClock.uptimeMillis();
+
+            //TODO LEITURA
+            try{
+                CadastrarUsuariosActivity.currentDevice.listTagID(1, 0, 0);
+                byte[] ret = CadastrarUsuariosActivity.currentDevice.getCmdResult();
+                if (VH73Device.checkSucc(ret))
+                {
+                    VH73Device.ListTagIDResult listTagIDResult = VH73Device.parseListTagIDResult(ret);
+
+                    //transformando cada tagid lido no padrao com sufixo "H" e atualizando a ListView
+                    for(byte[] bs : listTagIDResult.epcs)
+                    {
+                        final String tagid = "H" + Utility.bytes2HexString(bs);
+
+                        AtualizarListView(tagid, false);
+                    }
+                    Log.d("SUCCESS", ret.toString());
+                } else {
+                    Log.d("ERRO", ret.toString());
+                }
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+
+
+            while(true)
+            {
+                long lnew = android.os.SystemClock.uptimeMillis();
+                if (lnew - lnow > 50) {
+                    break;
+                }
+            }
+        }
+    }
+
+    private void ConectarVANCH75(BluetoothDevice bluetoothDevice)
+    {
+        VH73Device vh75Device = new VH73Device(CadastrarUsuariosActivity.this, bluetoothDevice);
+
+        boolean succ = vh75Device.connect();
+
+        if (succ) {
+            CadastrarUsuariosActivity.currentDevice = vh75Device;
+            mainHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(CadastrarUsuariosActivity.this, "Conectado!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            mainHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(CadastrarUsuariosActivity.this, "Leitor não conectado. Tente novamente!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+    private void StartReadingDOTR900()
+    {
+        setOpMode(true, false, 1000, false);
+        sendCmdInventory();
+    }
+
+    private void ConectarDOTR900(BluetoothDevice bluetoothDevice)
+    {
+        if (mConnected == false)
+        {
+            if (mR900Manager.isTryingConnect() == false)
+            {
+                mR900Manager.connectToBluetoothDevice(bluetoothDevice, MY_UUID);
+            }
+        }
+    }
+
+    public void onBtFoundNewDevice(BluetoothDevice device)
+    {}
+
+    public void onBtScanCompleted()
+    {}
+
+    public void onBtConnected( BluetoothDevice device )
+    {
+        mConnectedDevice = device;
+        mainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(CadastrarUsuariosActivity.this, "Conectado!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void onBtDisconnected(BluetoothDevice device)
+    {}
+
+    public void onBtConnectFail(BluetoothDevice device, String msg)
+    {
+        mainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(CadastrarUsuariosActivity.this, "Leitor não conectado. Tente novamente!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void onBtDataSent(byte[] data)
+    {}
+
+    public void onBtDataTransException(BluetoothDevice device, String msg)
+    {
+        mainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(CadastrarUsuariosActivity.this, msg, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void onNotifyBtDataRecv()
+    {
+        if( mR900Manager == null )
+            return;
+
+        R900RecvPacketParser packetParser = mR900Manager.getRecvPacketParser();
+
+        while( true )
+        {
+            final String parameter = packetParser.popPacket();
+
+            if( mConnected == false )
+                break;
+
+            if( parameter != null && parameter.length() > 4 && mLastCmd != null )
+            {
+                if (mLastCmd.equalsIgnoreCase(R900Protocol.CMD_INVENT))
+                {
+                    final String tagid = "H" + parameter.substring(0, parameter.length() - 4);
+
+                    AtualizarListView(tagid, false);
+                }
+            }
+            else
+                break;
+        }
+    }
+
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
+    {}
 }

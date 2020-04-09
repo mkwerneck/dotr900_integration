@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tv_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Informe o Restulado"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:fillViewport="true"
+            android:layout_marginVertical="14dp">
+
+            <ListView
+                android:id="@+id/lv_resultado"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </ScrollView>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_resultado"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="8dp"
+            app:srcCompat="@drawable/ic_rfid2"
+            app:backgroundTint="@color/circular_button_normal"
+            tools:ignore="VectorDrawableCompat" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_cancelar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancelar"
+                android:backgroundTint="@android:color/transparent"
+                android:textColor="@color/green"
+                style="?android:attr/borderlessButtonStyle"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

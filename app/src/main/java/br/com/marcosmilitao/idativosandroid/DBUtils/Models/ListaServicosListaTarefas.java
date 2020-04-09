@@ -1,8 +1,9 @@
 package br.com.marcosmilitao.idativosandroid.DBUtils.Models;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-import android.arch.persistence.room.TypeConverters;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
 import java.util.Date;
 import br.com.marcosmilitao.idativosandroid.helper.TimeStampConverter;
 
@@ -18,16 +19,13 @@ public class ListaServicosListaTarefas {
     private String Status;
 
     @TypeConverters({TimeStampConverter.class})
-    private Date DataInicio;
-
-    @TypeConverters({TimeStampConverter.class})
-    private Date DataConclusao;
+    private Date UltimaAtualizacao;
 
     private String Resultado;
 
-    private int ListaTarefasItemIdOriginal;
+    private int ListaTarefaIdOriginal;
 
-    private int ServicoAdicinalItemIdOriginal;
+    private int ServicoAdicionalIdOriginal;
 
     public int getId() {
         return Id;
@@ -45,6 +43,14 @@ public class ListaServicosListaTarefas {
         IdOriginal = idOriginal;
     }
 
+    public String getRowVersion() {
+        return RowVersion;
+    }
+
+    public void setRowVersion(String rowVersion) {
+        RowVersion = rowVersion;
+    }
+
     public String getStatus() {
         return Status;
     }
@@ -53,20 +59,12 @@ public class ListaServicosListaTarefas {
         Status = status;
     }
 
-    public Date getDataInicio() {
-        return DataInicio;
+    public Date getUltimaAtualizacao() {
+        return UltimaAtualizacao;
     }
 
-    public void setDataInicio(Date dataInicio) {
-        DataInicio = dataInicio;
-    }
-
-    public Date getDataConclusao() {
-        return DataConclusao;
-    }
-
-    public void setDataConclusao(Date dataConclusao) {
-        DataConclusao = dataConclusao;
+    public void setUltimaAtualizacao(Date ultimaAtualizacao) {
+        UltimaAtualizacao = ultimaAtualizacao;
     }
 
     public String getResultado() {
@@ -77,27 +75,20 @@ public class ListaServicosListaTarefas {
         Resultado = resultado;
     }
 
-    public int getListaTarefasItemIdOriginal() {
-        return ListaTarefasItemIdOriginal;
+    public int getListaTarefaIdOriginal() {
+        return ListaTarefaIdOriginal;
     }
 
-    public void setListaTarefasItemIdOriginal(int listaTarefasItemIdOriginal) {
-        ListaTarefasItemIdOriginal = listaTarefasItemIdOriginal;
+    public void setListaTarefaIdOriginal(int listaTarefaIdOriginal) {
+        ListaTarefaIdOriginal = listaTarefaIdOriginal;
     }
 
-    public int getServicoAdicinalItemIdOriginal() {
-        return ServicoAdicinalItemIdOriginal;
+    public int getServicoAdicionalIdOriginal() {
+        return ServicoAdicionalIdOriginal;
     }
 
-    public void setServicoAdicinalItemIdOriginal(int servicoAdicinalItemIdOriginal) {
-        ServicoAdicinalItemIdOriginal = servicoAdicinalItemIdOriginal;
+    public void setServicoAdicionalIdOriginal(int servicoAdicionalIdOriginal) {
+        ServicoAdicionalIdOriginal = servicoAdicionalIdOriginal;
     }
 
-    public String getRowVersion() {
-        return RowVersion;
-    }
-
-    public void setRowVersion(String rowVersion) {
-        RowVersion = rowVersion;
-    }
 }
