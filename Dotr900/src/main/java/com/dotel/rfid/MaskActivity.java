@@ -76,7 +76,24 @@ public class MaskActivity extends Activity implements View.OnClickListener
 	
 	public void onClick( View v )
 	{
-		switch( v.getId() )
+		if (v.getId() == R.id.label_tag)
+		{
+			Type = 0;
+			mRadioMask.setChecked( false );
+			enableTagControls( true );
+			enableMaskControls( false );
+			saveValue();
+		}
+		else if (v.getId() == R.id.label_mask)
+		{
+			Type = 1;
+			mRadioTag.setChecked( false );
+			enableTagControls( false );
+			enableMaskControls( true );
+			saveValue();
+		}
+
+		/*switch( v.getId() )
 		{
 			case R.id.radio_access_tag:
 			case R.id.label_tag:
@@ -105,7 +122,7 @@ public class MaskActivity extends Activity implements View.OnClickListener
 				finish();
 				break;
 			}
-		}
+		}*/
 	}
 	
 	public static SelectMask getSelectMask()

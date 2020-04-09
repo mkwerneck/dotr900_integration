@@ -100,8 +100,6 @@ public class LampView extends View
 		@Override
 		public void handleMessage( Message msg )
 		{
-			if( RFIDHostActivity.mExit )
-				return;
 			switch( msg.what )
 			{
 				case MSG_CHANGE_LAMP:
@@ -124,9 +122,6 @@ public class LampView extends View
 	
 	public void setLamp( int status )
 	{
-		if( RFIDHostActivity.mExit)
-			return;
-		
 		mBlinkContinue = false;
 		mLampCur = status;
 		mHandlerBlink.sendEmptyMessage( MSG_CHANGE_LAMP );
@@ -144,9 +139,6 @@ public class LampView extends View
 	
 	public void startBlink( int blinkOff, int blinkOn, int interval, boolean continuous, boolean lampEffect, boolean soundEffect )
 	{
-		if( RFIDHostActivity.mExit)
-			return;
-		
 		mBlinkContinue = continuous;
 		mBlinkSoundOn = soundEffect;
 		mLampEffectOn = lampEffect;

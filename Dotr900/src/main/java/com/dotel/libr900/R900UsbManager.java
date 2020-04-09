@@ -12,8 +12,6 @@ import java.util.EventListener;
 import java.util.HashMap;
 
 import com.dotel.libr900.R900Status;
-import com.dotel.rfid.RFIDUsbHostActivity.LockPattern;
-
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -223,12 +221,7 @@ public class R900UsbManager implements Runnable {
 			  }
 		}
 	}
-	
-	/**
-	 *  send data
-	 *  @param data
-	 *  @type byte[]
-	 */
+
 	public void sendData( byte[] bytes )
 	{
 		Log.d(TAG,"send bytes : " + bytes);
@@ -422,21 +415,7 @@ public class R900UsbManager implements Runnable {
 			sendData(R900Protocol.makeProtocol( R900Protocol.CMD_INVENT_PARAM, new int[]{ session, q, m_ab } ) );
 		}
 	}
-		
-	/**
-	 * Select mask command
-	 * @param n : the index of mask table(0~7). (default = 0)
-	 * @param bits : number of bits of the select mask pattern. (default = 0)
-	 * @param mem : memory bank id of the tag to match for the select mask. (default = 0)
-	 *       0 - RESERVED
-	 *       1 - EPC
-	 *       2 - TID
-	 *       3 - USER
-	 * @param b_offset : bit offset of the memory bank of the tag to match for the select mask. (default = 0)
-	 * @param pattern : Bit pattern of the memory in the tag to match for the select mask. Must be HEXA_STRING, MSB is starting bit. (default = 0)
-	 * @param target : Target flag in the tag will be altered after select command. (default = 4)
-	 * @param action : Flag setting option. (default = 4)  
-	 */
+
 	public void sendSetSelectAction( int bits, int mem, int b_offset, String pattern, int action )
 	{
 		if(mConnection != null && mEndpointOut != null)
@@ -511,35 +490,7 @@ public class R900UsbManager implements Runnable {
 	{
 		return enable ? ( index ? 1 : 0 ) : -1;
 	}
-		
-	/**
-	 * lock operation	
-	 * @param lockPattern : lock pattern 
-	 * @param ACS_PWD : access password
-	 */
-	public void sendLockTag( LockPattern lockPattern, String ACS_PWD )
-	{
-		if(mConnection != null && mEndpointOut != null)
-		{
-			final int user = convertLockIndex( lockPattern.enableUser, lockPattern.indexUser );//( ( lockPattern.indexUser == false ) ? ( R900Protocol.SKIP_PARAM ) : ( lockPattern.enableUser ? 1 : 0 ) );
-			final int tid = convertLockIndex( lockPattern.enableTid, lockPattern.indexTid );//( ( lockPattern.indexTid == false ) ? ( R900Protocol.SKIP_PARAM ) : ( lockPattern.enableTid ? 1 : 0 ) );
-			final int epc = convertLockIndex( lockPattern.enableUii, lockPattern.indexUii );//( ( lockPattern.indexUii == false ) ? ( R900Protocol.SKIP_PARAM ) : ( lockPattern.enableUii ? 1 : 0 ) );
-			final int acs_pwd = convertLockIndex( lockPattern.enableAcsPwd, lockPattern.indexAcsPwd );//( ( lockPattern.indexAcsPwd == false ) ? ( R900Protocol.SKIP_PARAM ) : ( lockPattern.enableAcsPwd ? 1 : 0 ) );
-			final int kill_pwd = convertLockIndex( lockPattern.enableKillPwd, lockPattern.indexKillPwd );//( ( lockPattern.indexKillPwd == false ) ? ( R900Protocol.SKIP_PARAM ) : ( lockPattern.enableKillPwd ? 1 : 0 ) );
-				
-			sendData(R900Protocol.makeProtocol( R900Protocol.CMD_LOCK_TAG_MEM,
-					new int[]{ user, tid, epc, acs_pwd, kill_pwd },
-					ACS_PWD,
-					new int[]{ mSingleTag ? 1 : 0, mUseMask ? ( mQuerySelected ? 3 : 2 ) : 0, mTimeout } ) );
-		}
-	}
-	
-	/**
-	 * tag lock operation
-	 * @param lockMask : lock mask
-	 * @param lockEnable : lock enable or disable
-	 * @param ACS_PWD : access password
-	 */
+
 	public void sendLockTag( int lockMask, int lockEnable, String ACS_PWD )
 	{
 		if(mConnection != null && mEndpointOut != null)

@@ -100,23 +100,19 @@ public class RFIDStartActivity extends Activity implements
 
 	public void onClick( View v )
 	{
-		switch( v.getId() )
+		if (v.getId() == R.id.btn_BTMode)
 		{
-			case R.id.btn_BTMode:
-				R900Status.setInterfaceMode(MODE_BT_INTERFACE);
-				
-				Intent intent = new Intent(mContext.getApplicationContext(), RFIDHostActivity.class);
-				startActivity(intent);				
-				
-				break;
-				
-			case R.id.btn_USBMode:
-				R900Status.setInterfaceMode(MODE_USB_INTERFACE);
-				
-				Intent Usbintent = new Intent(mContext.getApplicationContext(), RFIDUsbHostActivity.class);
-				startActivity(Usbintent);			
-				
-				break;		
+			R900Status.setInterfaceMode(MODE_BT_INTERFACE);
+
+			/*Intent intent = new Intent(mContext.getApplicationContext(), RFIDHostActivity.class);
+			startActivity(intent);*/
+		}
+		else if (v.getId() == R.id.btn_USBMode)
+		{
+			R900Status.setInterfaceMode(MODE_USB_INTERFACE);
+
+			/*Intent Usbintent = new Intent(mContext.getApplicationContext(), RFIDUsbHostActivity.class);
+			startActivity(Usbintent);*/
 		}
 	}
 

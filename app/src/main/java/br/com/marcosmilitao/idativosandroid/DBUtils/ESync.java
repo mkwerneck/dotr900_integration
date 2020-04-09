@@ -1408,12 +1408,12 @@ public class ESync {
     {
 
         //CONEXÃOSERVIDORSQL   --   DESENVOLVIMENTO ***
-        /*String driver="net.sourceforge.jtds.jdbc.Driver";
+        String driver="net.sourceforge.jtds.jdbc.Driver";
         String Server_Adress="198.38.85.183";
         String portaSQL="1433";
         String dataBaseName="idativos2019_omni";
         String username="sa";
-        String password="idutto16";*/
+        String password="idutto16";
 
 
         //CONEXÃOSERVIDORSQL   --   HOMOLOGAÇÃO***
@@ -1427,12 +1427,13 @@ public class ESync {
 
 
         //CONEXÃOSERVIDORSQL   --   PRODUÇÃO***
-        String driver="net.sourceforge.jtds.jdbc.Driver";
+/*        String driver="net.sourceforge.jtds.jdbc.Driver";
         String Server_Adress="189.8.34.140";
         String portaSQL="1433";
         String dataBaseName="idativos2019_omni";
         String username="sa";
-        String password="idutto@04d";
+        String password="idutto@04d";*/
+
 
 
 

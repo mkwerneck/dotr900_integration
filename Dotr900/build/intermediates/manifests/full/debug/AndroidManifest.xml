@@ -27,27 +27,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.dotel.rfid.RFIDHostActivity"
-            android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.dotel.rfid.RFIDUsbHostActivity"
-            android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
-                android:resource="@xml/device_filter" />
-        </activity>
-        <activity
             android:name="com.dotel.rfid.MaskActivity"
             android:label="Mask"
             android:screenOrientation="portrait" >

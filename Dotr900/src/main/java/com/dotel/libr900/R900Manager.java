@@ -20,7 +20,6 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.Environment;
 import android.os.Handler;
-import android.util.Log;
 
 public class R900Manager
 {
@@ -339,7 +338,7 @@ public class R900Manager
 					// if( mBtEventListener != null )
 					// mBtEventListener.onBtDataRecv(buffer, bytes);
 					mHandlerNoti
-							.sendEmptyMessage(BluetoothActivity.MSG_BT_DATA_RECV);
+							.sendEmptyMessage(BluetoothManager.MSG_BT_DATA_RECV);
 				}
 				catch( IOException e )
 				{
@@ -391,7 +390,7 @@ public class R900Manager
 	{
 		if( mConnectedThread != null )
 		{
-			Log.d(BluetoothActivity.TAG, "Send : " + new String(bytes));
+			//Log.d(BluetoothManager.TAG, "Send : " + new String(bytes));
 			mConnectedThread.write(bytes);
 		}
 		else

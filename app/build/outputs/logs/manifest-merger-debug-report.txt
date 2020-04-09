@@ -8,7 +8,7 @@ MERGED from [:EventBus] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 |
 MERGED from [com.android.support:multidex:1.0.2] /Users/marcoswerneck/.gradle/caches/transforms-1/files-1.1/multidex-1.0.2.aar/b79549e416ab6212c8fe9dd5427527fe/AndroidManifest.xml:17:1-22:12
 MERGED from [:slideDateTimePicker] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/slideDateTimePicker/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:BluetoothLeGatt] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/build/intermediates/manifests/full/debug/AndroidManifest.xml:17:1-63:12
-MERGED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-60:12
+MERGED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-39:12
 MERGED from [com.android.support:design:27.0.2] /Users/marcoswerneck/.gradle/caches/transforms-1/files-1.1/design-27.0.2.aar/c61c4cb479f478244a4f64e5b537ade5/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.gms:play-services:11.8.0] /Users/marcoswerneck/.gradle/caches/transforms-1/files-1.1/play-services-11.8.0.aar/3d4aa1161707b457b02ed999127c5d9c/AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.android.gms:play-services-cast-framework:11.8.0] /Users/marcoswerneck/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-11.8.0.aar/77cb33c61295dea797dc8340a0e01916/AndroidManifest.xml:2:1-14:12
@@ -237,8 +237,8 @@ MERGED from [:EventBus] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 |
 MERGED from [:EventBus] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus/build/intermediates/manifests/full/debug/AndroidManifest.xml:13:5-14:19
 MERGED from [:BluetoothLeGatt] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/build/intermediates/manifests/full/debug/AndroidManifest.xml:42:5-61:19
 MERGED from [:BluetoothLeGatt] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt/build/intermediates/manifests/full/debug/AndroidManifest.xml:42:5-61:19
-MERGED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:16:5-58:19
-MERGED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:16:5-58:19
+MERGED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:16:5-37:19
+MERGED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:16:5-37:19
 MERGED from [com.google.android.gms:play-services:11.8.0] /Users/marcoswerneck/.gradle/caches/transforms-1/files-1.1/play-services-11.8.0.aar/3d4aa1161707b457b02ed999127c5d9c/AndroidManifest.xml:5:5-20
 MERGED from [com.google.android.gms:play-services:11.8.0] /Users/marcoswerneck/.gradle/caches/transforms-1/files-1.1/play-services-11.8.0.aar/3d4aa1161707b457b02ed999127c5d9c/AndroidManifest.xml:5:5-20
 MERGED from [com.google.android.gms:play-services-cast-framework:11.8.0] /Users/marcoswerneck/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-11.8.0.aar/77cb33c61295dea797dc8340a0e01916/AndroidManifest.xml:7:5-12:19
@@ -1162,40 +1162,16 @@ ADDED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | D
 		ADDED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:21:13-45
 	android:name
 		ADDED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:20:13-60
-activity#com.dotel.rfid.RFIDHostActivity
-ADDED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:29:9-35:20
-	android:screenOrientation
-		ADDED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:31:13-49
-	android:name
-		ADDED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:30:13-59
-intent-filter#action:name:android.intent.action.MAIN
-ADDED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:32:13-34:29
-activity#com.dotel.rfid.RFIDUsbHostActivity
-ADDED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:36:9-49:20
-	android:screenOrientation
-		ADDED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:38:13-49
-	android:name
-		ADDED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:37:13-62
-intent-filter#action:name:android.hardware.usb.action.USB_DEVICE_ATTACHED
-ADDED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:42:13-44:29
-action#android.hardware.usb.action.USB_DEVICE_ATTACHED
-ADDED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:43:17-90
-	android:name
-		ADDED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:43:25-87
-meta-data#android.hardware.usb.action.USB_DEVICE_ATTACHED
-ADDED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:46:13-48:57
-	android:resource
-		ADDED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:48:17-54
-	android:name
-		ADDED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:47:17-79
 activity#com.dotel.rfid.MaskActivity
-ADDED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:50:9-57:20
+ADDED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:29:9-36:20
 	android:screenOrientation
-		ADDED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:53:13-49
+		ADDED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:32:13-49
 	android:label
-		ADDED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:52:13-33
+		ADDED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:31:13-33
 	android:name
-		ADDED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:51:13-55
+		ADDED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:30:13-55
+intent-filter#action:name:android.intent.action.MAIN
+ADDED from [:Dotr900] /Users/marcoswerneck/AndroidStudio/Omni - 2019 VANCH75 | DOTR900/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900/build/intermediates/manifests/full/debug/AndroidManifest.xml:33:13-35:29
 receiver#com.google.android.gms.cast.framework.media.MediaIntentReceiver
 ADDED from [com.google.android.gms:play-services-cast-framework:11.8.0] /Users/marcoswerneck/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-11.8.0.aar/77cb33c61295dea797dc8340a0e01916/AndroidManifest.xml:8:9-100
 	android:name

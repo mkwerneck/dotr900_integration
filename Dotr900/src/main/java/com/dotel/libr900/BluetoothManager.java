@@ -1,7 +1,7 @@
 package com.dotel.libr900;
 
 /***********************************************************************************
-* BluetoothActivity revision history                                               *
+* BluetoothManager revision history                                               *
 *************+*************+********+***********************************************
 * 2012.12.12	ver 1.0.0  	  eric     1. Generated(First release)                 *
 //-----------+-------------+--------+-----------------------------------------------
@@ -11,6 +11,7 @@ package com.dotel.libr900;
 import java.util.UUID;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.TabActivity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -31,15 +32,16 @@ import com.dotel.libr900.R900Status;
 
 //import com.dotel.rfid.RFIDHostActivity.LockPattern;
 
-public class BluetoothActivity extends AppCompatActivity
+public class BluetoothManager
 {
-	protected static String TAG = "BluetoothActivity";
+	protected String TAG = "BluetoothManager";
 
-	protected static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 	protected ArrayAdapter<String> mArrayAdapter;
-	protected R900Manager mR900Manager;
-	protected String mLastCmd;
-	
+	public R900Manager mR900Manager;
+	public  String mLastCmd;
+	public static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+	public boolean mConnected;
+
 	// protected Map<String, BluetoothDevice> mMapBtDevice;
 	private OnBtEventListener mBtEventListener;
 	public static final int MSG_BT_DATA_RECV = 10;
@@ -48,8 +50,6 @@ public class BluetoothActivity extends AppCompatActivity
 	protected boolean mUseMask;
 	protected int mTimeout;
 	protected boolean mQuerySelected;
-	
-	protected boolean mConnected;
 
 	static final int REQUEST_COARSE_LOCATION_PERMISSIONS = 1;
 	
@@ -103,7 +103,13 @@ public class BluetoothActivity extends AppCompatActivity
 		}
 	};
 
-	@Override
+	public BluetoothManager(){
+		int mode = R900Status.getInterfaceMode();
+
+		mR900Manager = new R900Manager( mHandler );
+	}
+
+	/*@Override
 	public void onCreate( Bundle savedInstanceState )
 	{
 		super.onCreate(savedInstanceState);
@@ -129,18 +135,18 @@ public class BluetoothActivity extends AppCompatActivity
 			startActivity(discoverableIntent);
 		}				
 
-	}
+	}*/
 
-	@Override
+	/*@Override
 	public void onDestroy()
 	{
 		super.onDestroy();	
 			
 		finalize();
 
-	}
+	}*/
 	
-	protected void finalize()
+	/*protected void finalize()
 	{
 		if( mR900Manager != null )
 			mR900Manager.finalize();
@@ -149,13 +155,13 @@ public class BluetoothActivity extends AppCompatActivity
 		if( mUnregister == false )
 			unregisterReceiver(mReceiver);
 		mUnregister = true;	
-	}
+	}*/
 	
-	@Override
+	/*@Override
 	public void onBackPressed()
 	{
-		Log.d("BluetoothActivity", "onBackPressed" );
-	}
+		Log.d("BluetoothManager", "onBackPressed" );
+	}*/
 	
 	
 	public void setOnBtEventListener( OnBtEventListener listener )
@@ -164,7 +170,8 @@ public class BluetoothActivity extends AppCompatActivity
 		if( mR900Manager != null )
 			mR900Manager.setOnBtEventListener(listener);
 	}
-	public void scanBluetoothDevice()
+
+	/*public void scanBluetoothDevice()
 	{
 		// mMapBtDevice.clear();
 		if( mR900Manager != null ) {
@@ -180,9 +187,7 @@ public class BluetoothActivity extends AppCompatActivity
 		}
 
 			mR900Manager.startDiscovery();
-	}
-
-
+	}*/
 
 	public void byeBluetoothDevice()
 	{
