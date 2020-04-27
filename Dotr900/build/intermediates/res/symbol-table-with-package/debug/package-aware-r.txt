@@ -762,10 +762,11 @@ int id txt_debug 0x7f0c00b3
 int id txt_duty 0x7f0c00b4
 int id txt_power 0x7f0c00b5
 int id txt_tagcount 0x7f0c00b6
-int id uniform 0x7f0c00b7
-int id up 0x7f0c00b8
-int id vendorId 0x7f0c00b9
-int id wrap_content 0x7f0c00ba
+int id txt_tagcountt 0x7f0c00b7
+int id uniform 0x7f0c00b8
+int id up 0x7f0c00b9
+int id vendorId 0x7f0c00ba
+int id wrap_content 0x7f0c00bb
 int integer abc_config_activityDefaultDur 0x7f0d0001
 int integer abc_config_activityShortDur 0x7f0d0002
 int integer cancel_button_image_alpha 0x7f0d0003

@@ -23,9 +23,6 @@ import java.util.logging.Logger;
 
 import de.greenrobot.event.EventBus;
 
-
-
-
 /**
  *
  classe de dispositivo, contém todas as operações de comando

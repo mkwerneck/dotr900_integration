@@ -108,8 +108,9 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     public static final String key_potencia = "key_potencia";
     public static final String key_bip = "key_bip";
     public static final String key_ipxr400 = "key_ipxr400";
+    private String modeloLeitor;
     public static final String key_modelo_leitor_rfid = "key_modelo_leitor_rfid";
-    private String modelo_leitor_rfid_Default = "Vanch_VH75";
+    private String modelo_leitor_rfid_Default;
     private String ipDefault = "0.0.0.0";
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
@@ -120,6 +121,9 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     private Handler limparDadosHandler;
     private HandlerThread limparDadosThread;
     private Handler mainHandler;
+
+    private Handler connectionBTHandler;
+    private HandlerThread connectionBTThread;
 
     public static class GetHandsetParam {
 
@@ -224,6 +228,9 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                         arrayListGerais.get(i).setSubtitle(modelo_leitor);
                         editor.putString(key_modelo_leitor_rfid, modelo_leitor);
                         editor.commit();
+
+                        modeloLeitor = modelo_leitor;
+
                         break;
                     default:
                         break;
@@ -237,6 +244,19 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        modelo_leitor_rfid_Default = this.getResources().getString(R.string.modelo_leitor_default);
+
+        connectionBTThread = new HandlerThread("ConnectionBTThread");
+        connectionBTThread.start();
+        connectionBTHandler = new Handler(connectionBTThread.getLooper())
+        {
+            @Override
+            public void handleMessage(Message msg)
+            {
+                //Processar mensagens
+            }
+        };
 
         limparDadosThread = new HandlerThread("limparDadosThread");
         limparDadosThread.start();
@@ -293,13 +313,12 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     protected void onResume(){
-        super.onResume();
+        //Obtendo o modelo preferencial
+        modeloLeitor = LeitorPreferencial();
 
-        try {
-            list();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        ConectarDispositivoBT(modeloLeitor);
+
+        super.onResume();
     }
 
     @Override
@@ -320,7 +339,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         int id = item.getItemId();
         switch (id){
             case R.id.action_reconectar_settings:
-                list();
+                ConectarDispositivoBT(modeloLeitor);
                 return true;
             default:
                 return false;
@@ -874,6 +893,71 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                         Toast.makeText(getApplicationContext(), "Dados removidos com sucesso", Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+        });
+    }
+
+    private String LeitorPreferencial()
+    {
+        if (!pref.contains(key_modelo_leitor_rfid)){
+            editor.putString(key_modelo_leitor_rfid, modelo_leitor_rfid_Default);
+            editor.commit();
+
+            return modelo_leitor_rfid_Default;
+        } else {
+            return pref.getString(key_modelo_leitor_rfid, modelo_leitor_rfid_Default);
+        }
+    }
+
+    private void ConectarDispositivoBT(String modeloLeitor)
+    {
+        pairedDevices = BA.getBondedDevices();
+        for (BluetoothDevice bluetoothDevice : pairedDevices)
+        {
+            switch (modeloLeitor)
+            {
+                case "Vanch_VH75":
+
+                    ConectarVANCH75(bluetoothDevice);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
+
+    private void ConectarVANCH75(BluetoothDevice bluetoothDevice)
+    {
+        connectionBTHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                VH73Device vh75Device = new VH73Device(SettingsActivity.this, bluetoothDevice);
+
+                boolean succ = vh75Device.connect();
+
+                if (succ) {
+
+                    SettingsActivity.currentDevice = vh75Device;
+                    EventBus.getDefault().post(new MainActivity.DoReadParam());
+                    ConfigUI.setConfigLastConnect(SettingsActivity.this, currentDevice.getAddress());
+
+                    EventBus.getDefault().post(new SettingsActivity.GetHandsetParam());
+
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(SettingsActivity.this, "Conectado!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(SettingsActivity.this, "Leitor não conectado. Tente novamente!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
     }

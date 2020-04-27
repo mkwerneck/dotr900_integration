@@ -6,6 +6,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
@@ -33,6 +34,10 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dotel.libr900.BluetoothActivity;
+import com.dotel.libr900.OnBtEventListener;
+import com.dotel.libr900.R900Protocol;
+import com.dotel.libr900.R900RecvPacketParser;
 import com.github.jjobes.slidedatetimepicker.SlideDateTimeListener;
 import com.github.jjobes.slidedatetimepicker.SlideDateTimePicker;
 
@@ -77,7 +82,7 @@ import br.com.marcosmilitao.idativosandroid.helper.TimeoutException;
 import br.com.marcosmilitao.idativosandroid.helper.Utility;
 import br.com.marcosmilitao.idativosandroid.helper.VH73Device;
 
-public class ExecutarProcessosActivity extends AppCompatActivity {
+public class ExecutarProcessosActivity extends BluetoothActivity implements OnBtEventListener {
 
     private ApplicationDB dbInstance;
     private BluetoothAdapter BA;
@@ -110,6 +115,7 @@ public class ExecutarProcessosActivity extends AppCompatActivity {
     private HandlerThread salvarThread;
 
     private static VH73Device currentDevice;
+    private BluetoothDevice mConnectedDevice;
     private List<BluetoothDevice> foundDevices;
     private Set<BluetoothDevice> pairedDevices;
 
@@ -135,9 +141,9 @@ public class ExecutarProcessosActivity extends AppCompatActivity {
 
     private FloatingActionButton fab_ler_materiais;
     private FloatingActionButton fab_resultado;
+    private FloatingActionButton fab_ativo;
 
     private boolean reading = false;
-    private boolean readingUser = false;
 
     private AlertDialog.Builder resultbuilder;
 
@@ -147,8 +153,20 @@ public class ExecutarProcessosActivity extends AppCompatActivity {
 
     private SimpleDateFormat mFormatter;
 
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
+    private String modeloLeitor;
+    public static final String key_modelo_leitor_rfid = "key_modelo_leitor_rfid";
+    private String modelo_leitor_rfid_Default;
+
+    private static final int[] TX_DUTY_OFF =
+            { 10, 40, 80, 100, 160, 180 };
+
+    private static final int[] TX_DUTY_ON =
+            { 190, 160, 70, 40, 20 };
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
+    public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_executar_processos);
@@ -243,19 +261,21 @@ public class ExecutarProcessosActivity extends AppCompatActivity {
         {
             @Override
             public void onClick(View view) {
-                if(ExecutarProcessosActivity.currentDevice != null){
+                if(mConnectedDevice != null){
                     if (reading == false)
                     {
-                        readingUser = false;
-                        StartReading(fab_ler_materiais);
+                        StartReading();
                     } else {
-                        StopReading(fab_ler_materiais);
+                        StopReading();
                     }
                 }else{
-                    ConectarDispositivoBT();
+                    ConectarDispositivoBT(modeloLeitor);
                 }
             }
         });
+
+        //setando o action button principal como ativo
+        fab_ativo = fab_ler_materiais;
 
         tab_executar_processo = (TabHost) findViewById(R.id.tab_executar_processo);
         tab_executar_processo.setup();
@@ -284,7 +304,7 @@ public class ExecutarProcessosActivity extends AppCompatActivity {
                 String modalidade = listaServicosExecucaoTarefas.getModalidade();
 
                 //Parando a leitura caso esteja lendo
-                StopReading(fab_ler_materiais);
+                StopReading();
 
                 if (modalidade.equals("Inserção de informações"))
                 {
@@ -311,6 +331,8 @@ public class ExecutarProcessosActivity extends AppCompatActivity {
 
         BA = BluetoothAdapter.getDefaultAdapter();
         BA.enable();
+
+        setOnBtEventListener(this);
     }
 
     @Override
@@ -322,9 +344,12 @@ public class ExecutarProcessosActivity extends AppCompatActivity {
     @Override
     protected void onResume()
     {
-        super.onResume();
+        //Obtendo o modelo preferencial
+        modeloLeitor = LeitorPreferencial();
 
-        ConectarDispositivoBT();
+        ConectarDispositivoBT(modeloLeitor);
+
+        super.onResume();
     }
 
     @Override
@@ -347,19 +372,19 @@ public class ExecutarProcessosActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id){
             case R.id.action_limpar_et:
-                StopReading(fab_ler_materiais);
+                StopReading();
 
                 LimparListView();
                 return true;
 
             case R.id.action_reconectar_et:
-                StopReading(fab_ler_materiais);
+                StopReading();
 
-                ConectarDispositivoBT();
+                ConectarDispositivoBT(modeloLeitor);
                 return true;
 
             case R.id.action_salvar_cf:
-                StopReading(fab_ler_materiais);
+                StopReading();
 
                 Salvar();
                 return true;
@@ -508,117 +533,189 @@ public class ExecutarProcessosActivity extends AppCompatActivity {
         this.finish();
     }
 
-    private void ConectarDispositivoBT()
+    private void ConectarDispositivoBT(String modeloLeitor)
     {
         pairedDevices = BA.getBondedDevices();
         for (BluetoothDevice bluetoothDevice : pairedDevices)
         {
-            connectionBTHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    VH73Device vh75Device = new VH73Device(ExecutarProcessosActivity.this, bluetoothDevice);
+            switch (modeloLeitor)
+            {
+                case "Vanch_VH75":
 
-                    boolean succ = vh75Device.connect();
+                    ConectarVANCH75(bluetoothDevice);
+                    break;
 
-                    if (succ) {
-                        ExecutarProcessosActivity.currentDevice = vh75Device;
-                        mainHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(ExecutarProcessosActivity.this, "Conectado!", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    } else {
-                        mainHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(ExecutarProcessosActivity.this, "Leitor não conectado. Tente novamente!", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                }
-            });
+                case "DOTR_900":
+
+                    ConectarDOTR900(bluetoothDevice);
+                    break;
+
+                default:
+                    break;
+            }
         }
     }
 
-    private void StartReading(FloatingActionButton fab)
+    private void ConectarVANCH75(BluetoothDevice bluetoothDevice)
+    {
+        connectionBTHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                VH73Device vh75Device = new VH73Device(ExecutarProcessosActivity.this, bluetoothDevice);
+
+                boolean succ = vh75Device.connect();
+
+                if (succ) {
+
+                    ExecutarProcessosActivity.currentDevice = vh75Device;
+                    mConnectedDevice = bluetoothDevice;
+
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(ExecutarProcessosActivity.this, "Conectado!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(ExecutarProcessosActivity.this, "Leitor não conectado. Tente novamente!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    private void ConectarDOTR900(BluetoothDevice bluetoothDevice)
+    {
+        if (mConnectedDevice == null)
+        {
+            if (mR900Manager.isTryingConnect() == false)
+            {
+                mR900Manager.connectToBluetoothDevice(bluetoothDevice, MY_UUID);
+            }
+        }
+    }
+
+    private void StartReading()
     {
         reading = true;
-        fab.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F30808")));
+        fab_ativo.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#F30808")));
 
-        Read(fab);
+        Read();
     }
 
-    private void StopReading(FloatingActionButton fab)
+    private void StopReading()
     {
-        reading = false;
-        fab.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#41C05A")));
+        fab_ativo.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#41C05A")));
+
+        switch (modeloLeitor)
+        {
+            case "Vanch_VH75":
+                reading = false;
+                break;
+
+            case "DOTR_900":
+                reading = false;
+                sendCmdStop();
+                break;
+
+            default:
+                break;
+        }
     }
 
-    private void Read(FloatingActionButton fab)
+    private void Read()
     {
         readTAGIDHandler.post(new Runnable() {
             @Override
             public void run() {
-                try{
-                    ExecutarProcessosActivity.currentDevice.SetReaderMode((byte) 1);
-                    byte[] res = ExecutarProcessosActivity.currentDevice.getCmdResultWithTimeout(3000);
-                    if (!VH73Device.checkSucc(res)) {
-                        StopReading(fab);
-
-                        return;
-                    }
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
-                } catch (TimeoutException e1) { // timeout
-                    Log.i("READING", "Timeout!!@");
-                }
-
-                while (reading)
+                switch (modeloLeitor)
                 {
-                    long lnow = SystemClock.uptimeMillis();
+                    case "Vanch_VH75":
+                        StartReadingVANCH75();
 
-                    //TODO LEITURA
-                    try{
-                        ExecutarProcessosActivity.currentDevice.listTagID(1, 0, 0);
-                        byte[] ret = ExecutarProcessosActivity.currentDevice.getCmdResult();
-                        if (VH73Device.checkSucc(ret))
-                        {
-                            VH73Device.ListTagIDResult listTagIDResult = VH73Device.parseListTagIDResult(ret);
+                        break;
 
-                            //transformando cada tagid lido no padrao com sufixo "H" e atualizando a ListView
-                            for(byte[] bs : listTagIDResult.epcs)
-                            {
-                                final String tagid = "H" + Utility.bytes2HexString(bs);
+                    case "DOTR_900":
+                        StartReadingDOTR900();
+                        break;
 
-                                if (readingUser == false)
-                                {
-                                    AtualizarListViewMateriais(tagid);
-                                } else
-                                {
-                                    AtualizarListViewUsuarios(tagid);
-                                }
-                            }
-                            Log.d("SUCCESS", ret.toString());
-                        } else {
-                            Log.d("ERRO", ret.toString());
-                        }
-                    } catch (IOException e){
-                        e.printStackTrace();
-                    }
-
-                    while(true)
-                    {
-                        long lnew = android.os.SystemClock.uptimeMillis();
-                        if (lnew - lnow > 50) {
-                            break;
-                        }
-                    }
+                    default:
+                        break;
                 }
             }
         });
+    }
+
+    private void StartReadingVANCH75()
+    {
+        try{
+            ExecutarProcessosActivity.currentDevice.SetReaderMode((byte) 1);
+            byte[] res = ExecutarProcessosActivity.currentDevice.getCmdResultWithTimeout(3000);
+            if (!VH73Device.checkSucc(res)) {
+                StopReading();
+
+                return;
+            }
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        } catch (InterruptedException e1) {
+            e1.printStackTrace();
+        } catch (TimeoutException e1) { // timeout
+            Log.i("READING", "Timeout!!@");
+        }
+
+        while (reading)
+        {
+            long lnow = SystemClock.uptimeMillis();
+
+            //TODO LEITURA
+            try{
+                ExecutarProcessosActivity.currentDevice.listTagID(1, 0, 0);
+                byte[] ret = ExecutarProcessosActivity.currentDevice.getCmdResult();
+                if (VH73Device.checkSucc(ret))
+                {
+                    VH73Device.ListTagIDResult listTagIDResult = VH73Device.parseListTagIDResult(ret);
+
+                    //transformando cada tagid lido no padrao com sufixo "H" e atualizando a ListView
+                    for(byte[] bs : listTagIDResult.epcs)
+                    {
+                        final String tagid = "H" + Utility.bytes2HexString(bs);
+
+                        if (fab_ativo == fab_ler_materiais)
+                        {
+                            AtualizarListViewMateriais(tagid);
+                        } else
+                        {
+                            AtualizarListViewUsuarios(tagid);
+                        }
+                    }
+                    Log.d("SUCCESS", ret.toString());
+                } else {
+                    Log.d("ERRO", ret.toString());
+                }
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+
+            while(true)
+            {
+                long lnew = android.os.SystemClock.uptimeMillis();
+                if (lnew - lnow > 50) {
+                    break;
+                }
+            }
+        }
+    }
+
+    private void StartReadingDOTR900()
+    {
+        sendInventParam(1, 5, 0);
+        setOpMode(false, false, 0, false);
+        sendCmdInventory();
     }
 
     private void AtualizarListViewMateriais(String tagid)
@@ -925,7 +1022,6 @@ public class ExecutarProcessosActivity extends AppCompatActivity {
                     });
 
                     resultalert.cancel();
-                    readingUser = false;
                 }
             }
         });
@@ -934,7 +1030,6 @@ public class ExecutarProcessosActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 resultalert.cancel();
-                readingUser = false;
             }
         });
 
@@ -974,7 +1069,9 @@ public class ExecutarProcessosActivity extends AppCompatActivity {
                 });
 
                 resultalert.cancel();
-                StopReading(fab_resultado);
+                StopReading();
+
+                fab_ativo = fab_ler_materiais;
             }
         });
 
@@ -983,24 +1080,28 @@ public class ExecutarProcessosActivity extends AppCompatActivity {
         {
             @Override
             public void onClick(View view) {
-                if(ExecutarProcessosActivity.currentDevice != null){
+                if(mConnectedDevice != null){
                     if (reading == false)
                     {
-                        readingUser = true;
-                        StartReading(fab_resultado);
+                        StartReading();
                     } else {
-                        StopReading(fab_resultado);
+                        StopReading();
                     }
                 }else{
-                    ConectarDispositivoBT();
+                    ConectarDispositivoBT(modeloLeitor);
                 }
             }
         });
 
+        //setando o action button do usuario como ativo
+        fab_ativo = fab_resultado;
+
         btn_cancelar.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View view){
-                StopReading(fab_resultado);
+                StopReading();
+
+                fab_ativo = fab_ler_materiais;
 
                 resultalert.cancel();
             }
@@ -1039,5 +1140,151 @@ public class ExecutarProcessosActivity extends AppCompatActivity {
         timerBuilder.setInitialDate(new Date());
         timerBuilder.setIs24HourTime(true);
         timerBuilder.build().show();
+    }
+
+    private String LeitorPreferencial()
+    {
+        pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        editor = pref.edit();
+
+        if (!pref.contains(key_modelo_leitor_rfid)){
+            editor.putString(key_modelo_leitor_rfid, modelo_leitor_rfid_Default);
+            editor.commit();
+
+            return modelo_leitor_rfid_Default;
+        } else {
+            return pref.getString(key_modelo_leitor_rfid, modelo_leitor_rfid_Default);
+        }
+    }
+
+    public void onBtFoundNewDevice(BluetoothDevice device)
+    {}
+
+    public void onBtScanCompleted()
+    {}
+
+    public void onBtConnected( BluetoothDevice device )
+    {
+        mConnectedDevice = device;
+        mainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(ExecutarProcessosActivity.this, "Leitor conectado!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        sendCmdOpenInterface1();
+
+        sendSettingTxCycle(TX_DUTY_ON[0], TX_DUTY_OFF[0]);
+
+        this.sleep(1000);
+    }
+
+    public void onBtDisconnected(BluetoothDevice device)
+    {
+        mConnectedDevice = null;
+
+        mainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(ExecutarProcessosActivity.this, "Leitor desconectado!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void onBtConnectFail(BluetoothDevice device, String msg)
+    {
+        mainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(ExecutarProcessosActivity.this, "Não foi possível conectar ao leitor. Tente novamente!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void onBtDataSent(byte[] data)
+    {
+    }
+
+    public void onBtDataTransException(BluetoothDevice device, String msg)
+    {
+        mainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(ExecutarProcessosActivity.this, msg, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void onNotifyBtDataRecv()
+    {
+        if( mR900Manager == null )
+            return;
+
+        R900RecvPacketParser packetParser = mR900Manager.getRecvPacketParser();
+
+        while( true )
+        {
+            final String parameter = packetParser.popPacket();
+
+            if( mConnectedDevice == null )
+                break;
+
+            if( parameter != null )
+            {
+                processPacket(parameter);
+            }
+            else
+                break;
+        }
+    }
+
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
+    {}
+
+    private synchronized void processPacket(final String param){
+        if (param == null || param.length() <= 0)
+            return;
+
+        final String CMD = param.toLowerCase();
+
+        if ( CMD.indexOf("^") == 0 || CMD.indexOf("$") == 0
+                || CMD.indexOf("ok") == 0 || CMD.indexOf("err") == 0
+                || CMD.indexOf("end") == 0 )
+        {
+            if (CMD.indexOf("$trigger=1") == 0){
+                StartReading();
+            }
+            else if (CMD.indexOf("$trigger=0") == 0){
+                StopReading();
+            }
+        }
+        else
+        {
+            if (mLastCmd == null)
+                return;
+
+            if (mLastCmd.equalsIgnoreCase(R900Protocol.CMD_INVENT))
+            {
+                if(param == null || param.length() <= 4)
+                    return;
+
+                final String tagid = "H" + param.substring(4, param.length() - 4);
+
+                if (fab_ativo == fab_ler_materiais)
+                {
+                    AtualizarListViewMateriais(tagid.toUpperCase());
+                } else
+                {
+                    AtualizarListViewUsuarios(tagid.toUpperCase());
+                }
+            }
+        }
+    }
+
+    public void sleep(int time){
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException e) { }
     }
 }

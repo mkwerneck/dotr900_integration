@@ -785,10 +785,11 @@ public final class R {
         public static final int txt_duty = 0x7f0a035c;
         public static final int txt_power = 0x7f0a035d;
         public static final int txt_tagcount = 0x7f0a035f;
-        public static final int uniform = 0x7f0a0361;
-        public static final int up = 0x7f0a0362;
-        public static final int vendorId = 0x7f0a0365;
-        public static final int wrap_content = 0x7f0a0384;
+        public static final int txt_tagcountt = 0x7f0a0360;
+        public static final int uniform = 0x7f0a0362;
+        public static final int up = 0x7f0a0363;
+        public static final int vendorId = 0x7f0a0366;
+        public static final int wrap_content = 0x7f0a0385;
     }
     public static final class integer {
         public static final int abc_config_activityDefaultDur = 0x7f0b0000;

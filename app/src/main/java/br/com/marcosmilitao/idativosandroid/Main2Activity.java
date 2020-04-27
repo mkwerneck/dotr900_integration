@@ -359,7 +359,7 @@ public class Main2Activity extends AppCompatActivity  implements NavigationView.
                 drawer.closeDrawer(GravityCompat.START);
                 return true;
             case R.id.nav_tagid_nao_cadastrado:
-                intent = new Intent(this, Act_TagID_Nao_Cadastrado.class);
+                intent = new Intent(this, TagidsNaoCadastradosActivity.class);
                 startActivity(intent);
                 drawer.closeDrawer(GravityCompat.START);
                 return true;

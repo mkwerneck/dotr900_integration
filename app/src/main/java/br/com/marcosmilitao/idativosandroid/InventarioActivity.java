@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -27,6 +28,11 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.dotel.libr900.BluetoothActivity;
+import com.dotel.libr900.OnBtEventListener;
+import com.dotel.libr900.R900Protocol;
+import com.dotel.libr900.R900RecvPacketParser;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -61,7 +67,7 @@ import br.com.marcosmilitao.idativosandroid.helper.TimeoutException;
 import br.com.marcosmilitao.idativosandroid.helper.Utility;
 import br.com.marcosmilitao.idativosandroid.helper.VH73Device;
 
-public class InventarioActivity extends AppCompatActivity {
+public class InventarioActivity extends BluetoothActivity implements OnBtEventListener {
 
     private ApplicationDB dbInstance;
     private BluetoothAdapter BA;
@@ -95,6 +101,7 @@ public class InventarioActivity extends AppCompatActivity {
     private HandlerThread showTAGIDDetailsThread;
 
     private static VH73Device currentDevice;
+    private BluetoothDevice mConnectedDevice;
     private List<BluetoothDevice> foundDevices;
     private Set<BluetoothDevice> pairedDevices;
 
@@ -120,10 +127,24 @@ public class InventarioActivity extends AppCompatActivity {
 
     private AlertDialog alert;
 
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
+    private String modeloLeitor;
+    public static final String key_modelo_leitor_rfid = "key_modelo_leitor_rfid";
+    private String modelo_leitor_rfid_Default;
+
+    private static final int[] TX_DUTY_OFF =
+            { 10, 40, 80, 100, 160, 180 };
+
+    private static final int[] TX_DUTY_ON =
+            { 190, 160, 70, 40, 20 };
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventario);
+
+        modelo_leitor_rfid_Default = this.getResources().getString(R.string.modelo_leitor_default);
 
         connectionBTThread = new HandlerThread("ConnectionBTThread");
         connectionBTThread.start();
@@ -205,7 +226,7 @@ public class InventarioActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                if (InventarioActivity.currentDevice != null)
+                if (mConnectedDevice != null)
                 {
                     if (reading == false)
                     {
@@ -214,7 +235,7 @@ public class InventarioActivity extends AppCompatActivity {
                         StopReading();
                     }
                 } else {
-                    ConectarDispositivoBT();
+                    ConectarDispositivoBT(modeloLeitor);
                 }
             }
         });
@@ -237,6 +258,8 @@ public class InventarioActivity extends AppCompatActivity {
 
         BA = BluetoothAdapter.getDefaultAdapter();
         BA.enable();
+
+        setOnBtEventListener(this);
     }
 
     @Override
@@ -249,7 +272,13 @@ public class InventarioActivity extends AppCompatActivity {
     protected void onResume()
     {
         super.onResume();
-        ConectarDispositivoBT();
+
+        //Obtendo o modelo preferencial
+        modeloLeitor = LeitorPreferencial();
+
+        ConectarDispositivoBT(modeloLeitor);
+
+        super.onResume();
     }
 
     @Override
@@ -284,7 +313,7 @@ public class InventarioActivity extends AppCompatActivity {
 
                 return true;
             case R.id.inventario_conexao:
-                ConectarDispositivoBT();
+                ConectarDispositivoBT(modeloLeitor);
                 return true;
             default:
 
@@ -308,6 +337,8 @@ public class InventarioActivity extends AppCompatActivity {
 
     private void CloseAct()
     {
+        mConnectedDevice = null;
+
         BA.disable();
         BA.enable();
         this.finish();
@@ -321,10 +352,88 @@ public class InventarioActivity extends AppCompatActivity {
         Read();
     }
 
+    private void StartReadingVANCH75()
+    {
+        try{
+            InventarioActivity.currentDevice.SetReaderMode((byte) 1);
+            byte[] res = InventarioActivity.currentDevice.getCmdResultWithTimeout(3000);
+            if (!VH73Device.checkSucc(res)) {
+                StopReading();
+
+                return;
+            }
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        } catch (InterruptedException e1) {
+            e1.printStackTrace();
+        } catch (TimeoutException e1) { // timeout
+            Log.i(TAG_READING, "Timeout!!@");
+        }
+
+        while (reading)
+        {
+            long lnow = SystemClock.uptimeMillis();
+
+            //TODO LEITURA
+            try{
+                InventarioActivity.currentDevice.listTagID(1, 0, 0);
+                byte[] ret = InventarioActivity.currentDevice.getCmdResult();
+                if (VH73Device.checkSucc(ret))
+                {
+                    VH73Device.ListTagIDResult listTagIDResult = VH73Device.parseListTagIDResult(ret);
+
+                    //transformando cada tagid lido no padrao com sufixo "H" e atualizando a ListView
+                    for(byte[] bs : listTagIDResult.epcs)
+                    {
+                        final String tagid = "H" + Utility.bytes2HexString(bs);
+
+                        AtualizarListView(tagid);
+
+                    }
+                    Log.d("SUCCESS", ret.toString());
+                } else {
+                    Log.d("ERRO", ret.toString());
+                }
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+
+
+            while(true)
+            {
+                long lnew = android.os.SystemClock.uptimeMillis();
+                if (lnew - lnow > 50) {
+                    break;
+                }
+            }
+        }
+    }
+
+    private void StartReadingDOTR900()
+    {
+        sendInventParam(1, 5, 0);
+        setOpMode(false, false, 0, false);
+        sendCmdInventory();
+    }
+
     private void StopReading()
     {
-        reading = false;
         fab_inv.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#41C05A")));
+
+        switch (modeloLeitor)
+        {
+            case "Vanch_VH75":
+                reading = false;
+                break;
+
+            case "DOTR_900":
+                reading = false;
+                sendCmdStop();
+                break;
+
+            default:
+                break;
+        }
     }
 
     private void Read()
@@ -332,58 +441,19 @@ public class InventarioActivity extends AppCompatActivity {
         readTAGIDHandler.post(new Runnable() {
             @Override
             public void run() {
-                try{
-                    InventarioActivity.currentDevice.SetReaderMode((byte) 1);
-                    byte[] res = InventarioActivity.currentDevice.getCmdResultWithTimeout(3000);
-                    if (!VH73Device.checkSucc(res)) {
-                        StopReading();
-
-                        return;
-                    }
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
-                } catch (TimeoutException e1) { // timeout
-                    Log.i(TAG_READING, "Timeout!!@");
-                }
-
-                while (reading)
+                switch (modeloLeitor)
                 {
-                    long lnow = SystemClock.uptimeMillis();
+                    case "Vanch_VH75":
+                        StartReadingVANCH75();
 
-                    //TODO LEITURA
-                    try{
-                        InventarioActivity.currentDevice.listTagID(1, 0, 0);
-                        byte[] ret = InventarioActivity.currentDevice.getCmdResult();
-                        if (VH73Device.checkSucc(ret))
-                        {
-                            VH73Device.ListTagIDResult listTagIDResult = VH73Device.parseListTagIDResult(ret);
+                        break;
 
-                            //transformando cada tagid lido no padrao com sufixo "H" e atualizando a ListView
-                            for(byte[] bs : listTagIDResult.epcs)
-                            {
-                                final String tagid = "H" + Utility.bytes2HexString(bs);
+                    case "DOTR_900":
+                        StartReadingDOTR900();
+                        break;
 
-                                AtualizarListView(tagid);
-
-                            }
-                            Log.d("SUCCESS", ret.toString());
-                        } else {
-                            Log.d("ERRO", ret.toString());
-                        }
-                    } catch (IOException e){
-                        e.printStackTrace();
-                    }
-
-
-                    while(true)
-                    {
-                        long lnew = android.os.SystemClock.uptimeMillis();
-                        if (lnew - lnow > 50) {
-                            break;
-                        }
-                    }
+                    default:
+                        break;
                 }
             }
         });
@@ -433,36 +503,26 @@ public class InventarioActivity extends AppCompatActivity {
         });
     }
 
-    private void ConectarDispositivoBT()
+    private void ConectarDispositivoBT(String modeloLeitor)
     {
         pairedDevices = BA.getBondedDevices();
         for (BluetoothDevice bluetoothDevice : pairedDevices)
         {
-            connectionBTHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    VH73Device vh75Device = new VH73Device(InventarioActivity.this, bluetoothDevice);
+            switch (modeloLeitor)
+            {
+                case "Vanch_VH75":
 
-                    boolean succ = vh75Device.connect();
+                    ConectarVANCH75(bluetoothDevice);
+                    break;
 
-                    if (succ) {
-                        InventarioActivity.currentDevice = vh75Device;
-                        mainHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(InventarioActivity.this, "Conectado!", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    } else {
-                        mainHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(InventarioActivity.this, "Leitor não conectado. Tente novamente!", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                }
-            });
+                case "DOTR_900":
+
+                    ConectarDOTR900(bluetoothDevice);
+                    break;
+
+                default:
+                    break;
+            }
         }
     }
 
@@ -657,5 +717,187 @@ public class InventarioActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void ConectarVANCH75(BluetoothDevice bluetoothDevice)
+    {
+        connectionBTHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                VH73Device vh75Device = new VH73Device(InventarioActivity.this, bluetoothDevice);
+
+                boolean succ = vh75Device.connect();
+
+                if (succ) {
+                    InventarioActivity.currentDevice = vh75Device;
+                    mConnectedDevice = bluetoothDevice;
+
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(InventarioActivity.this, "Conectado!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(InventarioActivity.this, "Leitor não conectado. Tente novamente!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    private String LeitorPreferencial()
+    {
+        pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        editor = pref.edit();
+
+        if (!pref.contains(key_modelo_leitor_rfid)){
+            editor.putString(key_modelo_leitor_rfid, modelo_leitor_rfid_Default);
+            editor.commit();
+
+            return modelo_leitor_rfid_Default;
+        } else {
+            return pref.getString(key_modelo_leitor_rfid, modelo_leitor_rfid_Default);
+        }
+    }
+
+    private void ConectarDOTR900(BluetoothDevice bluetoothDevice)
+    {
+        if (mConnectedDevice == null)
+        {
+            if (mR900Manager.isTryingConnect() == false)
+            {
+                mR900Manager.connectToBluetoothDevice(bluetoothDevice, MY_UUID);
+            }
+        }
+    }
+
+    public void onBtFoundNewDevice(BluetoothDevice device)
+    {}
+
+    public void onBtScanCompleted()
+    {}
+
+    public void onBtConnected( BluetoothDevice device )
+    {
+        mConnectedDevice = device;
+        mainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(InventarioActivity.this, "Leitor conectado!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        sendCmdOpenInterface1();
+
+        sendSettingTxCycle(TX_DUTY_ON[0], TX_DUTY_OFF[0]);
+
+        this.sleep(1000);
+    }
+
+    public void onBtDisconnected(BluetoothDevice device)
+    {
+        mConnectedDevice = null;
+
+        mainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(InventarioActivity.this, "Leitor desconectado!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void onBtConnectFail(BluetoothDevice device, String msg)
+    {
+        mainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(InventarioActivity.this, "Não foi possível conectar ao leitor. Tente novamente!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void onBtDataSent(byte[] data)
+    {
+    }
+
+    public void onBtDataTransException(BluetoothDevice device, String msg)
+    {
+        mainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(InventarioActivity.this, msg, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void onNotifyBtDataRecv()
+    {
+        if( mR900Manager == null )
+            return;
+
+        R900RecvPacketParser packetParser = mR900Manager.getRecvPacketParser();
+
+        while( true )
+        {
+            final String parameter = packetParser.popPacket();
+
+            if( mConnectedDevice == null )
+                break;
+
+            if( parameter != null )
+            {
+                processPacket(parameter);
+            }
+            else
+                break;
+        }
+    }
+
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
+    {}
+
+    private synchronized void processPacket(final String param){
+        if (param == null || param.length() <= 0)
+            return;
+
+        final String CMD = param.toLowerCase();
+
+        if ( CMD.indexOf("^") == 0 || CMD.indexOf("$") == 0
+                || CMD.indexOf("ok") == 0 || CMD.indexOf("err") == 0
+                || CMD.indexOf("end") == 0 )
+        {
+            if (CMD.indexOf("$trigger=1") == 0){
+                StartReading();
+            }
+            else if (CMD.indexOf("$trigger=0") == 0){
+                StopReading();
+            }
+        }
+        else
+        {
+            if (mLastCmd == null)
+                return;
+
+            if (mLastCmd.equalsIgnoreCase(R900Protocol.CMD_INVENT))
+            {
+                if(param == null || param.length() <= 4)
+                    return;
+
+                final String tagid = "H" + param.substring(4, param.length() - 4);
+
+                AtualizarListView(tagid.toUpperCase());
+            }
+        }
+    }
+
+    public void sleep(int time){
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException e) { }
     }
 }

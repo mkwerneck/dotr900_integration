@@ -1,10 +1,10 @@
 package com.dotel.libr900;
 
 /***********************************************************************************
-* R900Manager revision history                                                     *
-*************+*************+********+***********************************************
-* 2012.12.12	ver 1.0.0  	  eric     1. Generated(First release)                 *
-************************************************************************************/
+ * R900Manager revision history                                                     *
+ *************+*************+********+***********************************************
+ * 2012.12.12	ver 1.0.0  	  eric     1. Generated(First release)                 *
+ ************************************************************************************/
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -20,6 +20,7 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.Environment;
 import android.os.Handler;
+import android.util.Log;
 
 public class R900Manager
 {
@@ -155,8 +156,7 @@ public class R900Manager
 			{
 				try
 				{
-					mBluetoothSocket = mBluetoothDevice
-							.createRfcommSocketToServiceRecord(mUuid);
+					mBluetoothSocket = mBluetoothDevice.createRfcommSocketToServiceRecord(mUuid);
 				}
 				catch( IOException e )
 				{
@@ -195,8 +195,8 @@ public class R900Manager
 					}
 
 					if( mBtEventListener != null )
-						mBtEventListener.onBtConnectFail(mBluetoothDevice,
-								connectException.getMessage());
+						mBtEventListener.onBtConnectFail(mBluetoothDevice, connectException.getMessage());
+
 					mConnectThread = null;
 					return;
 				}
@@ -205,6 +205,7 @@ public class R900Manager
 				mConnectedThread = new ConnectedThread(mBluetoothSocket);
 				if( mConnectedThread.isInitOk() )
 				{
+					mConnectedThread.setName("Connected Thread");
 					mConnectedThread.start();
 
 					if( mBtEventListener != null )
@@ -222,7 +223,6 @@ public class R900Manager
 
 		public void cancel()
 		{
-
 		}
 	};
 
@@ -230,9 +230,9 @@ public class R900Manager
 	{
 		try
 		{
-    		final BluetoothDevice DEVICE = getBluetoothDevice(address);
-    		if( DEVICE != null )
-    			connectToBluetoothDevice(DEVICE, uuid);
+			final BluetoothDevice DEVICE = getBluetoothDevice(address);
+			if( DEVICE != null )
+				connectToBluetoothDevice(DEVICE, uuid);
 		}
 		catch( Exception ex )
 		{
@@ -245,7 +245,9 @@ public class R900Manager
 		mBluetoothDevice = device;
 		mUuid = uuid;
 		disconnect();
+
 		mConnectThread = new ConnectThread();
+		mConnectThread.setName("Connecting Thread");
 		mConnectThread.start();
 	}
 
@@ -289,7 +291,7 @@ public class R900Manager
 		private final InputStream mmInStream;
 		private final OutputStream mmOutStream;
 		private boolean mInitOk;
-		
+
 		public ConnectedThread( BluetoothSocket socket )
 		{
 			mmSocket = socket;
@@ -306,9 +308,10 @@ public class R900Manager
 			catch( IOException e )
 			{
 				mBtEventListener.onBtConnectFail(mBluetoothDevice,
-				"BluetothSocket is null.");
+						"BluetothSocket is null.");
 				mInitOk = false;
 			}
+
 			mmInStream = tmpIn;
 			mmOutStream = tmpOut;
 		}
@@ -317,7 +320,7 @@ public class R900Manager
 		{
 			return mInitOk;
 		}
-		
+
 		public void run()
 		{
 			byte[] buffer = new byte[1024];
@@ -337,16 +340,13 @@ public class R900Manager
 
 					// if( mBtEventListener != null )
 					// mBtEventListener.onBtDataRecv(buffer, bytes);
-					mHandlerNoti
-							.sendEmptyMessage(BluetoothManager.MSG_BT_DATA_RECV);
+
+					mHandlerNoti.sendEmptyMessage(BluetoothActivity.MSG_BT_DATA_RECV);
 				}
 				catch( IOException e )
 				{
 					if( mBtEventListener != null )
-						mBtEventListener.onBtDataTransException(
-								mBluetoothDevice,
-								"[Bluetooth Socket] Read Fail : "
-										+ e.getMessage());
+						mBtEventListener.onBtDisconnected(mBluetoothDevice);
 					break;
 				}
 			}
@@ -358,6 +358,7 @@ public class R900Manager
 			try
 			{
 				mmOutStream.write(bytes);
+
 				if( mBtEventListener != null )
 					mBtEventListener.onBtDataSent(bytes);
 			}
@@ -390,7 +391,7 @@ public class R900Manager
 	{
 		if( mConnectedThread != null )
 		{
-			//Log.d(BluetoothManager.TAG, "Send : " + new String(bytes));
+			Log.d(BluetoothActivity.TAG, "Send : " + new String(bytes));
 			mConnectedThread.write(bytes);
 		}
 		else

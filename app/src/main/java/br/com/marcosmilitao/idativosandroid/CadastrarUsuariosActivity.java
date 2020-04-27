@@ -48,12 +48,14 @@ import br.com.marcosmilitao.idativosandroid.helper.TimeoutException;
 import br.com.marcosmilitao.idativosandroid.helper.Utility;
 import br.com.marcosmilitao.idativosandroid.helper.VH73Device;
 
+import com.dotel.libr900.BluetoothActivity;
 import com.dotel.libr900.BluetoothManager;
 import com.dotel.libr900.OnBtEventListener;
 import com.dotel.libr900.R900Protocol;
 import com.dotel.libr900.R900RecvPacketParser;
+import com.dotel.rfid.LogfileMng;
 
-public class CadastrarUsuariosActivity extends AppCompatActivity implements OnBtEventListener {
+public class CadastrarUsuariosActivity extends BluetoothActivity implements OnBtEventListener {
 
     private ApplicationDB dbInstance;
     private BluetoothAdapter BA;
@@ -107,7 +109,12 @@ public class CadastrarUsuariosActivity extends AppCompatActivity implements OnBt
     private String modeloLeitor;
     public static final String key_modelo_leitor_rfid = "key_modelo_leitor_rfid";
     private String modelo_leitor_rfid_Default;
-    private BluetoothManager btManager;
+
+    private static final int[] TX_DUTY_OFF =
+            { 10, 40, 80, 100, 160, 180 };
+
+    private static final int[] TX_DUTY_ON =
+            { 190, 160, 70, 40, 20 };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -115,8 +122,6 @@ public class CadastrarUsuariosActivity extends AppCompatActivity implements OnBt
         setContentView(R.layout.activity_cadastrar_usuarios);
 
         modelo_leitor_rfid_Default = this.getResources().getString(R.string.modelo_leitor_default);
-
-        btManager = new BluetoothManager();
 
         connectionBTThread = new HandlerThread("ConnectionBTThread");
         connectionBTThread.start();
@@ -180,7 +185,7 @@ public class CadastrarUsuariosActivity extends AppCompatActivity implements OnBt
             @Override
             public void onClick(View view)
             {
-                if (CadastrarUsuariosActivity.currentDevice != null)
+                if (mConnectedDevice != null)
                 {
                     if (reading == false)
                     {
@@ -252,7 +257,7 @@ public class CadastrarUsuariosActivity extends AppCompatActivity implements OnBt
         //Se activity vier como intent de outra activity, usa-se o tagid para já incluir na lista e seleciona-lo
         PreencherListaTAGID(extra_tagid);
 
-        btManager.setOnBtEventListener(this);
+        setOnBtEventListener(this);
     }
 
     @Override
@@ -264,12 +269,12 @@ public class CadastrarUsuariosActivity extends AppCompatActivity implements OnBt
     @Override
     protected void onResume()
     {
-        super.onResume();
-
         //Obtendo o modelo preferencial
         modeloLeitor = LeitorPreferencial();
 
         ConectarDispositivoBT(modeloLeitor);
+
+        super.onResume();
     }
 
     @Override
@@ -327,6 +332,8 @@ public class CadastrarUsuariosActivity extends AppCompatActivity implements OnBt
 
     private void CloseAct()
     {
+        mConnectedDevice = null;
+
         BA.disable();
         BA.enable();
         this.finish();
@@ -373,27 +380,21 @@ public class CadastrarUsuariosActivity extends AppCompatActivity implements OnBt
         pairedDevices = BA.getBondedDevices();
         for (BluetoothDevice bluetoothDevice : pairedDevices)
         {
-            connectionBTHandler.post(new Runnable() {
-                @Override
-                public void run() {
+            switch (modeloLeitor)
+            {
+                case "Vanch_VH75":
 
-                    switch (modeloLeitor)
-                    {
-                        case "Vanch_VH75":
+                    ConectarVANCH75(bluetoothDevice);
+                    break;
 
-                            ConectarVANCH75(bluetoothDevice);
-                            break;
+                case "DOTR_900":
 
-                        case "DOTR_900":
+                    ConectarDOTR900(bluetoothDevice);
+                    break;
 
-                            ConectarDOTR900(bluetoothDevice);
-                            break;
-
-                        default:
-                            break;
-                    }
-                }
-            });
+                default:
+                    break;
+            }
         }
     }
 
@@ -417,7 +418,7 @@ public class CadastrarUsuariosActivity extends AppCompatActivity implements OnBt
 
             case "DOTR_900":
                 reading = false;
-                btManager.sendCmdInventory();
+                sendCmdStop();
                 break;
 
             default:
@@ -685,41 +686,50 @@ public class CadastrarUsuariosActivity extends AppCompatActivity implements OnBt
 
     private void ConectarVANCH75(BluetoothDevice bluetoothDevice)
     {
-        VH73Device vh75Device = new VH73Device(CadastrarUsuariosActivity.this, bluetoothDevice);
+        connectionBTHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                VH73Device vh75Device = new VH73Device(CadastrarUsuariosActivity.this, bluetoothDevice);
 
-        boolean succ = vh75Device.connect();
+                boolean succ = vh75Device.connect();
 
-        if (succ) {
-            CadastrarUsuariosActivity.currentDevice = vh75Device;
-            mainHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(CadastrarUsuariosActivity.this, "Conectado!", Toast.LENGTH_SHORT).show();
+                if (succ) {
+
+                    CadastrarUsuariosActivity.currentDevice = vh75Device;
+                    mConnectedDevice = bluetoothDevice;
+
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(CadastrarUsuariosActivity.this, "Conectado!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(CadastrarUsuariosActivity.this, "Leitor não conectado. Tente novamente!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
-            });
-        } else {
-            mainHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(CadastrarUsuariosActivity.this, "Leitor não conectado. Tente novamente!", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
+            }
+        });
     }
 
     private void StartReadingDOTR900()
     {
-        btManager.setOpMode(true, false, 1000, false);
-        btManager.sendCmdInventory();
+        sendInventParam(1, 5, 0);
+        setOpMode(false, false, 0, false);
+        sendCmdInventory();
     }
 
     private void ConectarDOTR900(BluetoothDevice bluetoothDevice)
     {
-        if (btManager.mConnected == false)
+        if (mConnectedDevice == null)
         {
-            if (btManager.mR900Manager.isTryingConnect() == false)
+            if (mR900Manager.isTryingConnect() == false)
             {
-                btManager.mR900Manager.connectToBluetoothDevice(bluetoothDevice, btManager.MY_UUID);
+                mR900Manager.connectToBluetoothDevice(bluetoothDevice, MY_UUID);
             }
         }
     }
@@ -736,26 +746,42 @@ public class CadastrarUsuariosActivity extends AppCompatActivity implements OnBt
         mainHandler.post(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(CadastrarUsuariosActivity.this, "Conectado!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CadastrarUsuariosActivity.this, "Leitor conectado!", Toast.LENGTH_SHORT).show();
             }
         });
+
+        sendCmdOpenInterface1();
+
+        sendSettingTxCycle(TX_DUTY_ON[0], TX_DUTY_OFF[0]);
+
+        this.sleep(1000);
     }
 
     public void onBtDisconnected(BluetoothDevice device)
-    {}
+    {
+        mConnectedDevice = null;
+
+        mainHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(CadastrarUsuariosActivity.this, "Leitor desconectado!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     public void onBtConnectFail(BluetoothDevice device, String msg)
     {
         mainHandler.post(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(CadastrarUsuariosActivity.this, "Leitor não conectado. Tente novamente!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CadastrarUsuariosActivity.this, "Não foi possível conectar ao leitor. Tente novamente!", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     public void onBtDataSent(byte[] data)
-    {}
+    {
+    }
 
     public void onBtDataTransException(BluetoothDevice device, String msg)
     {
@@ -769,26 +795,21 @@ public class CadastrarUsuariosActivity extends AppCompatActivity implements OnBt
 
     public void onNotifyBtDataRecv()
     {
-        if( btManager.mR900Manager == null )
+        if( mR900Manager == null )
             return;
 
-        R900RecvPacketParser packetParser = btManager.mR900Manager.getRecvPacketParser();
+        R900RecvPacketParser packetParser = mR900Manager.getRecvPacketParser();
 
         while( true )
         {
             final String parameter = packetParser.popPacket();
 
-            if( btManager.mConnected == false )
+            if( mConnectedDevice == null )
                 break;
 
-            if( parameter != null && parameter.length() > 4 && btManager.mLastCmd != null )
+            if( parameter != null )
             {
-                if (btManager.mLastCmd.equalsIgnoreCase(R900Protocol.CMD_INVENT))
-                {
-                    final String tagid = "H" + parameter.substring(0, parameter.length() - 4);
-
-                    AtualizarListView(tagid, false);
-                }
+                processPacket(parameter);
             }
             else
                 break;
@@ -797,4 +818,44 @@ public class CadastrarUsuariosActivity extends AppCompatActivity implements OnBt
 
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
     {}
+
+    private synchronized void processPacket(final String param){
+        if (param == null || param.length() <= 0)
+            return;
+
+        final String CMD = param.toLowerCase();
+
+        if ( CMD.indexOf("^") == 0 || CMD.indexOf("$") == 0
+                || CMD.indexOf("ok") == 0 || CMD.indexOf("err") == 0
+                || CMD.indexOf("end") == 0 )
+        {
+            if (CMD.indexOf("$trigger=1") == 0){
+                StartReading();
+            }
+            else if (CMD.indexOf("$trigger=0") == 0){
+                StopReading();
+            }
+        }
+        else
+        {
+            if (mLastCmd == null)
+                return;
+
+            if (mLastCmd.equalsIgnoreCase(R900Protocol.CMD_INVENT))
+            {
+                if(param == null || param.length() <= 4)
+                    return;
+
+                final String tagid = "H" + param.substring(4, param.length() - 4);
+
+                AtualizarListView(tagid.toUpperCase(), false);
+            }
+        }
+    }
+
+    public void sleep(int time){
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException e) { }
+    }
 }

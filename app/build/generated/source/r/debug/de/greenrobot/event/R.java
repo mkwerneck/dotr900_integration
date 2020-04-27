@@ -1410,13 +1410,13 @@ public final class R {
         public static final int title_view = 0x7f0a031c;
         public static final int toolbar = 0x7f0a031d;
         public static final int topPanel = 0x7f0a0320;
-        public static final int uniform = 0x7f0a0361;
-        public static final int up = 0x7f0a0362;
-        public static final int url = 0x7f0a0363;
-        public static final int volume_item_container = 0x7f0a0369;
-        public static final int wide = 0x7f0a0380;
-        public static final int wrap = 0x7f0a0383;
-        public static final int wrap_content = 0x7f0a0384;
+        public static final int uniform = 0x7f0a0362;
+        public static final int up = 0x7f0a0363;
+        public static final int url = 0x7f0a0364;
+        public static final int volume_item_container = 0x7f0a036a;
+        public static final int wide = 0x7f0a0381;
+        public static final int wrap = 0x7f0a0384;
+        public static final int wrap_content = 0x7f0a0385;
     }
     public static final class integer {
         public static final int abc_config_activityDefaultDur = 0x7f0b0000;
