@@ -51,6 +51,8 @@ public class CadastroMateriais {
 
     private boolean EmUso;
 
+    private String Status;
+
     public boolean isEmUso() {
         return EmUso;
     }
@@ -194,5 +196,13 @@ public class CadastroMateriais {
 
     public void setRowVersion(String rowVersion) {
         RowVersion = rowVersion;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
     }
 }

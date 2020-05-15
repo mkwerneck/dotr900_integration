@@ -42,7 +42,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Modelo"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                android:textColor="@color/green"/>
 
             <android.support.v7.widget.AppCompatAutoCompleteTextView
                 android:id="@+id/et_edfer_modelo"
@@ -62,7 +63,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Posição Original"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                android:textColor="@color/green"/>
 
             <android.support.v7.widget.AppCompatAutoCompleteTextView
                 android:id="@+id/et_edfer_posicao"
@@ -91,7 +93,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Nº Série"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:textColor="@color/green"/>
 
                 <EditText
                     android:id="@+id/et_edfer_numserie"
@@ -112,7 +115,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Patrimônio"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:textColor="@color/green"/>
 
                 <EditText
                     android:id="@+id/et_edfer_patrimonio"
@@ -143,7 +147,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Quantidade"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:textColor="@color/green"/>
 
                 <EditText
                     android:id="@+id/et_edfer_quantidade"
@@ -166,7 +171,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Valor Unitário"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:textColor="@color/green"/>
 
                 <com.blackcat.currencyedittext.CurrencyEditText
                     android:id="@+id/et_edfer_valorunitario"
@@ -198,7 +204,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Nota Fiscal"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:textColor="@color/green"/>
 
                 <EditText
                     android:id="@+id/et_edfer_notafiscal"
@@ -220,7 +227,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Entrada Nota Fiscal"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:textColor="@color/green"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -270,7 +278,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Data Validade"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:textColor="@color/green"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -310,7 +319,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Data Fabricação"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:textColor="@color/green"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -341,18 +351,37 @@
 
         </LinearLayout>
 
-        <!--<ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true"
-            android:layout_marginVertical="14dp">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginBottom="6dp">
 
-            <ListView
-                android:id="@+id/lv_cadfer_tagid"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_marginRight="8dp"
+                >
 
-        </ScrollView> -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Status"
+                    android:textSize="16sp"
+                    android:textColor="@color/green"/>
+
+                <Spinner
+                    android:id="@+id/et_edfer_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Informe o Status"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 

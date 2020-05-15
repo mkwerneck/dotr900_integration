@@ -15,4 +15,13 @@ public class Migrations {
             database.execSQL("ALTER TABLE Usuarios ADD COLUMN Matricula TEXT");
         }
     };
+
+    //Adicionado em 15/05/2020
+    public static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE CadastroMateriais ADD COLUMN Status TEXT");
+            database.execSQL("ALTER TABLE UPMOBCadastroMateriais ADD COLUMN Status TEXT");
+        }
+    };
 }

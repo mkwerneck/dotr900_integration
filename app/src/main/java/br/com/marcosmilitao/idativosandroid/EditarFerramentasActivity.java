@@ -14,6 +14,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.blackcat.currencyedittext.CurrencyEditText;
@@ -23,6 +25,7 @@ import com.github.jjobes.slidedatetimepicker.SlideDateTimePicker;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -47,14 +50,18 @@ public class EditarFerramentasActivity extends AppCompatActivity {
     private CustomAdapterModeloMateriais modeloMateriaisAdapter;
     private CustomAdapterPosicoes posicoesAdapter;
     private CustomAdapterCadastrarTagid listViewAdapter;
+    private ArrayAdapter<String> statusAdapter;
 
     private ArrayList<ModeloMateriaisCF> modeloMateriaisArrayList;
     private ArrayList<PosicaoCF> posicoesArrayList;
+    private ArrayList<String> statusArrayList;
 
     private AppCompatAutoCompleteTextView et_edfer_modelo, et_edfer_posicao;
 
     private TextView et_edfer_numserie, et_edfer_patrimonio, et_edfer_quantidade, et_edfer_notafiscal;
     private TextView tvsp_edfer_dtnotafiscal, tvsp_edfer_dtvalidade, tvsp_edfer_dtfabricacao;
+
+    private Spinner et_edfer_status;
 
     private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -91,6 +98,7 @@ public class EditarFerramentasActivity extends AppCompatActivity {
 
         FillAdapterModeloMateriais();
         FillAdapterPosicoes();
+        FillAdapterStatus();
 
         //determinando os listeners dos datepickers
         slideListenernf = new SlideDateTimeListener(){
@@ -237,6 +245,9 @@ public class EditarFerramentasActivity extends AppCompatActivity {
             case R.id.action_salvar_ef:
                 Salvar();
                 return true;
+            case R.id.action_sync_ef:
+                ESync.GetSyncInstance().SyncDatabase(EditarFerramentasActivity.this);
+                return true;
             default:
                 return false;
         }
@@ -303,6 +314,17 @@ public class EditarFerramentasActivity extends AppCompatActivity {
         }).start();
     }
 
+    private void FillAdapterStatus()
+    {
+        List<String> status = Arrays.asList(new String[]{"Disponível", "Fora de Uso"});
+
+        statusArrayList = new ArrayList<String>(status);
+        statusAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, statusArrayList );
+
+        et_edfer_status = (Spinner) findViewById(R.id.et_edfer_status);
+        et_edfer_status.setAdapter(statusAdapter);
+    }
+
     private void PreencherDados()
     {
         new Thread(new Runnable() {
@@ -351,7 +373,10 @@ public class EditarFerramentasActivity extends AppCompatActivity {
             showMessage("AVISO", "Informe a Posição Original da Ferramenta", 3);
 
         } else if(modeloSelected == null) {
-            showMessage("AVISO", "Informe o Modelo da Ferramenta", 3);
+             showMessage("AVISO", "Informe o Modelo da Ferramenta", 3);
+
+         }else if(et_edfer_status.getSelectedItem() == null) {
+                 showMessage("AVISO", "Informe o Status da Ferramenta", 3);
 
         } else if(et_edfer_notafiscal.getText().toString() == null || et_edfer_notafiscal.getText().toString().equals("0") || et_edfer_notafiscal.getText().toString().equals("")){
             showMessage("AVISO", "Informe a Nota Fiscal da Ferramenta", 3);
@@ -413,6 +438,7 @@ public class EditarFerramentasActivity extends AppCompatActivity {
                     upmobCadastroMateriais.setDataValidade(dataValidade);
                     upmobCadastroMateriais.setDataEntradaNotaFiscal(dataEntradaNF);
                     upmobCadastroMateriais.setDataFabricacao(dataFabricacao);
+                    upmobCadastroMateriais.setStatus(et_edfer_status.getSelectedItem().toString());
 
                     dbInstance.upmobCadastroMateriaisDAO().Create(upmobCadastroMateriais);
 

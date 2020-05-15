@@ -154,7 +154,7 @@ public class ESync {
                                 //region UPMOBCADASTRO MATERIAIS
                                 for (UPMOBCadastroMateriais upmobCadastroMateriais : dbInstance.upmobCadastroMateriaisDAO().GetAllRecords())
                                 {
-                                    try(PreparedStatement pstmt = DbConn.prepareStatement("INSERT INTO UPMOBCadastroMateriais VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");)
+                                    try(PreparedStatement pstmt = DbConn.prepareStatement("INSERT INTO UPMOBCadastroMateriais VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");)
                                     {
                                         pstmt.setInt(1, upmobCadastroMateriais.getIdOriginal());
                                         pstmt.setString(2, upmobCadastroMateriais.getNumSerie());
@@ -175,6 +175,7 @@ public class ESync {
                                         pstmt.setBoolean(17, upmobCadastroMateriais.getFlagAtualizar());
                                         pstmt.setBoolean(18, upmobCadastroMateriais.getFlagProcess());
                                         pstmt.setString(19, upmobCadastroMateriais.getCodColetor());
+                                        pstmt.setString(20, upmobCadastroMateriais.getStatus());
 
                                         pstmt.execute();
 
@@ -586,7 +587,7 @@ public class ESync {
 
                                 //region CADASTRO MATERIAIS
                                 String rv_CadastroMateriais = dbInstance.cadastroMateriaisDAO().GetLastRowVersion() != null ? dbInstance.cadastroMateriaisDAO().GetLastRowVersion() : "0";
-                                try (ResultSet rs = stmt.executeQuery("SELECT ct.Categoria as ctcategoria, c.DadosTecnicos as cdadostecnicos, c.DataCadastro as cdatacadastro, c.DataEntradaNotaFiscal as cdatanotafiscal, c.DataFabricacao as cdatafabricacao, c.DataValidade as cdatavalidade, c.Id as cid, c.ModeloMateriaisItemId as cmodeloid, c.NotaFiscal as cnotafiscal, c.NumSerie as cnumserie, c.Patrimonio as cpatrimonio, c.PosicaoOriginalItemId as cposicaoid, c.Quantidade as cquantidade, c.RowVersion as crowversion, t.TAGID as ttagid, c.ValorUnitario as cvalorunitario, c.EmUso as cemuso " +
+                                try (ResultSet rs = stmt.executeQuery("SELECT ct.Categoria as ctcategoria, c.DadosTecnicos as cdadostecnicos, c.DataCadastro as cdatacadastro, c.DataEntradaNotaFiscal as cdatanotafiscal, c.DataFabricacao as cdatafabricacao, c.DataValidade as cdatavalidade, c.Id as cid, c.ModeloMateriaisItemId as cmodeloid, c.NotaFiscal as cnotafiscal, c.NumSerie as cnumserie, c.Patrimonio as cpatrimonio, c.PosicaoOriginalItemId as cposicaoid, c.Quantidade as cquantidade, c.RowVersion as crowversion, t.TAGID as ttagid, c.ValorUnitario as cvalorunitario, c.EmUso as cemuso, c.Status as cstatus " +
                                         "FROM CadastroMateriais as c INNER JOIN CategoriasMateriais as ct ON c.CategoriaMateriaisItemId = ct.Id INNER JOIN TAGIDMaterial as t ON c.TAGIDMaterialItemId = t.Id " +
                                         "WHERE c.RowVersion > " + rv_CadastroMateriais);)
                                 {
@@ -613,6 +614,7 @@ public class ESync {
                                             cadastroMateriais.setTAGID(rs.getString("ttagid"));
                                             cadastroMateriais.setValorUnitario(rs.getFloat("cvalorunitario"));
                                             cadastroMateriais.setEmUso(rs.getBoolean("cemuso"));
+                                            cadastroMateriais.setStatus(rs.getString("cstatus"));
 
                                             dbInstance.cadastroMateriaisDAO().Create(cadastroMateriais);
                                         }
@@ -634,6 +636,7 @@ public class ESync {
                                             cadastroMateriais.setRowVersion("0x" + rs.getString("crowversion"));
                                             cadastroMateriais.setTAGID(rs.getString("ttagid"));
                                             cadastroMateriais.setValorUnitario(rs.getFloat("cvalorunitario"));
+                                            cadastroMateriais.setStatus(rs.getString("cstatus"));
 
                                             dbInstance.cadastroMateriaisDAO().Update(cadastroMateriais);
                                         }

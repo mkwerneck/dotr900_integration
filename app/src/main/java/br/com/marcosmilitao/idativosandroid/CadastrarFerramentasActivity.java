@@ -47,6 +47,7 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -57,6 +58,7 @@ import javax.annotation.Nullable;
 import br.com.marcosmilitao.idativosandroid.CustomAdapters.CustomAdapterCadastrarTagid;
 import br.com.marcosmilitao.idativosandroid.CustomAdapters.CustomAdapterModeloMateriais;
 import br.com.marcosmilitao.idativosandroid.CustomAdapters.CustomAdapterPosicoes;
+import br.com.marcosmilitao.idativosandroid.CustomAdapters.CustomAdapterSpinnerFuncoes;
 import br.com.marcosmilitao.idativosandroid.DBUtils.ApplicationDB;
 import br.com.marcosmilitao.idativosandroid.DBUtils.ESync;
 import br.com.marcosmilitao.idativosandroid.DBUtils.Models.CadastroEquipamentos;
@@ -65,6 +67,7 @@ import br.com.marcosmilitao.idativosandroid.DBUtils.Models.Posicoes;
 import br.com.marcosmilitao.idativosandroid.DBUtils.Models.UPMOBCadastroMateriais;
 import br.com.marcosmilitao.idativosandroid.DBUtils.Models.Usuarios;
 import br.com.marcosmilitao.idativosandroid.POJO.CadastrarTagid;
+import br.com.marcosmilitao.idativosandroid.POJO.FuncoesCU;
 import br.com.marcosmilitao.idativosandroid.POJO.ModeloMateriaisCF;
 import br.com.marcosmilitao.idativosandroid.POJO.PosicaoCF;
 import br.com.marcosmilitao.idativosandroid.helper.ConfigUI;
@@ -84,11 +87,15 @@ public class CadastrarFerramentasActivity extends BluetoothActivity implements O
     private CustomAdapterModeloMateriais modeloMateriaisAdapter;
     private CustomAdapterPosicoes posicoesAdapter;
     private CustomAdapterCadastrarTagid listViewAdapter;
+    private ArrayAdapter<String> statusAdapter;
 
     private ArrayList<ModeloMateriaisCF> modeloMateriaisArrayList;
     private ArrayList<PosicaoCF> posicoesArrayList;
     private ArrayList<CadastrarTagid> listViewArrayList;
+    private ArrayList<String> statusArrayList;
     private List<String> tagsLidosArrayList;
+
+    private Spinner et_cadfer_status;
 
     private AppCompatAutoCompleteTextView et_cadfer_modelo, et_cadfer_posicao;
 
@@ -211,6 +218,7 @@ public class CadastrarFerramentasActivity extends BluetoothActivity implements O
 
         FillAdapterModeloMateriais();
         FillAdapterPosicoes();
+        FillAdapterStatus();
         //FillListViewTeste();
 
         //determinando os listeners dos datepickers
@@ -450,6 +458,17 @@ public class CadastrarFerramentasActivity extends BluetoothActivity implements O
                 });
             }
         }).start();
+    }
+
+    private void FillAdapterStatus()
+    {
+        List<String> status = Arrays.asList(new String[]{"Disponível", "Fora de Uso"});
+
+        statusArrayList = new ArrayList<String>(status);
+        statusAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, statusArrayList );
+
+        et_cadfer_status = (Spinner) findViewById(R.id.et_cadfer_status);
+        et_cadfer_status.setAdapter(statusAdapter);
     }
 
     private void FillAdapterPosicoes()
@@ -800,6 +819,9 @@ public class CadastrarFerramentasActivity extends BluetoothActivity implements O
         } else if(posicaoSelected == null) {
             showMessage("AVISO", "Informe a Posição Original da Ferramenta", 3);
 
+        } else if(et_cadfer_status.getSelectedItem() == null) {
+            showMessage("AVISO", "Informe o Status da Ferramenta", 3);
+
         } else if(modeloSelected == null) {
             showMessage("AVISO", "Informe o Modelo da Ferramenta", 3);
 
@@ -868,6 +890,7 @@ public class CadastrarFerramentasActivity extends BluetoothActivity implements O
                     upmobCadastroMateriais.setDataValidade(dataValidade);
                     upmobCadastroMateriais.setDataEntradaNotaFiscal(dataEntradaNF);
                     upmobCadastroMateriais.setDataFabricacao(dataFabricacao);
+                    upmobCadastroMateriais.setStatus(et_cadfer_status.getSelectedItem().toString());
 
                     dbInstance.upmobCadastroMateriaisDAO().Create(upmobCadastroMateriais);
 

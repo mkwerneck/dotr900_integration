@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BluetoothLeGatt/BluetoothLeGatt.iml" filepath="$PROJECT_DIR$/BluetoothLeGatt/BluetoothLeGatt.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Dotr900/Dotr900.iml" filepath="$PROJECT_DIR$/Dotr900/Dotr900.iml" />
-      <module fileurl="file://$PROJECT_DIR$/EventBus/EventBus.iml" filepath="$PROJECT_DIR$/EventBus/EventBus.iml" />
-      <module fileurl="file://$PROJECT_DIR$/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO.iml" filepath="$PROJECT_DIR$/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/slideDateTimePicker/slideDateTimePicker.iml" filepath="$PROJECT_DIR$/slideDateTimePicker/slideDateTimePicker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BluetoothLeGatt/BluetoothLeGatt.iml" filepath="$PROJECT_DIR$/BluetoothLeGatt/BluetoothLeGatt.iml" group="IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/BluetoothLeGatt" />
+      <module fileurl="file://$PROJECT_DIR$/Dotr900/Dotr900.iml" filepath="$PROJECT_DIR$/Dotr900/Dotr900.iml" group="IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/Dotr900" />
+      <module fileurl="file://$PROJECT_DIR$/EventBus/EventBus.iml" filepath="$PROJECT_DIR$/EventBus/EventBus.iml" group="IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/EventBus" />
+      <module fileurl="file://$PROJECT_DIR$/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO.iml" filepath="$PROJECT_DIR$/IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO.iml" group="IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/app" />
+      <module fileurl="file://$PROJECT_DIR$/slideDateTimePicker/slideDateTimePicker.iml" filepath="$PROJECT_DIR$/slideDateTimePicker/slideDateTimePicker.iml" group="IDAtivosAndroid_1.9.1.03 DESENVOLVIMENTO/slideDateTimePicker" />
     </modules>
   </component>
 </project>

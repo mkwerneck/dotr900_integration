@@ -34,6 +34,7 @@ public class UPMOBCadastroMateriais {
     private Boolean FlagAtualizar;
     private Boolean FlagProcess;
     private int ModeloMateriaisItemId;
+    private String Status;
 
     public int getId() {
         return Id;
@@ -195,4 +196,11 @@ public class UPMOBCadastroMateriais {
         ModeloMateriaisItemId = modeloMateriaisItemId;
     }
 
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
+    }
 }
