@@ -17,6 +17,8 @@ public class InventarioPlanejado {
 
     private String ApplicationUserItemIdOriginal;
 
+    private boolean EmUso;
+
     public int getId() {
         return Id;
     }
@@ -55,5 +57,13 @@ public class InventarioPlanejado {
 
     public void setApplicationUserItemIdOriginal(String applicationUserItemIdOriginal) {
         ApplicationUserItemIdOriginal = applicationUserItemIdOriginal;
+    }
+
+    public boolean isEmUso() {
+        return EmUso;
+    }
+
+    public void setEmUso(boolean emUso) {
+        EmUso = emUso;
     }
 }

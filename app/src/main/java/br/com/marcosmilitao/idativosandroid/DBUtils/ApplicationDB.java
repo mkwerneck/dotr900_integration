@@ -88,7 +88,7 @@ import br.com.marcosmilitao.idativosandroid.DBUtils.Models.Usuarios;
         UPMOBHistoricoLocalizacao.class,
         UPMOBCadastroMateriaisItens.class,
         UPMOBCadastroMateriais.class,
-        UPMOBDescartes.class}, version = 3)
+        UPMOBDescartes.class}, version = 4)
 
 public abstract class ApplicationDB extends RoomDatabase {
 

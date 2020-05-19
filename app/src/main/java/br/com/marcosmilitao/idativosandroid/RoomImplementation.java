@@ -27,6 +27,7 @@ public class RoomImplementation extends Application {
         dbInstance = Room.databaseBuilder(getApplicationContext(), ApplicationDB.class, "ApplicationDB")
                 .addMigrations(Migrations.MIGRATION_1_2)
                 .addMigrations(Migrations.MIGRATION_2_3)
+                .addMigrations(Migrations.MIGRATION_3_4)
                 .build();
     }
 

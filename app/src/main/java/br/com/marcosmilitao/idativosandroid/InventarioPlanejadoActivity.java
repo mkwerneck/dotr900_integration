@@ -592,7 +592,7 @@ public class InventarioPlanejadoActivity extends BluetoothActivity implements On
         new Thread(new Runnable() {
             @Override
             public void run() {
-                List<InvPlanejado> inventarioPlanejadoList = dbInstance.inventarioPlanejadoDAO().GetSpinnerItens();
+                List<InvPlanejado> inventarioPlanejadoList = dbInstance.inventarioPlanejadoDAO().GetSpinnerItens(true);
 
                 inventarioArrayList = new ArrayList<InvPlanejado>(inventarioPlanejadoList);
                 inventarioAdapter = new CustomAdapterSpinnerInvPlan(InventarioPlanejadoActivity.this, inventarioArrayList);

@@ -587,8 +587,9 @@ public class ESync {
 
                                 //region CADASTRO MATERIAIS
                                 String rv_CadastroMateriais = dbInstance.cadastroMateriaisDAO().GetLastRowVersion() != null ? dbInstance.cadastroMateriaisDAO().GetLastRowVersion() : "0";
-                                try (ResultSet rs = stmt.executeQuery("SELECT ct.Categoria as ctcategoria, c.DadosTecnicos as cdadostecnicos, c.DataCadastro as cdatacadastro, c.DataEntradaNotaFiscal as cdatanotafiscal, c.DataFabricacao as cdatafabricacao, c.DataValidade as cdatavalidade, c.Id as cid, c.ModeloMateriaisItemId as cmodeloid, c.NotaFiscal as cnotafiscal, c.NumSerie as cnumserie, c.Patrimonio as cpatrimonio, c.PosicaoOriginalItemId as cposicaoid, c.Quantidade as cquantidade, c.RowVersion as crowversion, t.TAGID as ttagid, c.ValorUnitario as cvalorunitario, c.EmUso as cemuso, c.Status as cstatus " +
-                                        "FROM CadastroMateriais as c INNER JOIN CategoriasMateriais as ct ON c.CategoriaMateriaisItemId = ct.Id INNER JOIN TAGIDMaterial as t ON c.TAGIDMaterialItemId = t.Id " +
+                                try (ResultSet rs = stmt.executeQuery("SELECT c.DadosTecnicos as cdadostecnicos, c.DataCadastro as cdatacadastro, c.DataEntradaNotaFiscal as cdatanotafiscal, c.DataFabricacao as cdatafabricacao, c.DataValidade as cdatavalidade, c.Id as cid, c.ModeloMateriaisItemId as cmodeloid, c.NotaFiscal as cnotafiscal, c.NumSerie as cnumserie, c.Patrimonio as cpatrimonio, c.PosicaoOriginalItemId as cposicaoid, c.Quantidade as cquantidade, c.RowVersion as crowversion, t.TAGID as ttagid, c.ValorUnitario as cvalorunitario, c.EmUso as cemuso, c.Status as cstatus " +
+                                        "FROM CadastroMateriais as c " +
+                                        "INNER JOIN TAGIDMaterial as t ON c.TAGIDMaterialItemId = t.Id " +
                                         "WHERE c.RowVersion > " + rv_CadastroMateriais);)
                                 {
                                     while(rs.next()){
@@ -597,7 +598,7 @@ public class ESync {
                                         if (cadastroMateriais == null)
                                         {
                                             cadastroMateriais = new CadastroMateriais();
-                                            cadastroMateriais.setCategoria(rs.getString("ctcategoria"));
+                                            cadastroMateriais.setCategoria("");
                                             cadastroMateriais.setDadosTecnicos(rs.getString("cdadostecnicos"));
                                             cadastroMateriais.setDataCadastro(rs.getTimestamp("cdatacadastro") != null ? new java.util.Date(rs.getTimestamp("cdatacadastro").getTime()) : null);
                                             cadastroMateriais.setDataEntradaNotaFiscal(rs.getTimestamp("cdatanotafiscal") != null ? new java.util.Date(rs.getTimestamp("cdatanotafiscal").getTime()) : null);
@@ -620,7 +621,7 @@ public class ESync {
                                         }
                                         else
                                         {
-                                            cadastroMateriais.setCategoria(rs.getString("ctcategoria"));
+                                            cadastroMateriais.setCategoria("");
                                             cadastroMateriais.setDadosTecnicos(rs.getString("cdadostecnicos"));
                                             cadastroMateriais.setDataCadastro(rs.getTimestamp("cdatacadastro") != null ? new java.util.Date(rs.getTimestamp("cdatacadastro").getTime()) : null);
                                             cadastroMateriais.setDataEntradaNotaFiscal(rs.getTimestamp("cdatanotafiscal") != null ? new java.util.Date(rs.getTimestamp("cdatanotafiscal").getTime()) : null);
@@ -1086,7 +1087,7 @@ public class ESync {
 
                                 //region INVENTARIO PLANEJADO
                                 String rv_InvPlan = dbInstance.inventarioPlanejadoDAO().GetLastRowVersion() != null ? dbInstance.inventarioPlanejadoDAO().GetLastRowVersion() : "0";
-                                try(ResultSet rs = stmt.executeQuery("SELECT Descricao, Id, RowVersion, ApplicationUserItemId " +
+                                try(ResultSet rs = stmt.executeQuery("SELECT Descricao, Id, RowVersion, ApplicationUserItemId, EmUso " +
                                         "FROM InventarioPlanejados " +
                                         "WHERE RowVersion >" + rv_InvPlan);)
                                 {
@@ -1101,6 +1102,7 @@ public class ESync {
                                             inventarioPlanejado.setIdOriginal(rs.getInt("Id"));
                                             inventarioPlanejado.setApplicationUserItemIdOriginal(rs.getString("ApplicationUserItemId"));
                                             inventarioPlanejado.setRowVersion("0x" + rs.getString("RowVersion"));
+                                            inventarioPlanejado.setEmUso(rs.getBoolean("EmUso"));
 
                                             dbInstance.inventarioPlanejadoDAO().Create(inventarioPlanejado);
                                         } else
@@ -1109,6 +1111,7 @@ public class ESync {
                                             inventarioPlanejado.setIdOriginal(rs.getInt("Id"));
                                             inventarioPlanejado.setApplicationUserItemIdOriginal(rs.getString("ApplicationUserItemId"));
                                             inventarioPlanejado.setRowVersion("0x" + rs.getString("RowVersion"));
+                                            inventarioPlanejado.setEmUso(rs.getBoolean("EmUso"));
 
                                             dbInstance.inventarioPlanejadoDAO().Update(inventarioPlanejado);
                                         }

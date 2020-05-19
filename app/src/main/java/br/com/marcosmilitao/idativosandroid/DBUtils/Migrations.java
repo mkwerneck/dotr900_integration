@@ -24,4 +24,12 @@ public class Migrations {
             database.execSQL("ALTER TABLE UPMOBCadastroMateriais ADD COLUMN Status TEXT");
         }
     };
+
+    //Adicionado em 19/05/2020
+    public static final Migration MIGRATION_3_4 = new Migration(3, 4) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE InventarioPlanejado ADD COLUMN EmUso INTEGER DEFAULT 0 NOT NULL");
+        }
+    };
 }

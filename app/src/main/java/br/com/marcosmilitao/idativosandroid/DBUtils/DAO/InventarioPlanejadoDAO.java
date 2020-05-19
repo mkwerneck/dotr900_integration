@@ -35,6 +35,6 @@ public interface InventarioPlanejadoDAO {
     @Query("SELECT IdOriginal FROM InventarioPlanejado WHERE Descricao like :qryDescricao")
     Integer GetIdOriginalByDescricao(String qryDescricao);
 
-    @Query("SELECT IdOriginal, Descricao FROM InventarioPlanejado")
-    List<InvPlanejado> GetSpinnerItens();
+    @Query("SELECT IdOriginal, Descricao FROM InventarioPlanejado WHERE EmUso = :qryEmUso")
+    List<InvPlanejado> GetSpinnerItens(boolean qryEmUso);
 }
