@@ -250,42 +250,45 @@ public class ProcessosActivity extends AppCompatActivity {
 
                 Proprietarios proprietario = dbInstance.proprietariosDAO().GetByIdOriginal(dbInstance.parametrosPadraoDAO().GetBaseId());
 
-                //Obtendo a lista de processos da base específica
-                List<Processos> processosList = dbInstance.processosDAO().GetByStatus("Em Andamento", proprietario.getDescricao());
-
-                for(Processos processo : processosList)
+                if (proprietario != null)
                 {
-                    ListaTarefas listaTarefas = dbInstance.listaTarefasDAO().GetUltimaListaTarefaByCodProcesso(processo.getIdOriginal());
+                    //Obtendo a lista de processos da base específica
+                    List<Processos> processosList = dbInstance.processosDAO().GetByStatus("Em Andamento", proprietario.getDescricao());
 
-                    if (listaTarefas != null)
+                    for(Processos processo : processosList)
                     {
-                        CadastroEquipamentos cadastroEquipamentos = dbInstance.cadastroEquipamentosDAO().GetByIdOriginal(processo.getCadsatroEquipamentosItemIdOriginal());
-                        Tarefas tarefas = dbInstance.tarefasDAO().GetByIdOriginal(dbInstance.listaTarefasDAO().GetUltimaTarefaByCodProcesso(processo.getIdOriginal()));
+                        ListaTarefas listaTarefas = dbInstance.listaTarefasDAO().GetUltimaListaTarefaByCodProcesso(processo.getIdOriginal());
 
-                        if (!tarefas.getFlagSaidaAlmoxarifado())
+                        if (listaTarefas != null)
                         {
-                            ProcessosProc processoProc = new ProcessosProc();
-                            processoProc.setIdOriginal(processo.getIdOriginal());
-                            processoProc.setAtivo(cadastroEquipamentos.getTraceNumber());
-                            processoProc.setCodProcesso(Integer.toString(processo.getIdOriginal()));
-                            processoProc.setDataInicio(dateFormat.format(processo.getDataInicio()));
-                            processoProc.setStatus(processo.getStatus());
-                            processoProc.setEntradaAlmoxarifado(tarefas.getFlagEntradaAlmoxarifado());
-                            processoProc.setTarefa(tarefas.getDescricao());
+                            CadastroEquipamentos cadastroEquipamentos = dbInstance.cadastroEquipamentosDAO().GetByIdOriginal(processo.getCadsatroEquipamentosItemIdOriginal());
+                            Tarefas tarefas = dbInstance.tarefasDAO().GetByIdOriginal(dbInstance.listaTarefasDAO().GetUltimaTarefaByCodProcesso(processo.getIdOriginal()));
 
-                            listViewArrayList.add(processoProc);
+                            if (!tarefas.getFlagSaidaAlmoxarifado())
+                            {
+                                ProcessosProc processoProc = new ProcessosProc();
+                                processoProc.setIdOriginal(processo.getIdOriginal());
+                                processoProc.setAtivo(cadastroEquipamentos.getTraceNumber());
+                                processoProc.setCodProcesso(Integer.toString(processo.getIdOriginal()));
+                                processoProc.setDataInicio(dateFormat.format(processo.getDataInicio()));
+                                processoProc.setStatus(processo.getStatus());
+                                processoProc.setEntradaAlmoxarifado(tarefas.getFlagEntradaAlmoxarifado());
+                                processoProc.setTarefa(tarefas.getDescricao());
+
+                                listViewArrayList.add(processoProc);
+                            }
                         }
                     }
+
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            listViewAdapter.notifyDataSetChanged();
+
+                            tv_proc_quantidade.setText("TOTAL ENCONTRADO: " + listViewArrayList.size());
+                        }
+                    });
                 }
-
-                mainHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        listViewAdapter.notifyDataSetChanged();
-
-                        tv_proc_quantidade.setText("TOTAL ENCONTRADO: " + listViewArrayList.size());
-                    }
-                });
             }
         });
     }
@@ -305,45 +308,48 @@ public class ProcessosActivity extends AppCompatActivity {
 
                 Proprietarios proprietario = dbInstance.proprietariosDAO().GetByIdOriginal(dbInstance.parametrosPadraoDAO().GetBaseId());
 
-                List<Processos> processosList = dbInstance.processosDAO().GetSearchResult(stringQuery, intQuery,  "Em Andamento", proprietario.getDescricao());
-                ArrayList<ProcessosProc> listViewArrayList_temp = new ArrayList<ProcessosProc>();
-
-                for(Processos processo : processosList)
+                if (proprietario != null)
                 {
-                    ListaTarefas listaTarefas = dbInstance.listaTarefasDAO().GetUltimaListaTarefaByCodProcesso(processo.getIdOriginal());
+                    List<Processos> processosList = dbInstance.processosDAO().GetSearchResult(stringQuery, intQuery,  "Em Andamento", proprietario.getDescricao());
+                    ArrayList<ProcessosProc> listViewArrayList_temp = new ArrayList<ProcessosProc>();
 
-                    if (listaTarefas != null)
+                    for(Processos processo : processosList)
                     {
-                        CadastroEquipamentos cadastroEquipamentos = dbInstance.cadastroEquipamentosDAO().GetByIdOriginal(processo.getCadsatroEquipamentosItemIdOriginal());
-                        Tarefas tarefas = dbInstance.tarefasDAO().GetByIdOriginal(dbInstance.listaTarefasDAO().GetUltimaTarefaByCodProcesso(processo.getIdOriginal()));
+                        ListaTarefas listaTarefas = dbInstance.listaTarefasDAO().GetUltimaListaTarefaByCodProcesso(processo.getIdOriginal());
 
-                        if (!tarefas.getFlagSaidaAlmoxarifado())
+                        if (listaTarefas != null)
                         {
-                            ProcessosProc processoProc = new ProcessosProc();
-                            processoProc.setIdOriginal(processo.getIdOriginal());
-                            processoProc.setAtivo(cadastroEquipamentos.getTraceNumber());
-                            processoProc.setCodProcesso(Integer.toString(processo.getIdOriginal()));
-                            processoProc.setDataInicio(dateFormat.format(processo.getDataInicio()));
-                            processoProc.setStatus(processo.getStatus());
-                            processoProc.setEntradaAlmoxarifado(tarefas.getFlagEntradaAlmoxarifado());
-                            processoProc.setTarefa(tarefas.getDescricao());
+                            CadastroEquipamentos cadastroEquipamentos = dbInstance.cadastroEquipamentosDAO().GetByIdOriginal(processo.getCadsatroEquipamentosItemIdOriginal());
+                            Tarefas tarefas = dbInstance.tarefasDAO().GetByIdOriginal(dbInstance.listaTarefasDAO().GetUltimaTarefaByCodProcesso(processo.getIdOriginal()));
 
-                            listViewArrayList_temp.add(processoProc);
+                            if (!tarefas.getFlagSaidaAlmoxarifado())
+                            {
+                                ProcessosProc processoProc = new ProcessosProc();
+                                processoProc.setIdOriginal(processo.getIdOriginal());
+                                processoProc.setAtivo(cadastroEquipamentos.getTraceNumber());
+                                processoProc.setCodProcesso(Integer.toString(processo.getIdOriginal()));
+                                processoProc.setDataInicio(dateFormat.format(processo.getDataInicio()));
+                                processoProc.setStatus(processo.getStatus());
+                                processoProc.setEntradaAlmoxarifado(tarefas.getFlagEntradaAlmoxarifado());
+                                processoProc.setTarefa(tarefas.getDescricao());
+
+                                listViewArrayList_temp.add(processoProc);
+                            }
                         }
                     }
+
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            listViewArrayList.clear();
+                            listViewArrayList.addAll(listViewArrayList_temp);
+
+                            listViewAdapter.notifyDataSetChanged();
+
+                            tv_proc_quantidade.setText("TOTAL ENCONTRADO: " + listViewArrayList.size());
+                        }
+                    });
                 }
-
-                mainHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        listViewArrayList.clear();
-                        listViewArrayList.addAll(listViewArrayList_temp);
-
-                        listViewAdapter.notifyDataSetChanged();
-
-                        tv_proc_quantidade.setText("TOTAL ENCONTRADO: " + listViewArrayList.size());
-                    }
-                });
             }
         });
     }

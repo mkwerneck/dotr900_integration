@@ -53,8 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Modelo"
-                android:textSize="16sp"
-                android:textColor="@color/green"/>
+                android:textSize="16sp"/>
 
             <android.support.v7.widget.AppCompatAutoCompleteTextView
                 android:id="@+id/et_cadfer_modelo"
@@ -74,8 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Posição Original"
-                android:textSize="16sp"
-                android:textColor="@color/green"/>
+                android:textSize="16sp"/>
 
             <android.support.v7.widget.AppCompatAutoCompleteTextView
                 android:id="@+id/et_cadfer_posicao"
@@ -104,8 +102,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Nº Série"
-                    android:textSize="16sp"
-                    android:textColor="@color/green"/>
+                    android:textSize="16sp"/>
 
                 <EditText
                     android:id="@+id/et_cadfer_numserie"
@@ -126,8 +123,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Patrimônio"
-                    android:textSize="16sp"
-                    android:textColor="@color/green"/>
+                    android:textSize="16sp"/>
 
                 <EditText
                     android:id="@+id/et_cadfer_patrimonio"
@@ -158,8 +154,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Quantidade"
-                    android:textSize="16sp"
-                    android:textColor="@color/green"/>
+                    android:textSize="16sp"/>
 
                 <EditText
                     android:id="@+id/et_cadfer_quantidade"
@@ -182,8 +177,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Valor Unitário"
-                    android:textSize="16sp"
-                    android:textColor="@color/green"/>
+                    android:textSize="16sp"/>
 
                 <com.blackcat.currencyedittext.CurrencyEditText
                     android:id="@+id/et_cadfer_valorunitario"
@@ -215,8 +209,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Nota Fiscal"
-                    android:textSize="16sp"
-                    android:textColor="@color/green"/>
+                    android:textSize="16sp"/>
 
                 <EditText
                     android:id="@+id/et_notafiscal"
@@ -238,8 +231,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Entrada Nota Fiscal"
-                    android:textSize="16sp"
-                    android:textColor="@color/green"/>
+                    android:textSize="16sp"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -288,9 +280,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Data Validade"
-                    android:textSize="16sp"
-                    android:textColor="@color/green"/>
+                    android:text="Validade de Inspeção"
+                    android:textSize="16sp"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -329,9 +320,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Data Fabricação"
-                    android:textSize="16sp"
-                    android:textColor="@color/green"/>
+                    android:text="Validade de Calibração"
+                    android:textSize="16sp"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -381,8 +371,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Status"
-                    android:textSize="16sp"
-                    android:textColor="@color/green"/>
+                    android:textSize="16sp"/>
 
                 <Spinner
                     android:id="@+id/et_cadfer_status"

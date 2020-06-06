@@ -12,6 +12,7 @@ public class ListaMateriaisExecucaoTarefas {
     public String PartNumber;
     public String NumSerie;
     public boolean IsFound;
+    public boolean IsValid;
 
     public int getIdOriginal() {
         return IdOriginal;
@@ -59,6 +60,14 @@ public class ListaMateriaisExecucaoTarefas {
 
     public void setFound(boolean found) {
         IsFound = found;
+    }
+
+    public boolean isValid() {
+        return IsValid;
+    }
+
+    public void setValid(boolean valid){
+        IsValid = valid;
     }
 
     public String getNumSerie() {

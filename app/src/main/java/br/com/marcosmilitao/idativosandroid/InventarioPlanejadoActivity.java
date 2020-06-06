@@ -138,6 +138,8 @@ public class InventarioPlanejadoActivity extends BluetoothActivity implements On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventario_planejado);
 
+        modelo_leitor_rfid_Default = this.getResources().getString(R.string.modelo_leitor_default);
+
         connectionBTThread = new HandlerThread("ConnectionBTThread");
         connectionBTThread.start();
         connectionBTHandler = new Handler(connectionBTThread.getLooper())
@@ -273,12 +275,12 @@ public class InventarioPlanejadoActivity extends BluetoothActivity implements On
     @Override
     protected void onResume()
     {
+        super.onResume();
+
         //Obtendo o modelo preferencial
         modeloLeitor = LeitorPreferencial();
 
         ConectarDispositivoBT(modeloLeitor);
-
-        super.onResume();
     }
 
     @Override
@@ -706,7 +708,7 @@ public class InventarioPlanejadoActivity extends BluetoothActivity implements On
                         @Override
                         public void run() {
                             et_tagid_in.setText(cadastroMateriais.getTAGID());
-                            et_datavalidade_in.setText(cadastroMateriais.getDataValidade() != null ? cadastroMateriais.getDataValidade().toString() : null);
+                            et_datavalidade_in.setText(cadastroMateriais.getDataValidadeInspecao() != null ? cadastroMateriais.getDataValidadeInspecao().toString() : null);
                             et_posicao_in.setText(posicao.getDescricao());
                             et_patrimonio_in.setText(cadastroMateriais.getPatrimonio());
                             et_numserie_in.setText(cadastroMateriais.getNumSerie());

@@ -27,10 +27,10 @@ public class CadastroMateriais {
     private Date DataCadastro;
 
     @TypeConverters({TimeStampConverter.class})
-    private Date DataFabricacao;
+    private Date DataValidadeCalibracao;
 
     @TypeConverters({TimeStampConverter.class})
-    private Date DataValidade;
+    private Date DataValidadeInspecao;
 
     private double ValorUnitario;
 
@@ -109,20 +109,20 @@ public class CadastroMateriais {
         DataCadastro = dataCadastro;
     }
 
-    public Date getDataFabricacao() {
-        return DataFabricacao;
+    public Date getDataValidadeCalibracao() {
+        return DataValidadeCalibracao;
     }
 
-    public void setDataFabricacao(Date dataFabricacao) {
-        DataFabricacao = dataFabricacao;
+    public void setDataValidadeCalibracao(Date dataValidadeCalibracao) {
+        DataValidadeCalibracao = dataValidadeCalibracao;
     }
 
-    public Date getDataValidade() {
-        return DataValidade;
+    public Date getDataValidadeInspecao() {
+        return DataValidadeInspecao;
     }
 
-    public void setDataValidade(Date dataValidade) {
-        DataValidade = dataValidade;
+    public void setDataValidadeInspecao(Date dataValidadeInspecao) {
+        DataValidadeInspecao = dataValidadeInspecao;
     }
 
     public double getValorUnitario() {

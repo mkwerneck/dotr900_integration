@@ -3,98 +3,126 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:orientation="horizontal"
+    android:weightSum="10"
     android:paddingVertical="10dp"
     android:paddingHorizontal="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:layout_weight="1">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:layout_marginRight="5dp"
-            android:text="Modelo: "/>
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/text_modelo"
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_marginRight="5dp"
+                android:text="Modelo: "/>
+
+            <TextView
+                android:id="@+id/text_modelo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TEEEEEEESTE"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TEEEEEEESTE"/>
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_marginRight="5dp"
+                    android:text="Part Number: "/>
+
+                <TextView
+                    android:id="@+id/text_partnumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TEEEEEEESTE"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_marginRight="5dp"
+                    android:text="Num. Série: "/>
+
+                <TextView
+                    android:id="@+id/text_numserie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TEEEEEEESTE"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_marginRight="5dp"
+                    android:text="TAGID: "/>
+
+                <TextView
+                    android:id="@+id/text_tagid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TEEEEEEESTE"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="3">
+        android:layout_height="match_parent"
+        android:layout_weight="9"
+        android:orientation="vertical"
+        android:gravity="right|center_vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/button_remove"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="1">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:layout_marginRight="5dp"
-                android:text="Part Number: "/>
-
-            <TextView
-                android:id="@+id/text_partnumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TEEEEEEESTE"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="1">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:layout_marginRight="5dp"
-                android:text="Num. Série: "/>
-
-            <TextView
-                android:id="@+id/text_numserie"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TEEEEEEESTE"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="1">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:layout_marginRight="5dp"
-                android:text="TAGID: "/>
-
-            <TextView
-                android:id="@+id/text_tagid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TEEEEEEESTE"/>
-
-        </LinearLayout>
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:drawableTop="@drawable/baseline_clear_black_18dp"
+            android:minWidth="0dp"/>
 
     </LinearLayout>
 

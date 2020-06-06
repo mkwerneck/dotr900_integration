@@ -352,9 +352,9 @@ public class EditarFerramentasActivity extends AppCompatActivity {
                                 et_edfer_valorunitario.setText(String.valueOf(cadastroMateriais.getValorUnitario()));
                                 et_edfer_notafiscal.setText(cadastroMateriais.getNotaFiscal());
 
-                                if (cadastroMateriais.getDataValidade() != null) tvsp_edfer_dtvalidade.setText(formato.format(cadastroMateriais.getDataValidade()));
+                                if (cadastroMateriais.getDataValidadeInspecao() != null) tvsp_edfer_dtvalidade.setText(formato.format(cadastroMateriais.getDataValidadeInspecao()));
                                 if (cadastroMateriais.getDataEntradaNotaFiscal() != null) tvsp_edfer_dtnotafiscal.setText(formato.format(cadastroMateriais.getDataEntradaNotaFiscal()));
-                                if (cadastroMateriais.getDataFabricacao() != null) tvsp_edfer_dtfabricacao.setText(formato.format(cadastroMateriais.getDataFabricacao()));
+                                if (cadastroMateriais.getDataValidadeCalibracao() != null) tvsp_edfer_dtfabricacao.setText(formato.format(cadastroMateriais.getDataValidadeCalibracao()));
 
                                 et_edfer_modelo.setText(modeloMateriais.getModelo());
 
@@ -435,9 +435,9 @@ public class EditarFerramentasActivity extends AppCompatActivity {
                     upmobCadastroMateriais.setFlagAtualizar(true);
                     upmobCadastroMateriais.setFlagProcess(false);
                     upmobCadastroMateriais.setDataHoraEvento(dataHoraEvento);
-                    upmobCadastroMateriais.setDataValidade(dataValidade);
+                    upmobCadastroMateriais.setDataValidadeInspecao(dataValidade);
                     upmobCadastroMateriais.setDataEntradaNotaFiscal(dataEntradaNF);
-                    upmobCadastroMateriais.setDataFabricacao(dataFabricacao);
+                    upmobCadastroMateriais.setDataValidadeCalibracao(dataFabricacao);
                     upmobCadastroMateriais.setStatus(et_edfer_status.getSelectedItem().toString());
 
                     dbInstance.upmobCadastroMateriaisDAO().Create(upmobCadastroMateriais);

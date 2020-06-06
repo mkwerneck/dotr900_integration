@@ -534,8 +534,8 @@ public class Act_Cadastro_dados extends AppCompatActivity  implements AdapterVie
                     upmobCadastroMateriais.setFlagAtualizar(intentFlagEditar);
                     upmobCadastroMateriais.setFlagProcess(false);
                     upmobCadastroMateriais.setDataHoraEvento(dataHoraEvento);
-                    upmobCadastroMateriais.setDataFabricacao(null);
-                    upmobCadastroMateriais.setDataValidade(data_validade);
+                    upmobCadastroMateriais.setDataValidadeCalibracao(null);
+                    upmobCadastroMateriais.setDataValidadeInspecao(data_validade);
 
                     dbInstance.upmobCadastroMateriaisDAO().Create(upmobCadastroMateriais);
 
@@ -1197,7 +1197,7 @@ public class Act_Cadastro_dados extends AppCompatActivity  implements AdapterVie
                         num_NF.setText(cadastroMateriais.getNotaFiscal());
                         et_valor.setText(String.valueOf(cadastroMateriais.getValorUnitario()));
 
-                        if (cadastroMateriais.getDataValidade() != null) tvsp_dtvalidade.setText(sdformat.format(cadastroMateriais.getDataValidade()));
+                        if (cadastroMateriais.getDataValidadeInspecao() != null) tvsp_dtvalidade.setText(sdformat.format(cadastroMateriais.getDataValidadeInspecao()));
 
                         if (cadastroMateriais.getDataEntradaNotaFiscal() != null) tvsp_data_nf.setText(sdformat.format(cadastroMateriais.getDataEntradaNotaFiscal()));
                     }

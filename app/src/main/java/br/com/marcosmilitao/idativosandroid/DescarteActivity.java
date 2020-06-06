@@ -129,6 +129,8 @@ public class DescarteActivity extends BluetoothActivity implements OnBtEventList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_descarte);
 
+        modelo_leitor_rfid_Default = this.getResources().getString(R.string.modelo_leitor_default);
+
         connectionBTThread = new HandlerThread("ConnectionBTThread");
         connectionBTThread.start();
         connectionBTHandler = new Handler(connectionBTThread.getLooper())

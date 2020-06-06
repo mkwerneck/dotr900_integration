@@ -702,7 +702,7 @@ public class InventarioActivity extends BluetoothActivity implements OnBtEventLi
                         @Override
                         public void run() {
                             et_tagid_in.setText(cadastroMateriais.getTAGID());
-                            et_datavalidade_in.setText(cadastroMateriais.getDataValidade() != null ? cadastroMateriais.getDataValidade().toString() : null);
+                            et_datavalidade_in.setText(cadastroMateriais.getDataValidadeInspecao() != null ? cadastroMateriais.getDataValidadeInspecao().toString() : null);
                             et_posicao_in.setText(posicao.getDescricao());
                             et_patrimonio_in.setText(cadastroMateriais.getPatrimonio());
                             et_numserie_in.setText(cadastroMateriais.getNumSerie());

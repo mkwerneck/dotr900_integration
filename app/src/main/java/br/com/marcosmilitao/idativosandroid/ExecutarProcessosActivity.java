@@ -56,6 +56,7 @@ import br.com.marcosmilitao.idativosandroid.CustomAdapters.CustomAdapterListaMat
 import br.com.marcosmilitao.idativosandroid.CustomAdapters.CustomAdapterListaServicos;
 import br.com.marcosmilitao.idativosandroid.DBUtils.ApplicationDB;
 import br.com.marcosmilitao.idativosandroid.DBUtils.ESync;
+import br.com.marcosmilitao.idativosandroid.DBUtils.Models.Almoxarifados;
 import br.com.marcosmilitao.idativosandroid.DBUtils.Models.CadastroEquipamentos;
 import br.com.marcosmilitao.idativosandroid.DBUtils.Models.CadastroMateriais;
 import br.com.marcosmilitao.idativosandroid.DBUtils.Models.ListaMateriaisListaTarefas;
@@ -63,7 +64,10 @@ import br.com.marcosmilitao.idativosandroid.DBUtils.Models.ListaServicosListaTar
 import br.com.marcosmilitao.idativosandroid.DBUtils.Models.ListaTarefas;
 import br.com.marcosmilitao.idativosandroid.DBUtils.Models.ModeloEquipamentos;
 import br.com.marcosmilitao.idativosandroid.DBUtils.Models.ModeloMateriais;
+import br.com.marcosmilitao.idativosandroid.DBUtils.Models.ParametrosPadrao;
+import br.com.marcosmilitao.idativosandroid.DBUtils.Models.Posicoes;
 import br.com.marcosmilitao.idativosandroid.DBUtils.Models.Processos;
+import br.com.marcosmilitao.idativosandroid.DBUtils.Models.Proprietarios;
 import br.com.marcosmilitao.idativosandroid.DBUtils.Models.ServicosAdicionais;
 import br.com.marcosmilitao.idativosandroid.DBUtils.Models.Tarefas;
 import br.com.marcosmilitao.idativosandroid.DBUtils.Models.UPMOBListaMateriais;
@@ -170,6 +174,8 @@ public class ExecutarProcessosActivity extends BluetoothActivity implements OnBt
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_executar_processos);
+
+        modelo_leitor_rfid_Default = this.getResources().getString(R.string.modelo_leitor_default);
 
         readTAGIDThread = new HandlerThread("readTAGIDThread");
         readTAGIDThread.start();
@@ -323,7 +329,22 @@ public class ExecutarProcessosActivity extends BluetoothActivity implements OnBt
 
         lv_materiais = (ListView) findViewById(R.id.lv_materiais);
         listViewMateriaisArrayList = new ArrayList<ListaMateriaisExecucaoTarefas>();
-        listViewMateriaisCustomAdapter = new CustomAdapterListaMateriais(ExecutarProcessosActivity.this, listViewMateriaisArrayList);
+        listViewMateriaisCustomAdapter = new CustomAdapterListaMateriais(ExecutarProcessosActivity.this, listViewMateriaisArrayList, processoId == 0);
+        listViewMateriaisCustomAdapter.setListener(new CustomAdapterListaMateriais.Listener() {
+            @Override
+            public void onClick(int position) {
+                ListaMateriaisExecucaoTarefas listaMateriaisExecucaoTarefas = listViewMateriaisCustomAdapter.getItem(position);
+                listaMateriaisArrayList.remove(listaMateriaisExecucaoTarefas);
+
+                mainHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        listViewMateriaisArrayList.remove(listaMateriaisExecucaoTarefas);
+                        listViewMateriaisCustomAdapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        });
         lv_materiais.setAdapter(listViewMateriaisCustomAdapter);
 
         //Carregando os dados para nova tarefa ou tarefa existente
@@ -344,12 +365,12 @@ public class ExecutarProcessosActivity extends BluetoothActivity implements OnBt
     @Override
     protected void onResume()
     {
+        super.onResume();
+
         //Obtendo o modelo preferencial
         modeloLeitor = LeitorPreferencial();
 
         ConectarDispositivoBT(modeloLeitor);
-
-        super.onResume();
     }
 
     @Override
@@ -490,6 +511,7 @@ public class ExecutarProcessosActivity extends BluetoothActivity implements OnBt
                                     listaMateriaisExecucaoTarefas.setTagid(cadastroMateriais.getTAGID());
                                     listaMateriaisExecucaoTarefas.setNumSerie(cadastroMateriais.getNumSerie());
                                     listaMateriaisExecucaoTarefas.setFound(materiais.getDataConclusao() != null ? true : false);
+                                    listaMateriaisExecucaoTarefas.setValid(true);
 
                                     temp_listViewMateriaisArrayList.add(listaMateriaisExecucaoTarefas);
                                 }
@@ -726,12 +748,14 @@ public class ExecutarProcessosActivity extends BluetoothActivity implements OnBt
                 if (processoId == 0)
                 {
                     CadastroMateriais cadastroMateriais = dbInstance.cadastroMateriaisDAO().GetByTAGID(tagid, true);
+                    Proprietarios proprietarioTablet = dbInstance.proprietariosDAO().GetByIdOriginal(dbInstance.parametrosPadraoDAO().GetBaseId());
 
                     if (cadastroMateriais != null)
                     {
                         ModeloMateriais modeloMateriais = dbInstance.modeloMateriaisDAO().GetByIdOriginal(cadastroMateriais.getModeloMateriaisItemIdOriginal());
+                        Posicoes posicao = dbInstance.posicoesDAO().GetByIdOriginal(cadastroMateriais.getPosicaoOriginalItemIdoriginal());
 
-                        if (modeloMateriais != null)
+                        if (modeloMateriais != null && posicao != null)
                         {
                             //Verificando se o tagid lido já existe na ListView
                             for(ListaMateriaisExecucaoTarefas listaMateriaisExecucaoTarefas : listViewMateriaisArrayList)
@@ -742,6 +766,11 @@ public class ExecutarProcessosActivity extends BluetoothActivity implements OnBt
                                 }
                             }
 
+                            //Verificando se a base da ferramenta é a mesma do tablet
+                            Almoxarifados almoxarifado = dbInstance.almoxarifadosDAO().GetByIdOriginal(posicao.getAlmoxarifadoId());
+                            Proprietarios proprietarioFerramenta = dbInstance.proprietariosDAO().GetByIdOriginal(almoxarifado.getSetorProprietarioId());
+                            boolean isValid = proprietarioFerramenta.getIdOriginal() == proprietarioTablet.getIdOriginal();
+
                             ListaMateriaisExecucaoTarefas listaMateriaisExecucaoTarefas = new ListaMateriaisExecucaoTarefas();
                             listaMateriaisExecucaoTarefas.setCadastroMateriaisId(cadastroMateriais.getIdOriginal());
                             listaMateriaisExecucaoTarefas.setIdOriginal(0);
@@ -750,6 +779,7 @@ public class ExecutarProcessosActivity extends BluetoothActivity implements OnBt
                             listaMateriaisExecucaoTarefas.setTagid(cadastroMateriais.getTAGID());
                             listaMateriaisExecucaoTarefas.setNumSerie(cadastroMateriais.getNumSerie());
                             listaMateriaisExecucaoTarefas.setFound(false);
+                            listaMateriaisExecucaoTarefas.setValid(isValid);
 
                             mainHandler.post(new Runnable() {
                                 @Override
@@ -767,7 +797,8 @@ public class ExecutarProcessosActivity extends BluetoothActivity implements OnBt
                         }
                     }
 
-                } else {
+                }
+                else {
                     CadastroMateriais cadastroMateriais = dbInstance.cadastroMateriaisDAO().GetByTAGID(tagid, true);
 
                     if (cadastroMateriais != null)
@@ -870,17 +901,24 @@ public class ExecutarProcessosActivity extends BluetoothActivity implements OnBt
     private void Salvar()
     {
         //Verificando se o usuário leu ao menos um material para emprestimo ou devolução
-        if (processoId == 0 && listaMateriaisArrayList.size() == 0)
-        {
+        if (processoId == 0 && listaMateriaisArrayList.size() == 0){
             showMessage("Atenção", "É preciso ler ao menos um material para prosseguir.", 3);
 
             return;
         }
 
+        //Verificando se todas as ferramentas são validas (pertencem à mesma base do leitor)
+        for (ListaMateriaisExecucaoTarefas listaMateriaisExecucaoTarefas : listViewMateriaisArrayList){
+            if (!listaMateriaisExecucaoTarefas.isValid()){
+                showMessage("Atenção", "Uma ou mais ferramentas da lista não pertencem à base de cadastro do seu leitor.", 3);
+
+                return;
+            }
+        }
+
         //Verificando se todos os serviços obrigatórios foram respondidos
         for(ListaServicosExecucaoTarefas listaServicosExecucaoTarefas : listViewServicosArrayList){
-            if (listaServicosExecucaoTarefas.isObrigatorio() && listaServicosExecucaoTarefas.getResultado() == null)
-            {
+            if (listaServicosExecucaoTarefas.isObrigatorio() && listaServicosExecucaoTarefas.getResultado() == null){
                 showMessage("Atenção", "É preciso preencher todos os serviços obrigatórios para prosseguir.", 3);
 
                 return;

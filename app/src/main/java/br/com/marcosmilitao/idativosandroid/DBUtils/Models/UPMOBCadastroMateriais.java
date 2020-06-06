@@ -16,9 +16,9 @@ public class UPMOBCadastroMateriais {
     private String NumSerie;
     private int Quantidade;
     @TypeConverters({TimeStampConverter.class})
-    private Date DataFabricacao;
+    private Date DataValidadeCalibracao;
     @TypeConverters({TimeStampConverter.class})
-    private Date DataValidade;
+    private Date DataValidadeInspecao;
     @TypeConverters({TimeStampConverter.class})
     private Date DataHoraEvento;
     private String DadosTecnicos;
@@ -76,20 +76,20 @@ public class UPMOBCadastroMateriais {
         Quantidade = quantidade;
     }
 
-    public Date getDataFabricacao() {
-        return DataFabricacao;
+    public Date getDataValidadeCalibracao() {
+        return DataValidadeCalibracao;
     }
 
-    public void setDataFabricacao(Date dataFabricacao) {
-        DataFabricacao = dataFabricacao;
+    public void setDataValidadeCalibracao(Date dataValidadeCalibracao) {
+        DataValidadeCalibracao = dataValidadeCalibracao;
     }
 
-    public Date getDataValidade() {
-        return DataValidade;
+    public Date getDataValidadeInspecao() {
+        return DataValidadeInspecao;
     }
 
-    public void setDataValidade(Date dataValidade) {
-        DataValidade = dataValidade;
+    public void setDataValidadeInspecao(Date dataValidadeInspecao) {
+        DataValidadeInspecao = dataValidadeInspecao;
     }
 
     public Date getDataHoraEvento() {

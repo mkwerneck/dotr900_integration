@@ -177,33 +177,36 @@ public class AtivosProcessoActivity extends AppCompatActivity {
 
                 Proprietarios proprietario = dbInstance.proprietariosDAO().GetByIdOriginal(dbInstance.parametrosPadraoDAO().GetBaseId());
 
-                List<CadastroEquipamentos> equipamentosList = dbInstance.cadastroEquipamentosDAO().GetCadastroEquipamentos(proprietario.getDescricao());
-                ArrayList<AtivosProc> listViewArrayList_temp = new ArrayList<AtivosProc>();
-
-                for(CadastroEquipamentos equipamento : equipamentosList)
+                if (proprietario != null)
                 {
-                    ModeloEquipamentos modeloEquipamento = dbInstance.modeloEquipamentosDAO().GetByIdOriginal(equipamento.getModeloEquipamentoItemIdOriginal());
+                    List<CadastroEquipamentos> equipamentosList = dbInstance.cadastroEquipamentosDAO().GetCadastroEquipamentos(proprietario.getDescricao());
+                    ArrayList<AtivosProc> listViewArrayList_temp = new ArrayList<AtivosProc>();
 
-                    if (modeloEquipamento != null)
+                    for(CadastroEquipamentos equipamento : equipamentosList)
                     {
-                        AtivosProc ativoProc = new AtivosProc();
-                        ativoProc.setIdOriginal(equipamento.getIdOriginal());
-                        ativoProc.setAtivo(equipamento.getTraceNumber());
-                        ativoProc.setModelo(modeloEquipamento.getModelo());
+                        ModeloEquipamentos modeloEquipamento = dbInstance.modeloEquipamentosDAO().GetByIdOriginal(equipamento.getModeloEquipamentoItemIdOriginal());
 
-                        listViewArrayList_temp.add(ativoProc);
+                        if (modeloEquipamento != null)
+                        {
+                            AtivosProc ativoProc = new AtivosProc();
+                            ativoProc.setIdOriginal(equipamento.getIdOriginal());
+                            ativoProc.setAtivo(equipamento.getTraceNumber());
+                            ativoProc.setModelo(modeloEquipamento.getModelo());
+
+                            listViewArrayList_temp.add(ativoProc);
+                        }
                     }
+
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            listViewArrayList.addAll(listViewArrayList_temp);
+                            listViewAdapter.notifyDataSetChanged();
+
+                            tv_atproc_quantidade.setText("TOTAL ENCONTRADO: " + listViewArrayList.size());
+                        }
+                    });
                 }
-
-                mainHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        listViewArrayList.addAll(listViewArrayList_temp);
-                        listViewAdapter.notifyDataSetChanged();
-
-                        tv_atproc_quantidade.setText("TOTAL ENCONTRADO: " + listViewArrayList.size());
-                    }
-                });
             }
         });
     }
@@ -218,34 +221,37 @@ public class AtivosProcessoActivity extends AppCompatActivity {
 
                 Proprietarios proprietario = dbInstance.proprietariosDAO().GetByIdOriginal(dbInstance.parametrosPadraoDAO().GetBaseId());
 
-                List<CadastroEquipamentos> equipamentosList = dbInstance.cadastroEquipamentosDAO().GetSearchResult(stringQuery, proprietario.getDescricao());
-                ArrayList<AtivosProc> listViewArrayList_temp = new ArrayList<AtivosProc>();
-
-                for(CadastroEquipamentos equipamento : equipamentosList)
+                if (proprietario != null)
                 {
-                    ModeloEquipamentos modeloEquipamento = dbInstance.modeloEquipamentosDAO().GetByIdOriginal(equipamento.getModeloEquipamentoItemIdOriginal());
+                    List<CadastroEquipamentos> equipamentosList = dbInstance.cadastroEquipamentosDAO().GetSearchResult(stringQuery, proprietario.getDescricao());
+                    ArrayList<AtivosProc> listViewArrayList_temp = new ArrayList<AtivosProc>();
 
-                    if (modeloEquipamento != null)
+                    for(CadastroEquipamentos equipamento : equipamentosList)
                     {
-                        AtivosProc ativoProc = new AtivosProc();
-                        ativoProc.setIdOriginal(equipamento.getIdOriginal());
-                        ativoProc.setAtivo(equipamento.getTraceNumber());
-                        ativoProc.setModelo(modeloEquipamento.getModelo());
+                        ModeloEquipamentos modeloEquipamento = dbInstance.modeloEquipamentosDAO().GetByIdOriginal(equipamento.getModeloEquipamentoItemIdOriginal());
 
-                        listViewArrayList_temp.add(ativoProc);
+                        if (modeloEquipamento != null)
+                        {
+                            AtivosProc ativoProc = new AtivosProc();
+                            ativoProc.setIdOriginal(equipamento.getIdOriginal());
+                            ativoProc.setAtivo(equipamento.getTraceNumber());
+                            ativoProc.setModelo(modeloEquipamento.getModelo());
+
+                            listViewArrayList_temp.add(ativoProc);
+                        }
                     }
+
+                    mainHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            listViewArrayList.clear();
+                            listViewArrayList.addAll(listViewArrayList_temp);
+                            listViewAdapter.notifyDataSetChanged();
+
+                            tv_atproc_quantidade.setText("TOTAL ENCONTRADO: " + listViewArrayList.size());
+                        }
+                    });
                 }
-
-                mainHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        listViewArrayList.clear();
-                        listViewArrayList.addAll(listViewArrayList_temp);
-                        listViewAdapter.notifyDataSetChanged();
-
-                        tv_atproc_quantidade.setText("TOTAL ENCONTRADO: " + listViewArrayList.size());
-                    }
-                });
             }
         });
     }

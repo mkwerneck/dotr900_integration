@@ -160,8 +160,8 @@ public class ESync {
                                         pstmt.setString(2, upmobCadastroMateriais.getNumSerie());
                                         pstmt.setString(3, upmobCadastroMateriais.getPatrimonio());
                                         pstmt.setInt(4, upmobCadastroMateriais.getQuantidade());
-                                        pstmt.setTimestamp(5, upmobCadastroMateriais.getDataFabricacao() != null ? new Timestamp(upmobCadastroMateriais.getDataFabricacao().getTime()) : null);
-                                        pstmt.setTimestamp(6, upmobCadastroMateriais.getDataValidade() != null ? new Timestamp(upmobCadastroMateriais.getDataValidade().getTime()) : null);
+                                        pstmt.setTimestamp(5, upmobCadastroMateriais.getDataValidadeCalibracao() != null ? new Timestamp(upmobCadastroMateriais.getDataValidadeCalibracao().getTime()) : null);
+                                        pstmt.setTimestamp(6, upmobCadastroMateriais.getDataValidadeInspecao() != null ? new Timestamp(upmobCadastroMateriais.getDataValidadeInspecao().getTime()) : null);
                                         pstmt.setDouble(7, upmobCadastroMateriais.getValorUnitario());
                                         pstmt.setString(8, upmobCadastroMateriais.getDadosTecnicos());
                                         pstmt.setString(9, upmobCadastroMateriais.getNotaFiscal());
@@ -587,7 +587,7 @@ public class ESync {
 
                                 //region CADASTRO MATERIAIS
                                 String rv_CadastroMateriais = dbInstance.cadastroMateriaisDAO().GetLastRowVersion() != null ? dbInstance.cadastroMateriaisDAO().GetLastRowVersion() : "0";
-                                try (ResultSet rs = stmt.executeQuery("SELECT c.DadosTecnicos as cdadostecnicos, c.DataCadastro as cdatacadastro, c.DataEntradaNotaFiscal as cdatanotafiscal, c.DataFabricacao as cdatafabricacao, c.DataValidade as cdatavalidade, c.Id as cid, c.ModeloMateriaisItemId as cmodeloid, c.NotaFiscal as cnotafiscal, c.NumSerie as cnumserie, c.Patrimonio as cpatrimonio, c.PosicaoOriginalItemId as cposicaoid, c.Quantidade as cquantidade, c.RowVersion as crowversion, t.TAGID as ttagid, c.ValorUnitario as cvalorunitario, c.EmUso as cemuso, c.Status as cstatus " +
+                                try (ResultSet rs = stmt.executeQuery("SELECT c.DadosTecnicos as cdadostecnicos, c.DataCadastro as cdatacadastro, c.DataEntradaNotaFiscal as cdatanotafiscal, c.DataValidadeCalibracao as cdatacalibracao, c.DataValidadeInspecao as cdatainspecao, c.Id as cid, c.ModeloMateriaisItemId as cmodeloid, c.NotaFiscal as cnotafiscal, c.NumSerie as cnumserie, c.Patrimonio as cpatrimonio, c.PosicaoOriginalItemId as cposicaoid, c.Quantidade as cquantidade, c.RowVersion as crowversion, t.TAGID as ttagid, c.ValorUnitario as cvalorunitario, c.EmUso as cemuso, c.Status as cstatus " +
                                         "FROM CadastroMateriais as c " +
                                         "INNER JOIN TAGIDMaterial as t ON c.TAGIDMaterialItemId = t.Id " +
                                         "WHERE c.RowVersion > " + rv_CadastroMateriais);)
@@ -602,8 +602,8 @@ public class ESync {
                                             cadastroMateriais.setDadosTecnicos(rs.getString("cdadostecnicos"));
                                             cadastroMateriais.setDataCadastro(rs.getTimestamp("cdatacadastro") != null ? new java.util.Date(rs.getTimestamp("cdatacadastro").getTime()) : null);
                                             cadastroMateriais.setDataEntradaNotaFiscal(rs.getTimestamp("cdatanotafiscal") != null ? new java.util.Date(rs.getTimestamp("cdatanotafiscal").getTime()) : null);
-                                            cadastroMateriais.setDataFabricacao(rs.getTimestamp("cdatafabricacao") != null ? new java.util.Date(rs.getTimestamp("cdatafabricacao").getTime()) : null);
-                                            cadastroMateriais.setDataValidade(rs.getTimestamp("cdatavalidade") != null ? new java.util.Date(rs.getTimestamp("cdatavalidade").getTime()) : null);
+                                            cadastroMateriais.setDataValidadeCalibracao(rs.getTimestamp("cdatacalibracao") != null ? new java.util.Date(rs.getTimestamp("cdatacalibracao").getTime()) : null);
+                                            cadastroMateriais.setDataValidadeInspecao(rs.getTimestamp("cdatainspecao") != null ? new java.util.Date(rs.getTimestamp("cdatainspecao").getTime()) : null);
                                             cadastroMateriais.setIdOriginal(rs.getInt("cid"));
                                             cadastroMateriais.setModeloMateriaisItemIdOriginal(rs.getInt("cmodeloid"));
                                             cadastroMateriais.setNotaFiscal(rs.getString("cnotafiscal"));
@@ -625,8 +625,8 @@ public class ESync {
                                             cadastroMateriais.setDadosTecnicos(rs.getString("cdadostecnicos"));
                                             cadastroMateriais.setDataCadastro(rs.getTimestamp("cdatacadastro") != null ? new java.util.Date(rs.getTimestamp("cdatacadastro").getTime()) : null);
                                             cadastroMateriais.setDataEntradaNotaFiscal(rs.getTimestamp("cdatanotafiscal") != null ? new java.util.Date(rs.getTimestamp("cdatanotafiscal").getTime()) : null);
-                                            cadastroMateriais.setDataFabricacao(rs.getTimestamp("cdatafabricacao") != null ? new java.util.Date(rs.getTimestamp("cdatafabricacao").getTime()) : null);
-                                            cadastroMateriais.setDataValidade(rs.getTimestamp("cdatavalidade") != null ? new java.util.Date(rs.getTimestamp("cdatavalidade").getTime()) : null);
+                                            cadastroMateriais.setDataValidadeCalibracao(rs.getTimestamp("cdatacalibracao") != null ? new java.util.Date(rs.getTimestamp("cdatacalibracao").getTime()) : null);
+                                            cadastroMateriais.setDataValidadeInspecao(rs.getTimestamp("cdatainspecao") != null ? new java.util.Date(rs.getTimestamp("cdatainspecao").getTime()) : null);
                                             cadastroMateriais.setIdOriginal(rs.getInt("cid"));
                                             cadastroMateriais.setModeloMateriaisItemIdOriginal(rs.getInt("cmodeloid"));
                                             cadastroMateriais.setNotaFiscal(rs.getString("cnotafiscal"));

@@ -887,9 +887,9 @@ public class CadastrarFerramentasActivity extends BluetoothActivity implements O
                     upmobCadastroMateriais.setFlagAtualizar(false);
                     upmobCadastroMateriais.setFlagProcess(false);
                     upmobCadastroMateriais.setDataHoraEvento(dataHoraEvento);
-                    upmobCadastroMateriais.setDataValidade(dataValidade);
+                    upmobCadastroMateriais.setDataValidadeInspecao(dataValidade);
                     upmobCadastroMateriais.setDataEntradaNotaFiscal(dataEntradaNF);
-                    upmobCadastroMateriais.setDataFabricacao(dataFabricacao);
+                    upmobCadastroMateriais.setDataValidadeCalibracao(dataFabricacao);
                     upmobCadastroMateriais.setStatus(et_cadfer_status.getSelectedItem().toString());
 
                     dbInstance.upmobCadastroMateriaisDAO().Create(upmobCadastroMateriais);
